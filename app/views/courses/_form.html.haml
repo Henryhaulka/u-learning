@@ -2,9 +2,11 @@
   = f.error_notification
   = f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present?
 
-  .form-inputs
-    = f.input :title
-    = f.input :description
-  %div.mt-3
-  .form-actions
-    = f.button :submit, class: 'btn-success'
+  .form-inputs.form-group
+    %div.mb-3
+      = f.input :title
+    %div.mb-3
+      = f.input :description
+    %div
+      .form-actions
+      = f.button :submit, class: 'btn-success'
