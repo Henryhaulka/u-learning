@@ -6,7 +6,8 @@
     %div.mb-3
       = f.input :title
     %div.mb-3
-      = f.input :description
+      = f.label :description
+      = f.rich_text_area :description
     %div
       .form-actions
       = f.button :submit, class: 'btn-success'
