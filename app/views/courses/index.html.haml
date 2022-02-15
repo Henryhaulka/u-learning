@@ -6,6 +6,7 @@
     %tr
       %th Title
       %th Description
+      %th Creator
       %th
       %th
       %th
@@ -15,6 +16,7 @@
       %tr
         %td= course.title
         %td= course.description
+        %td= current_user.email
         %td= link_to 'Show', course
         %td= link_to 'Edit', edit_course_path(course)
         %td= link_to 'Destroy', course, method: :delete, data: { confirm: 'Are you sure?' }
