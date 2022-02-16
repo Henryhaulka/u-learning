@@ -1,6 +1,7 @@
 %div.w-50.mx-auto
+.card
+  .card-header
     %h1 New course
-
+  .card-body
     = render 'form'
-
-    = link_to 'Back', courses_path
+= link_to 'Back', courses_path
