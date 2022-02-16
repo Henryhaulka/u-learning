@@ -1,10 +1,55 @@
+.jumbotron.bg-light.p-5.rounded
+  %h1.display-4 What do you want to learn today?
+  .form-inline.my-2.my-lg-0.w-75.pt-5
+    = form_tag(courses_path, method: :get) do
+      .input-group
+        = text_field_tag :title, params[:title], autocomplete: 'off', placeholder: 'Search by course title', class: 'form-control'
+        %span.input-group-append
+        %button.btn.btn-primary.btn-sm{:type => 'Submit'}
+          %span.fa.fa-search{'aria-hidden' => 'true'}
+%p
+%div.grid2
+  .card.p-4
+    .card-body.p-0
+    .fa.fa-graduation-cap.fa-4x
+    = Course.count 
+    online courses
+    %p
+    Explore variety of fresh courses
+  .card.p-4
+    .card-body.p-0
+    .fa.fa-chalkboard-teacher.fa-4x
+    = Course.distinct.count(:user)
+    Expert Instructor
+    %p
+    Find the best Instructor for you
+  .card.p-4
+    .card-body.p-0
+    .fa.fa-user-graduate.fa-4x
+    = User.count 
+    Active learners
+    %p
+    Join the online community of learners
+  .card.p-4
+    .card-body.p-0
+    .fa.fa-infinity.fa-4x
+    Life Access
+    %p
+    Learn at your own pace and time
 
-
-
-= link_to root_path, class: 'btn btn-success' do
-  .fa.fa-flag
-  Homepage
-
-  = link_to courses_path, class: 'btn btn-success' do
-    .fas.fa-book
-    Courses
+%hr
+%h3 Popular Courses
+%div.grid-system
+  - @courses.each do |cour|
+    = render 'layouts/course', course: cour
+%hr
+%h3 Top Courses
+%div.grid-system
+  - @courses.each do |cour|
+    = render 'layouts/course', course: cour
+%hr
+%h3 Latest Courses
+%div.grid-system
+  - @latest_courses.each do |cour|
+    = render 'layouts/course', course: cour
+%hr

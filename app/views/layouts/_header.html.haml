@@ -1,6 +1,6 @@
 %nav.navbar.navbar-expand-lg.navbar-dark.bg-dark
-  .container
-    %a.navbar-brand{:href => "#"} U-Learning
+  .container-fluid
+    %a.navbar-brand{:href => "/"} U-Learning
     - if user_signed_in?
       %button.navbar-toggler{"aria-controls" => "navbarSupportedContent", "aria-expanded" => "false", "aria-label" => "Toggle navigation", "data-bs-target" => "#navbarSupportedContent", "data-bs-toggle" => "collapse", :type => "button"}
         %span.navbar-toggler-icon
@@ -14,10 +14,14 @@
             = link_to courses_path, class: 'nav-link' do
               .fa.fa-book
               Courses
+          %li.nav-item{class: "#{'active font-weight-bold' if current_page?(new_course_path)}"}
+            = link_to new_course_path, class: 'nav-link' do
+              .fa.fa-plus
+              New Course
           .form-inline.my-2.my-lg-0
           = form_tag(courses_path, method: :get) do
             .input-group
-              = text_field_tag :title, params[:title], autocomplete: 'off', placeholder: 'Search', class: 'form-control'
+              = text_field_tag :title, params[:title], autocomplete: 'off', placeholder: 'Search by course title', class: 'form-control'
               %span.input-group-append
               %button.btn.btn-primary.btn-sm{:type => 'Submit'}
                 %span.fa.fa-search{'aria-hidden' => 'true'}

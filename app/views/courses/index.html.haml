@@ -1,26 +1,7 @@
 %h1 Listing courses
 %h3
   courses: #{@courses.count}
-%table.table
-  %thead
-    %tr
-      %th Title
-      %th Description
-      %th Creator
-      %th
-      %th
-      %th
+%div.grid-system
+  - @courses.each do |cour|
+    = render 'layouts/course', course: cour
 
-  %tbody
-    - @courses.each do |course|
-      %tr
-        %td= course.title
-        %td= course.description
-        %td= course.user.email
-        %td= link_to 'Show', course
-        %td= link_to 'Edit', edit_course_path(course)
-        %td= link_to 'Destroy', course, method: :delete, data: { confirm: 'Are you sure?' }
-
-%br
-
-= link_to 'New Course', new_course_path
