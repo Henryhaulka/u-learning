@@ -2,3 +2,23 @@
 @import "font-awesome-sprockets";
 @import "font-awesome";
 @import "./actiontext.scss";
+
+.grid-system {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 1rem;
+}
+
+.grid2 {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-gap: 5px;
+}
+
+@media screen and (max-width: 765px){
+  .grid-system,
+  .grid2
+   { 
+     grid-template-columns:  1fr;
+    }
+}
