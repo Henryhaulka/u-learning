@@ -20,4 +20,9 @@
     %hr
     %b last sign in ip:
     = use.last_sign_in_ip
-    
+    %hr
+    Confirmed Email
+    - if use.confirmed_at.present?
+      .badge.bg-success  Yes
+    - else
+      .badge.bg-danger No
