@@ -1,0 +1,23 @@
+.card
+  .card-header
+    %b User Email:
+    = use.email
+  .card-footer
+    %b Signed Up:
+    = time_ago_in_words(use.created_at) + ' ago'
+  .card-footer
+    = 'sign_in_count:'.humanize
+    = use.sign_in_count
+    %hr
+    %b Current sign time:
+    = use.current_sign_in_at
+    %hr
+    %b Last sign in at:
+    = use.last_sign_in_at
+    %hr
+    %b current sign in ip:
+    = use.current_sign_in_ip
+    %hr
+    %b last sign in ip:
+    = use.last_sign_in_ip
+    
