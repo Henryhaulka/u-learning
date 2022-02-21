@@ -12,6 +12,7 @@ gem 'simple_form', '~> 5.1'
 gem 'faker', '~> 2.19'
 gem 'devise', '~> 4.8', '>= 4.8.1'
 gem 'friendly_id', '~> 5.4', '>= 5.4.2'
+gem 'ransack', '~> 2.5'
 # Use Puma as the app server
 gem 'puma', '~> 5.0'
 # Use SCSS for stylesheets

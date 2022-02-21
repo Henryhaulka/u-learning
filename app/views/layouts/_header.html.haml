@@ -20,7 +20,7 @@
             = link_to new_course_path, class: 'nav-link' do
               .fa.fa-plus
               New Course
-          %li.nav-item{class: "#{'active font-weight-bold' if current_page?(users_index_path)}"}
+          %li.nav-item{class: "#{'active font-weight-bold' if current_page?(users_path)}"}
             = link_to users_index_path, class: 'nav-link' do
               .fa.fa-users
               Users
