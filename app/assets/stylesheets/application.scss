@@ -3,10 +3,17 @@
 @import "font-awesome";
 @import "./actiontext.scss";
 
+.form-control.is-invalid { background-image: none;}
+.form-control.is-valid { background-image: none;}
+
 .grid-system {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   grid-gap: 1rem;
+}
+
+.aligner {
+  text-align: right;
 }
 
 .grid2 {

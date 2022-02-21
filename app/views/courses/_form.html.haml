@@ -2,12 +2,21 @@
   = f.error_notification
   = f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present?
 
-  .form-inputs.form-group
-    %div.mb-3
-      = f.input :title
-    %div.mb-3
-      = f.label :description
-      = f.rich_text_area :description
+  .form-inputs
+    = f.input :title
+    %br
+    = f.label :description
+    = f.rich_text_area :description
+    %small= f.error :description, class:'text-danger'
+    %br
+    = f.input :short_description
+    %br
+    = f.input :language , collection: [ "English", "French", "Spanish"]
+    %br
+    = f.input :level, collection: [ "Beginner", "Intermediate", "Advanced"]
+    %br
+    = f.input :price
+    %br
     %div
       .form-actions
       = f.button :submit, class: 'btn-success'
