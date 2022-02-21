@@ -1,7 +1,27 @@
 %h1 Listing courses
 %h3
   courses: #{@courses.count}
-%div.grid-system
-  - @courses.each do |cour|
-    = render 'layouts/course', course: cour
+.row
+  .col-md-2
+    .card-header
+      %b Filter by:
+    = search_form_for @q do |f|
+      = f.search_field :title_cont, placeholder: 'Title', class: 'form-control form-control-sm '
+      %br
+      = f.search_field :short_description_cont, placeholder: 'Description', class: 'form-control form-control-sm '
+      %br
+      = f.search_field :language_cont, placeholder: 'Language', class: 'form-control form-control-sm '
+      %br
+      = f.search_field :price_cont, placeholder: 'Price', class: 'form-control form-control-sm '
+      %br
+      = f.submit
+    %br
+    = link_to courses_path, class: 'btn btn-sm btn-info' do
+      .fa.fa-sync
+    %br
+    %br
+  .col-md-10
+    %div.grid-system
+      - @courses.each do |cour|
+        = render 'layouts/course', course: cour
 
