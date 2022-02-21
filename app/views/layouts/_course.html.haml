@@ -3,13 +3,29 @@
     .fa.fa-book
     = link_to course.title, course
   .card-body
-    = course.description
+    = simple_format(course.short_description)
   .card-footer
-    .fa.fa-chalkboard-teacher
-    = course.user.email
     .row
-    .far.fa-clock
-    = course.created_at.strftime('%c')
+      .col-md-6
+        .fa.fa-language
+        = course.language
+      .col-md-6
+        .aligner
+          .fa.fa-signal
+          = course.level
+  .card-footer
+    .text-center
+      .fa.fa-wallet
+      = number_to_currency(course.price) 
+  .card-footer
+    .row
+      .col-md-6
+        .fa.fa-chalkboard-teacher
+        = course.user.email
+      .col-md-6
+        .aligner
+          .far.fa-clock
+          = course.created_at.strftime('%c')
   .card-footer
     = link_to 'Show', course, class: 'btn btn-primary'
     = link_to 'Edit', edit_course_path(course), class: 'btn btn-info'
