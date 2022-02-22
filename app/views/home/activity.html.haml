@@ -1,0 +1,10 @@
+%h2 Activity
+- @activities.each do |activity|
+    .row
+    = activity.id
+    Course_id:
+    = activity.trackable_id
+    = link_to activity.trackable.title, activity.trackable if activity.trackable.present?
+    = activity.key
+    = activity.parameters
+    = activity.owner.try(:username)
