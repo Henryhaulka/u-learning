@@ -12,6 +12,17 @@
   grid-gap: 1rem;
 }
 
+body {
+  margin-bottom: 10rem;
+}
+
+.general-footer {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  margin-top: 25rem;
+}
+
 .former {
   outline: none;
 }
