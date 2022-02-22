@@ -1,6 +1,9 @@
-%h1 Listing courses
-%h3
-  courses: #{@courses.count}
+%h2
+  .text-center
+    Course
+    .badge.bg-secondary
+      = @courses.count
+%p
 .row
   .col-md-2
     .card-header

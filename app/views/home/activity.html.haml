@@ -1,10 +1,16 @@
-%h2 Activity
-- @activities.each do |activity|
+%h2
+  .text-center
+    Activity
+    .badge.bg-secondary
+      = @activities.count
+%p
+%ul.list-group
+  - @activities.each do |activity|
     .row
-    = activity.id
-    Course_id:
-    = activity.trackable_id
-    = link_to activity.trackable.title, activity.trackable if activity.trackable.present?
-    = activity.key
-    = activity.parameters
-    = activity.owner.try(:username)
+    %li.list-group-item
+      = activity.id
+      = activity.trackable_id
+      = link_to activity.trackable.title, activity.trackable if activity.trackable.present?
+      = activity.key
+      = activity.parameters
+      = activity.owner.try(:username)

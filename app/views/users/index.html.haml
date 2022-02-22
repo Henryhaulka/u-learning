@@ -1,3 +1,9 @@
+%h2
+  .text-center
+    User
+    .badge.bg-secondary
+      = @users.count
+%p
 %div.grid-system
   - @users.each do |user|
     = render 'user', use:  user

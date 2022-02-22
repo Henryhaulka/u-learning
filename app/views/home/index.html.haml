@@ -1,12 +1,11 @@
 .jumbotron.bg-light.p-5.rounded
   %h1.display-4 What do you want to learn today?
-  .form-inline.my-2.my-lg-0.w-75.pt-5
-    = form_tag(courses_path, method: :get) do
-      .input-group
-        = text_field_tag :title, params[:title], autocomplete: 'off', placeholder: 'Search by course title', class: 'form-control'
-        %span.input-group-append
-        %button.btn.btn-primary.btn-sm{:type => 'Submit'}
-          %span.fa.fa-search{'aria-hidden' => 'true'}
+  = search_form_for @ransack_courses, as: :courses_search , url: courses_path do |f|
+    .input-group
+    = f.search_field :title_or_user_email_cont, placeholder: 'Find Course by Title or Author', class: 'form-control', style: 'float: left; width: 250px;'
+    %span.input-group-append
+      %button.btn.btn-primary.btn-sm.mt-1{:type => 'Submit'}
+        %span.fa.fa-search{'aria-hidden' => 'true'}
 %p
 %div.grid2
   .card.p-4
