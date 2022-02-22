@@ -5,7 +5,7 @@ class Course < ApplicationRecord
     belongs_to :user
     extend FriendlyId
     friendly_id :title, use: :slugged
-
+    
     LANGUAGES = [ :English, :French, :Spanish, :Russian]
     def self.languages
         LANGUAGES.each {|language| language}
@@ -15,5 +15,6 @@ class Course < ApplicationRecord
     def self.levels
         LEVELS.each {|level| level}
     end
-    
+    include PublicActivity::Model
+    tracked owner: Proc.new{ |controller, model| controller.current_user }
 end
