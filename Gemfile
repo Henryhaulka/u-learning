@@ -13,6 +13,7 @@ gem 'faker', '~> 2.19'
 gem 'devise', '~> 4.8', '>= 4.8.1'
 gem 'friendly_id', '~> 5.4', '>= 5.4.2'
 gem 'ransack', '~> 2.5'
+gem 'public_activity', '~> 1.6', '>= 1.6.4'
 # Use Puma as the app server
 gem 'puma', '~> 5.0'
 # Use SCSS for stylesheets
