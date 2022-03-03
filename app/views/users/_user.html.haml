@@ -1,28 +1,32 @@
 .card
   .card-header
     .fa.fa-user
-    = use.email
+    = user_reg.email
   .card-footer
     %b Signed Up:
-    = time_ago_in_words(use.created_at) + ' ago'
+    = time_ago_in_words(user_reg.created_at) + ' ago'
   .card-footer
     = 'sign_in_count:'.humanize
-    = use.sign_in_count
+    = user_reg.sign_in_count
     %hr
     %b Current sign time:
-    = use.current_sign_in_at
+    = user_reg.current_sign_in_at
     %hr
     %b Last sign in at:
-    = use.last_sign_in_at
+    = user_reg.last_sign_in_at
     %hr
     %b current sign in ip:
-    = use.current_sign_in_ip
+    = user_reg.current_sign_in_ip
     %hr
     %b last sign in ip:
-    = use.last_sign_in_ip
+    = user_reg.last_sign_in_ip
     %hr
     Confirmed Email
-    - if use.confirmed_at.present?
+    - if user_reg.confirmed_at.present?
       .badge.bg-success  Yes
     - else
       .badge.bg-danger No
+  .card-footer
+    - user_reg.roles.each do |role|
+      .badge.bg-info
+        = role.name

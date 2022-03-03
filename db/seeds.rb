@@ -1,4 +1,4 @@
-# u = User.find_by!(email: 'onuhenry24@gmail.com')
+u = User.find_by!(email: 'onuhenry24@gmail.com')
 30.times do 
     Course.create!([{ 
      title: Faker::Educator.course_name,
