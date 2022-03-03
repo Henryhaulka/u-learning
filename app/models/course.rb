@@ -5,6 +5,8 @@ class Course < ApplicationRecord
     belongs_to :user
     extend FriendlyId
     friendly_id :title, use: :slugged
+    scope :recent, -> {order(created_at: :desc)}
+    scope :limiter, -> {limit(3)}
     
     LANGUAGES = [ :English, :French, :Spanish, :Russian]
     def self.languages
