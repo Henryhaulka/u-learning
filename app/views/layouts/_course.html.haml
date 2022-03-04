@@ -26,9 +26,9 @@
         .aligner
           .far.fa-clock
           = course.created_at.strftime('%c')
-  .card-footer
-    = link_to 'Show', course, class: 'btn btn-primary'
-    = link_to 'Edit', edit_course_path(course), class: 'btn btn-info'
-    = link_to 'Destroy', course, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger'
+  - if user_signed_in? &&  policy(course).edit?   
+    .card-footer
+      = link_to 'Edit', edit_course_path(course), class: 'btn btn-info'
+      = link_to 'Destroy', course, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger'
 
   
