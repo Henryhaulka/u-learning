@@ -41,15 +41,15 @@
 %h3 Popular Courses
 %div.grid-system
   - @courses.each do |cour|
-    = render 'layouts/course', course: cour
+    = render 'courses/course', course: cour
 %hr
 %h3 Top Courses
 %div.grid-system
   - @courses.each do |cour|
-    = render 'layouts/course', course: cour
+    = render 'courses/course', course: cour
 %hr
 %h3 Latest Courses
 %div.grid-system
   - @latest_courses.each do |cour|
-    = render 'layouts/course', course: cour
+    = render 'courses/course', course: cour
 %hr
