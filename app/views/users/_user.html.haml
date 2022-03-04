@@ -1,7 +1,7 @@
 .card
   .card-header
     .fa.fa-user
-    = user_reg.email
+    = link_to user_reg.username, user_reg
     - if current_user == user_reg
       .badge.bg-success YOU
   .card-footer

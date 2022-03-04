@@ -26,9 +26,9 @@
               Users
           = search_form_for @ransack_courses, as: :courses_search , url: courses_path do |f|
             .input-group
-            = f.search_field :title_or_user_email_cont, placeholder: 'Find Course by Title or Author', class: 'form-control-sm former mt-1'
+            = f.search_field :title_or_user_email_cont, placeholder: 'Find Course by Title or Author', class: 'form-control', style: 'float: left; width: 200px;'
             %span.input-group-append
-              %button.btn.btn-primary.btn-sm{:type => 'Submit'}
+              %button.btn.btn-primary.btn-sm.mt-1{:type => 'Submit'}
                 %span.fa.fa-search{'aria-hidden' => 'true'}
           /.form-inline.my-2.my-lg-0
           /= form_tag(courses_path, method: :get) do
