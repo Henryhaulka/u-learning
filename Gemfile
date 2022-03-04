@@ -15,6 +15,7 @@ gem 'friendly_id', '~> 5.4', '>= 5.4.2'
 gem 'ransack', '~> 2.5'
 gem 'public_activity', '~> 1.6', '>= 1.6.4'
 gem 'rolify', '~> 6.0'
+gem "pundit"
 # Use Puma as the app server
 gem 'puma', '~> 5.0'
 # Use SCSS for stylesheets
