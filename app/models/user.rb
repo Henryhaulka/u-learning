@@ -7,9 +7,13 @@ class User < ApplicationRecord
   rolify
   after_create :assign_default_role
 
+  
+
   def username
       self.email.split(/@/).first
   end
+  extend FriendlyId
+  friendly_id :username, use: :slugged
 
   private
   def assign_default_role
