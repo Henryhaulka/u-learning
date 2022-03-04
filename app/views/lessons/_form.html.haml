@@ -9,7 +9,12 @@
       = "For #{ (Lesson.friendly.find(params[:id]) ).course.title.capitalize } Course" 
   .form-inputs
     = f.input :title
-    = f.input :content
+    %br
+    = f.label :content
+    = f.rich_text_area :content
+    %small= f.error:content, class:'text-danger'
+    %br
+    /= f.input :content
     /= f.association :course
     = f.input :course_id, input_html: {value: @lesson.course_id || params[:course_id]}, as: :hidden
 

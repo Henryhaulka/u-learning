@@ -2,6 +2,9 @@ class Lesson < ApplicationRecord
   belongs_to :course
   extend FriendlyId
   friendly_id :title, use: :slugged
+  has_rich_text :content
+  validates :title, :content, presence: true
+  validates :content, length: {minimum: 10 }
 
   include PublicActivity::Model
   tracked owner: Proc.new{ |controller, model| controller.current_user }
