@@ -2,5 +2,15 @@
 \/
 = link_to "#{@course.title}", edit_course_path(@course)
 %p
-= render 'layouts/course', course: @course
-
+.row
+  .col-lg-6
+    = render 'courses/course', course: @course
+  .col-lg-6
+    - if  @course_lessons.present?
+      %h3
+        =  "Lessons on #{@course.title}"
+      - @course_lessons.each do |lessoner|
+        = render 'lessons/lesson', lesson: lessoner
+    - else
+      %h3
+        The course has no Lessons yet
