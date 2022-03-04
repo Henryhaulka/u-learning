@@ -5,11 +5,13 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable,:trackable, :confirmable
   has_many :courses, dependent: :destroy
   rolify
+  after_create :assign_default_role
+
   def username
       self.email.split(/@/).first
   end
 
-  after_create :assign_default_role
+  private
   def assign_default_role
     if User.count == 1
       self.add_role(:admin) if self.roles.blank?
@@ -20,5 +22,13 @@ class User < ApplicationRecord
       self.add_role(:student) if self.roles.blank?
     end
   end
-    
+
+  validate :must_have_a_role, on: :update
+
+  def must_have_a_role
+    unless roles.present?
+      errors.add(:roles, 'User must have a role')
+    end
+  end
+  
 end

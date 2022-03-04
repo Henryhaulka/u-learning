@@ -2,6 +2,8 @@
   .card-header
     .fa.fa-user
     = user_reg.email
+    - if current_user == user_reg
+      .badge.bg-success YOU
   .card-footer
     %b Signed Up:
     = time_ago_in_words(user_reg.created_at) + ' ago'
@@ -30,6 +32,7 @@
     - user_reg.roles.each do |role|
       .badge.bg-info
         = role.name
-    %p.pt-3
-      = link_to "User Role", edit_user_path(user_reg), class: 'btn btn-sm btn-warning'
+    - if policy(user_reg).edit?    
+      %p.pt-3
+        = link_to "User Role", edit_user_path(user_reg), class: 'btn btn-sm btn-warning'
 

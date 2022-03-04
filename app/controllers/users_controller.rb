@@ -7,9 +7,11 @@ before_action :set_user, only: [:edit, :update]
   end
 
   def edit
+    authorize @user
   end
 
   def update
+    authorize @user
     if @user.update(user_params)
       redirect_to users_path, notice: "#{@user.username} role has been update"
     else
