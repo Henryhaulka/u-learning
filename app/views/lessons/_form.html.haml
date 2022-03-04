@@ -4,9 +4,9 @@
   = f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present?
   %h4
     - if @lesson.new_record?
-      = "For #{(Course.find(params[:course_id])).title.capitalize }" 
+      = "For #{(Course.find(params[:course_id])).title.capitalize } Course" 
     - else
-      = "For #{ (Lesson.friendly.find(params[:id]) ).inspect }" 
+      = "For #{ (Lesson.friendly.find(params[:id]) ).course.title.capitalize } Course" 
   .form-inputs
     = f.input :title
     = f.input :content
