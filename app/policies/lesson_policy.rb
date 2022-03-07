@@ -16,11 +16,11 @@ class LessonPolicy < ApplicationPolicy
   
 
   def new?
-  # @user.has_role?(:teacher) 
+  #  user == record.course.user 
   end
 
   def create?
-    #@user.has_role?(:teacher)
+    user == record.course.user
   end
 
   def update?

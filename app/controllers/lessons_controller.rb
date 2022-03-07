@@ -15,6 +15,7 @@ class LessonsController < ApplicationController
   def new
     @lesson = Lesson.new
     @course = Course.friendly.find(params[:course_id])
+    # authorize @lesson
   end
 
   # GET /lessons/1/edit
@@ -27,6 +28,7 @@ class LessonsController < ApplicationController
     @lesson = Lesson.new(lesson_params)
     @course = Course.friendly.find(params[:course_id])
     @lesson.course = @course 
+    authorize @lesson
     respond_to do |format|
       if @lesson.save
         format.html { redirect_to course_lesson_url(@course,@lesson), notice: "Lesson was successfully created." }
@@ -71,6 +73,8 @@ class LessonsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def lesson_params
-      params.require(:lesson).permit(:title, :content, :course_id)
+      #we didn't include "course_id" here since it was in the actions above
+      #if included here, it might easy to hack
+      params.require(:lesson).permit(:title, :content)
     end
 end
