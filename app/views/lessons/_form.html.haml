@@ -1,10 +1,10 @@
 -# frozen_string_literal: true
-= simple_form_for(@lesson) do |f|
+= simple_form_for([@course, @lesson]) do |f|
   = f.error_notification
   = f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present?
   %h4
     - if @lesson.new_record?
-      = "For #{(Course.find(params[:course_id])).title.capitalize } Course" 
+      = "For #{(Course.friendly.find(params[:course_id])).title.capitalize } Course" 
     - else
       = "For #{ (Lesson.friendly.find(params[:id]) ).course.title.capitalize } Course" 
   .form-inputs
@@ -16,7 +16,7 @@
     %br
     /= f.input :content
     /= f.association :course
-    = f.input :course_id, input_html: {value: @lesson.course_id || params[:course_id]}, as: :hidden
+    /= f.input :course_id, input_html: {value: @lesson.course_id || params[:course_id]}, as: :hidden
 
   .form-actions
     = f.button :submit, class: 'btn btn-success'

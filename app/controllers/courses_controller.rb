@@ -20,7 +20,7 @@ class CoursesController < ApplicationController
 
   # GET /courses/1 or /courses/1.json
   def show
-    @course_lessons = @course.lessons
+    @course_lessons = @course.lessons.recent_lessons
   end
 
   # GET /courses/new
@@ -37,7 +37,6 @@ class CoursesController < ApplicationController
   # POST /courses or /courses.json
   def create
     @course = Course.new(course_params)
-   
     @course.user = current_user
      authorize @course
 

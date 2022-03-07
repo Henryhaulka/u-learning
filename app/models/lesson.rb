@@ -13,6 +13,6 @@ class Lesson < ApplicationRecord
   def to_s
     title
   end
-  
+  scope :recent_lessons, -> {order(created_at: :desc)}
 
 end
