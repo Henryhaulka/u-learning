@@ -11,6 +11,7 @@
       .fa.fa-plus
       Add a lesson
     - if  @course_lessons.present?
+      %p
       %h3
         =  "Lessons on #{@course.title}"
       - @course_lessons.each do |lessoner|

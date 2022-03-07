@@ -4,9 +4,9 @@
     .badge.bg-secondary
       = @users.count
 %p
-%div.grid-system
-  - @users.each do |user|
-    = render 'user', user_reg:  user
+/%div.grid-system
+/  - @users.each do |user|
+/    = render 'user', user_reg:  user
 %br
 = search_form_for @q do |f|
   = f.search_field :email_cont, placeholder: 'Email'
@@ -28,6 +28,9 @@
       %th= 'last_sign_in_at'.humanize
       %th= 'current_sign_in_ip'.humanize
       %th= 'last_sign_in_ip'.humanize
+      %th Confirmed?
+      %th Role
+
   %body
     - @users.each do |user|
       %tr 
@@ -39,4 +42,15 @@
         %td= user.last_sign_in_at
         %td= user.current_sign_in_ip
         %td= user.last_sign_in_ip
-    
+        %td
+          - if user.confirmed_at.present?
+            .badge.bg-success  Yes
+          - else
+            .badge.bg-danger No
+        %td
+          - user.roles.each do |role|
+            .badge.bg-info
+              = role.name
+          - if policy(user).edit?    
+            %p.pt-3
+              = link_to "User Role", edit_user_path(user), class: 'btn btn-sm btn-warning'
