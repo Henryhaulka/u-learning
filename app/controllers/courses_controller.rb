@@ -10,7 +10,8 @@ class CoursesController < ApplicationController
       # @courses = @q.result.includes(:user)
       #  @ransack_courses = Course.ransack(params[:courses_search], key: :courses_search)
       # if current_user.has_role?(:admin)
-         @courses = @ransack_courses.result.includes(:user)
+        #  @courses = @ransack_courses.result.includes(:user)
+          @pagy,@courses = pagy(@ransack_courses.result.includes(:user))
       # else
       #   redirect_to root_path, alert: 'You are not authorized'
       # end

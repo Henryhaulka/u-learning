@@ -38,4 +38,7 @@
     %div.grid-system
       - @courses.each do |cour|
         = render 'courses/course', course: cour
+    %p
+      %div.text-center
+        != pagy_bootstrap_nav(@pagy)
 
