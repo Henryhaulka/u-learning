@@ -16,6 +16,7 @@ gem 'ransack', '~> 2.5'
 gem 'public_activity', '~> 1.6', '>= 1.6.4'
 gem 'rolify', '~> 6.0'
 gem "pundit"
+gem 'exception_notification', '~> 4.5'
 # Use Puma as the app server
 gem 'puma', '~> 5.0'
 # Use SCSS for stylesheets
