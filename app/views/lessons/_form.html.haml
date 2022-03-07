@@ -19,4 +19,5 @@
     = f.input :course_id, input_html: {value: @lesson.course_id || params[:course_id]}, as: :hidden
 
   .form-actions
-    = f.button :submit
+    = f.button :submit, class: 'btn btn-success'
+  %p
