@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  resources :subscriptions, except: [:new, :create]
+  resources :subscriptions
   get 'users/index'
   devise_for :users
   resources :courses do
