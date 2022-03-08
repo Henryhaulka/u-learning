@@ -66,6 +66,6 @@ class SubscriptionsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def subscription_params
-      params.require(:subscription).permit(:course_id, :review, :rating)
+      params.require(:subscription).permit(:review, :rating)
     end
 end
