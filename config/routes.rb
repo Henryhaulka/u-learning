@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :subscriptions
   get 'users/index'
   devise_for :users
   resources :courses do
