@@ -1,3 +1,7 @@
+- content_for :title do
+  = ULearning
+  \|
+  All Users
 %h2
   .text-center
     User
@@ -35,7 +39,12 @@
     - @users.each do |user|
       %tr 
         %td= user.id
-        %td= user.email
+        %td
+          - if user.online?
+            .fa.fa-circle.text-success
+          - else
+            .fa.fa-circle.text-danger
+          = link_to user.email, user 
         %td= user.created_at
         %td= user.sign_in_count
         %td= user.current_sign_in_at
