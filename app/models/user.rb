@@ -4,6 +4,7 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable,:trackable, :confirmable
   has_many :courses, dependent: :destroy
+  has_many :subscriptions, dependent: :destroy
   rolify
   after_create :assign_default_role
 
