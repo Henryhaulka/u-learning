@@ -11,7 +11,11 @@ class User < ApplicationRecord
   def username
       self.email.split(/@/).first
   end
-
+  
+  def buy_a_course(course)
+    self.subscriptions.create(course_id: course, price: course.price)
+  end
+  
   def online?
     self.updated_at > 2.minutes.ago
   end
