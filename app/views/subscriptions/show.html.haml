@@ -1,21 +1,31 @@
-%p#notice= notice
-
-%p
-  %b Course:
-  = @subscription.course.title
-%p
-  %b User:
+- content_for :title do
+  U-learning
+  \|
   = @subscription.user.username
-%p
-  %b Price:
-  = number_to_currency(@subscription.price)
-%p
-  %b Review:
-  = @subscription.review
-%p
-  %b Rating:
-  = @subscription.rating
+  \|
+  = @subscription.course.title
 
-= link_to 'Edit', edit_subscription_path(@subscription)
-\|
-= link_to 'Back', subscriptions_path
+%p
+.card
+  .card-header
+    %h4
+      = "#{@subscription.user.username}'s"
+      Subscription for
+      = @subscription.course.title
+  .card-body
+    %b Price:
+    = number_to_currency(@subscription.price)
+    %p
+    %b Review:
+    = @subscription.review
+    %p
+    %b Rating:
+    = @subscription.rating
+  .card-footer
+    = link_to 'Edit', edit_subscription_path(@subscription)
+    \|
+    = link_to 'Back', subscriptions_path
+
+  
+
+

@@ -1,7 +1,16 @@
-
-%h1 Listing subscriptions
+- content_for :title do
+  ULearning
+  \|
+  All Subscriptions
+%h2
+  .text-center
+    Subscriptions
+    .badge.bg-secondary
+      = @subscriptions.size
+%p
+%p
 .table-responsive
-  %table.table.table-bordered
+  %table.table.table-bordered.table-sm.table-striped
     %thead
       %tr
         %th Course
