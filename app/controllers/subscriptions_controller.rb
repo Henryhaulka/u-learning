@@ -22,7 +22,8 @@ class SubscriptionsController < ApplicationController
   # POST /subscriptions or /subscriptions.json
   def create
     @subscription = Subscription.new(subscription_params)
-     @subscription.user = current_user
+    @subscription.user = current_user
+    @subscription.price =  @subscription.course.price
     respond_to do |format|
       if @subscription.save
         format.html { redirect_to subscription_url(@subscription), notice: "Subscription was successfully created." }
