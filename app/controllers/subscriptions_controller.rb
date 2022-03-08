@@ -4,6 +4,7 @@ class SubscriptionsController < ApplicationController
   # GET /subscriptions or /subscriptions.json
   def index
     @subscriptions = Subscription.all
+    authorize  @subscriptions
   end
 
   # GET /subscriptions/1 or /subscriptions/1.json
@@ -17,6 +18,7 @@ class SubscriptionsController < ApplicationController
 
   # GET /subscriptions/1/edit
   def edit
+    authorize  @subscription
   end
 
   # POST /subscriptions or /subscriptions.json
@@ -33,6 +35,7 @@ class SubscriptionsController < ApplicationController
 
   # PATCH/PUT /subscriptions/1 or /subscriptions/1.json
   def update
+    authorize  @subscription
     respond_to do |format|
       if @subscription.update(subscription_params)
         format.html { redirect_to subscription_url(@subscription), notice: "Subscription was successfully updated." }
@@ -46,6 +49,7 @@ class SubscriptionsController < ApplicationController
 
   # DELETE /subscriptions/1 or /subscriptions/1.json
   def destroy
+      authorize  @subscription
     @subscription.destroy
 
     respond_to do |format|
