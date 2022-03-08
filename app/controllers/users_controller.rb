@@ -4,6 +4,7 @@ before_action :set_user, only: [:edit, :update, :show]
     # @users = User.all
     @q = User.ransack(params[:q])
     @users = @q.result(distinct: true)
+    authorize @users
   end
 
   def show
