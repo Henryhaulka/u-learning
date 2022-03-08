@@ -2,13 +2,16 @@
   U-learning
   \|
   New subscription
-  = @course.inspect
 .card
   .card-header
-    %h1 
+    %h3
+      .fa.fa-book
+      = link_to @course.title, @course
+      %hr
       .fa.fa-lock-open
-      New subscription
+      Buy Course
   .card-body
-    = render 'form'
+    = form_tag course_subscriptions_path(@course) do
+      =submit_tag "Pay #{@course.price}", class: 'btn btn-success'
   .card-footer
-    = link_to 'Back', subscriptions_path
+    = link_to "Back to All Courses", courses_path
