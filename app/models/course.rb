@@ -23,4 +23,8 @@ class Course < ApplicationRecord
     
     include PublicActivity::Model
     tracked owner: Proc.new{ |controller, model| controller.current_user }
+
+    def user_subscribed?(user)
+        self.subscriptions.where(course_id: self.id, user_id: user.id).empty?
+    end
 end
