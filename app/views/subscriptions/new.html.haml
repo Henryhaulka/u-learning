@@ -2,8 +2,12 @@
   U-learning
   \|
   New subscription
-%h1 New subscription
-
-= render 'form'
-
-= link_to 'Back', subscriptions_path
+.card
+  .card-header
+    %h1 
+      .fa.fa-lock-open
+      New subscription
+  .card-body
+    = render 'form'
+  .card-footer
+    = link_to 'Back', subscriptions_path
