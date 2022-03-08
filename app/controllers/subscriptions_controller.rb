@@ -1,6 +1,6 @@
 class SubscriptionsController < ApplicationController
   before_action :set_subscription, only: %i[ show edit update destroy ]
-
+  before_action :set_course, only: [:new, :create ]
   # GET /subscriptions or /subscriptions.json
   def index
     @subscriptions = Subscription.all
@@ -21,17 +21,13 @@ class SubscriptionsController < ApplicationController
 
   # POST /subscriptions or /subscriptions.json
   def create
-    @subscription = Subscription.new(subscription_params)
-    @subscription.user = current_user
-    @subscription.price =  @subscription.course.price
-    respond_to do |format|
-      if @subscription.save
-        format.html { redirect_to subscription_url(@subscription), notice: "Subscription was successfully created." }
-        format.json { render :show, status: :created, location: @subscription }
-      else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @subscription.errors, status: :unprocessable_entity }
-      end
+    if @course.price > 0
+      flash[:alert] = "You can't access paid courses yet"
+      redirect_to new_course_subscription_path(@course)
+    else
+      current_user.buy_a_course(@course)
+      flash[:notice] = "You have successfully subscribe to #{@course.title}"
+      redirect_to course_path(@course)
     end
   end
 
@@ -58,12 +54,18 @@ class SubscriptionsController < ApplicationController
     end
   end
 
+  
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_subscription
       @subscription = Subscription.find(params[:id])
     end
-
+    
+    def set_course
+      @course = Course.friendly.find(params[:course_id])
+    end
+    
     # Only allow a list of trusted parameters through.
     def subscription_params
       params.require(:subscription).permit(:review, :rating)
