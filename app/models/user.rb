@@ -11,9 +11,9 @@ class User < ApplicationRecord
   def username
       self.email.split(/@/).first
   end
-  
+
   def buy_a_course(course)
-    self.subscriptions.create(course_id: course, price: course.price)
+    self.subscriptions.create(course_id: course.id, price: course.price)
   end
   
   def online?
@@ -41,6 +41,5 @@ class User < ApplicationRecord
     unless roles.present?
       errors.add(:roles, 'User must have a role')
     end
-  end
-  
+  end  
 end

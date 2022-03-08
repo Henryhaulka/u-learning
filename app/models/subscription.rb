@@ -8,17 +8,20 @@ class Subscription < ApplicationRecord
   validates_uniqueness_of :user_id, scope: :course_id
   validates_uniqueness_of :course_id, scope: :user_id
 
-  validate :cant_subscribe_to_own_course
+  
 
   def to_s
     user.username + "| "  + course.title
   end
-  
+  validate :cant_subscribe_to_own_course
   protected
+
   def cant_subscribe_to_own_course
-      if self.user_id == course.user_id
-        errors.add(:base, "You can't subscribe to your own course")
-      end
+    if self.new_record?
+          if  self.user_id == self.course.user.id
+              errors.add(:base, "You can't subscribe to your own course")
+          end
+    end
   end
   
 end
