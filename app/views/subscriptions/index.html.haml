@@ -15,8 +15,8 @@
   %tbody
     - @subscriptions.each do |subscription|
       %tr
-        %td= subscription.course
-        %td= subscription.user
+        %td= subscription.course.title
+        %td= subscription.user.username
         %td= subscription.price
         %td= subscription.review
         %td= subscription.rating

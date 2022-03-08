@@ -5,10 +5,10 @@
   = @subscription.course.title
 %p
   %b User:
-  = @subscription.user
+  = @subscription.user.username
 %p
   %b Price:
-  = @subscription.price
+  = number_to_currency(@subscription.price)
 %p
   %b Review:
   = @subscription.review
