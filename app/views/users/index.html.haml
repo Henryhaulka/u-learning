@@ -13,10 +13,11 @@
 /    = render 'user', user_reg:  user
 %br
 = search_form_for @q do |f|
-  = f.search_field :email_cont, placeholder: 'Email'
-  /= f.search_field :sign_in_count_eq, placeholder: 'Sign in count'
-  /= f.search_field :email_or_sign_in_count_eq, placeholder: 'Sign in count or email'
-  = f.submit
+  .row
+    = f.search_field :email_cont, placeholder: 'Email', class:'form-control m-2', style:"width: 300px;"
+    /= f.search_field :sign_in_count_eq, placeholder: 'Sign in count'
+    /= f.search_field :email_or_sign_in_count_eq, placeholder: 'Sign in count or email'
+    = f.submit style:"width: 70px;", class:"btn btn-sm btn-success m-2"
 = link_to users_path, class: 'btn btn-sm btn-secondary' do
   .fa.fa-sync
 %br

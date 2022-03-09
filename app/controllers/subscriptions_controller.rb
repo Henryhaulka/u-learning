@@ -4,7 +4,8 @@ class SubscriptionsController < ApplicationController
   # GET /subscriptions or /subscriptions.json
   def index
     #  @subscriptions= Subscription.all
-    @pagy,@subscriptions = pagy(Subscription.all)
+    @q = Subscription.ransack(params[:q])
+    @pagy,@subscriptions = pagy(@q.result.includes(:user))
     authorize  @subscriptions
   end
 
@@ -64,7 +65,7 @@ class SubscriptionsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_subscription
-      @subscription = Subscription.find(params[:id])
+      @subscription = Subscription.friendly.find(params[:id])
     end
     
     def set_course
