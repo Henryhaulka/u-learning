@@ -25,6 +25,6 @@ class Course < ApplicationRecord
     tracked owner: Proc.new{ |controller, model| controller.current_user }
 
     def user_subscribed?(user)
-        self.subscriptions.where(course_id: self.id, user_id: user.id).empty?
+        self.subscriptions.where(course_id: self.id, user_id: user.id).present?
     end
 end

@@ -1,0 +1,18 @@
+.card
+  .card-header
+    .fa.fa-user
+    = link_to enrollment.user.username,enrollment.user
+    .text-warning.fa.fa-clock
+    = time_ago_in_words(enrollment.updated_at) + ' ago'
+    .fa.fa-graduation-cap
+    = link_to enrollment.course.title, enrollment.course
+  - if enrollment.rating.present? || enrollment.review.present?
+    .card-body
+      .text-warning.fa.fa-star
+      %b 
+        = enrollment.rating
+      .fa.fa-comment
+      = enrollment.review
+  - if policy(enrollment).edit?
+    .card-footer
+      = link_to 'Edit Review', edit_subscription_path(enrollment)

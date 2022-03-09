@@ -5,14 +5,14 @@
 .card
   .card-header
     %h1 
-      .fa.fa-unlock
-      Editing subscription
+      .text-warning.fa.fa-star
+      Add a Review
   .card-body
     = render 'form'
   .card-footer
-    = link_to 'Show', @subscription
+    = link_to 'This subscription', @subscription
     \|
-    = link_to 'Back', subscriptions_path
+    = link_to 'Back to Courses', courses_path
 
 
 

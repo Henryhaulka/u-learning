@@ -16,10 +16,10 @@
     = user_reg.sign_in_count
     %hr
     %b Current sign time:
-    = user_reg.current_sign_in_at
+    = user_reg.current_sign_in_at.strftime('%D - %r')
     %hr
     %b Last sign in at:
-    = user_reg.last_sign_in_at
+    = user_reg.last_sign_in_at.strftime('%D - %r')
     %hr
     %b current sign in ip:
     = user_reg.current_sign_in_ip
