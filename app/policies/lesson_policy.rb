@@ -11,7 +11,7 @@ class LessonPolicy < ApplicationPolicy
   end
 
   def show?
-    user.has_role?(:admin) or user == record.course.user 
+    user.has_role?(:admin) or user == record.course.user or  record.course.user_subscribed?(user) == true
   end
   
 
