@@ -3,7 +3,8 @@ class SubscriptionsController < ApplicationController
   before_action :set_course, only: [:new, :create ]
   # GET /subscriptions or /subscriptions.json
   def index
-    @subscriptions = Subscription.all
+    #  @subscriptions= Subscription.all
+    @pagy,@subscriptions = pagy(Subscription.all)
     authorize  @subscriptions
   end
 

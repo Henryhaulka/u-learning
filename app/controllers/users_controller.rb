@@ -3,7 +3,8 @@ before_action :set_user, only: [:edit, :update, :show]
   def index
     # @users = User.all
     @q = User.ransack(params[:q])
-    @users = @q.result(distinct: true)
+    # @users = @q.result(distinct: true)
+    @pagy, @users  = pagy(@q.result(distinct: true))
     authorize @users
   end
 

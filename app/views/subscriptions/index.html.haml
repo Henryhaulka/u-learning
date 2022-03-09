@@ -60,3 +60,6 @@
   %br
 
   = link_to "Back to Courses", courses_path
+%p
+  %div.text-center
+    != pagy_bootstrap_nav(@pagy)
