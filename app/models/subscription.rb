@@ -8,7 +8,9 @@ class Subscription < ApplicationRecord
   validates_uniqueness_of :user_id, scope: :course_id
   validates_uniqueness_of :course_id, scope: :user_id
   scope :pending_review, -> { where(rating: [0,nil, ""], review: [0,nil, ""])}
-  
+  validates_presence_of :rating, if: :review?
+  validates_presence_of :review, if: :rating?
+
   extend FriendlyId
   friendly_id :to_s, use: :slugged
 
