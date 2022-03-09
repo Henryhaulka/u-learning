@@ -16,4 +16,20 @@ module CoursesHelper
       
   end
   
+  def review_course(course)
+    if user_signed_in?
+        user_sub = current_user.subscriptions.where(course_id: course.id)
+      if user_sub.present?#this is now a subscription
+        #user_sub.where(rating: [0,nil, ""], review: [0,nil, ""]).present?
+        if  user_sub.pending_review.present?#scope in subsription
+          link_to 'Pls, Add a Review', edit_subscription_path(user_sub.first), class: 'btn btn-primary'
+        else
+          link_to "Thanks for the review!", subscription_path(user_sub.first)
+        end
+      end
+        
+      
+    end
+  end
+  
 end

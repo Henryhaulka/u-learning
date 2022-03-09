@@ -7,7 +7,8 @@ class Subscription < ApplicationRecord
   # hence can't subcribe to same course twice 
   validates_uniqueness_of :user_id, scope: :course_id
   validates_uniqueness_of :course_id, scope: :user_id
-
+  scope :pending_review, -> { where(rating: [0,nil, ""], review: [0,nil, ""])}
+  
   
 
   def to_s

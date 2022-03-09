@@ -16,6 +16,8 @@
   .card-footer
     .text-center
       = subscribe_button(course)
+      %p
+      = review_course(course)
   .card-footer
     .fa.fa-tasks
     = course.lessons.count
