@@ -20,7 +20,11 @@
       = review_course(course)
   .card-footer
     .fa.fa-star.text-warning
-    = course.average_rating
+    %b 
+      = course.average_rating
+    Subscriptions:
+    %b
+      = course.subscriptions_count
   .card-footer
     .fa.fa-tasks
     = course.lessons.count
