@@ -31,9 +31,13 @@
                 Learn
               %ul.dropdown-menu{"aria-labelledby" => "teacherDropdown"}
                 %li
-                  = link_to courses_path, class: 'dropdown-item' do
-                    .fa.fa-plus
-                    Course
+                  = link_to purchased_courses_courses_path, class: 'dropdown-item' do
+                    .fa.fa-graduation-cap
+                    Purchased Courses
+                %li
+                  = link_to pending_reviews_courses_path, class: 'dropdown-item' do
+                    .text-warning.fa.fa-star
+                    Pending Reviews
           - if current_user.has_role?(:teacher)
             %li.nav-item.dropdown
               %a#teacherDropdown.nav-link.dropdown-toggle{"aria-expanded" => "false", "data-bs-toggle" => "dropdown", :href => "#", :role => "button"}
@@ -45,6 +49,14 @@
                     .fa.fa-plus
                     .fa.fa-graduation-cap
                     New Course
+                %li
+                  = link_to created_courses_courses_path, class: 'dropdown-item' do
+                    .fa.fa-graduation-cap
+                    My Course
+                %li
+                  = link_to my_students_subscriptions_path, class: 'dropdown-item' do
+                    .fa.fa-users
+                    My Students
           - if current_user.has_role?(:admin)
             %li.nav-item.dropdown
               %a#adminDropdown.nav-link.dropdown-toggle{"aria-expanded" => "false", "data-bs-toggle" => "dropdown", :href => "#", :role => "button"}

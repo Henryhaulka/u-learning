@@ -4,7 +4,7 @@ module CoursesHelper
       if current_user == course.user
           link_to 'You created this Course, View analytics', course_path(course),class: 'text-decoration-none'
       elsif course.subscriptions.where(user_id: current_user).present?
-          link_to 'You already subscribed to this course, Keep learning', course_path(course), class: 'text-decoration-none'
+          'You already subscribed to this course, Keep learning'
       elsif course.price.zero?
           link_to 'Free', new_course_subscription_path(course), class: 'btn btn-success'
       elsif !course.price.zero?
@@ -22,7 +22,7 @@ module CoursesHelper
       if user_sub.present?#this is now a subscription
         #user_sub.where(rating: [0,nil, ""], review: [0,nil, ""]).present?
         if  user_sub.pending_review.present?#scope in subsription
-          link_to 'Pls, Add a Review', edit_subscription_path(user_sub.first), class: 'btn btn-primary'
+          link_to ' Add a Review', edit_subscription_path(user_sub.first), class: 'btn btn-primary'
         else
           link_to "Thanks for the review!", subscription_path(user_sub.first)
         end
