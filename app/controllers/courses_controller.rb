@@ -31,7 +31,7 @@ class CoursesController < ApplicationController
     #joins is used to join tables
     ##a course has many subscriptions hence .joins(:subscriptions) subscriptions is plural
     @ransack_courses = Course.joins(:subscriptions).where(subscriptions: {user_id: current_user}).ransack(params[:courses_search])
-    @pagy,@courses = pagy(@ransack_courses.result.includes(:user) )
+    @pagy,@courses = pagy(@ransack_courses.result )
     render 'index'
   end
 
@@ -41,13 +41,14 @@ class CoursesController < ApplicationController
     @ransack_courses = 
       Course.joins(:subscriptions).where(subscriptions: 
       {rating: [0,nil, ""], review: [0,nil, "", ], user_id: current_user}).ransack(params[:courses_search])
-    @pagy,@courses = pagy(@ransack_courses.result.includes(:user))
+    @pagy,@courses = pagy(@ransack_courses.result)
     render 'index'
   end
 
   def created_courses
     @ransack_path = created_courses_courses_path
-    @pagy,@courses = pagy(Course.where(user_id: current_user))
+    @ransack_courses = Course.where(user_id: current_user).ransack(params[:courses_search])
+    @pagy,@courses = pagy(@ransack_courses.result)
     render 'index'
     
   end
