@@ -57,10 +57,14 @@
                   = link_to created_courses_courses_path, class: 'dropdown-item' do
                     .fa.fa-graduation-cap
                     My Course
+                    .badge.bg-danger
+                      = current_user.courses.count
                 %li
                   = link_to my_students_subscriptions_path, class: 'dropdown-item' do
                     .fa.fa-users
                     My Students
+                    .badge.bg-danger
+                      = Subscription.joins(:course).where(courses: {user: current_user}).count
           - if current_user.has_role?(:admin)
             %li.nav-item.dropdown
               %a#adminDropdown.nav-link.dropdown-toggle{"aria-expanded" => "false", "data-bs-toggle" => "dropdown", :href => "#", :role => "button"}
@@ -71,10 +75,14 @@
                   = link_to users_path, class: 'dropdown-item' do
                     .fa.fa-users
                     Users
+                    .badge.bg-danger
+                      = User.count
                 %li
                   = link_to  subscriptions_path, class: 'dropdown-item' do
                     .fa.fa-unlock
-                    Subscribe
+                    Subscriptions
+                    .badge.bg-danger
+                      = Subscription.count
                 %li
                   = link_to home_activity_path, class: 'dropdown-item' do
                     .fa.fa-bell
