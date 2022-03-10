@@ -10,7 +10,7 @@
 %p
 %p
 
-= search_form_for @q do |f|
+= search_form_for @q, url: @ransack_path do |f|
   .row
     = f.search_field :user_email_cont, placeholder: 'Email',class:'form-control m-2', style:"width: 200px;"
     = f.search_field :rating_eq, placeholder: 'rating', class:'form-control m-2', style:"width: 200px;"
@@ -18,7 +18,7 @@
     = f.search_field :review_cont, placeholder: 'Review', class:'form-control m-2', style:"width: 200px;"
     = f.submit style:"width: 70px;", class:"btn btn-sm btn-success m-2"
 %p
-= link_to subscriptions_path, class: 'btn btn-sm btn-info' do
+= link_to @ransack_path, class: 'btn btn-sm btn-info' do
   .fa.fa-sync
 %p
 %p

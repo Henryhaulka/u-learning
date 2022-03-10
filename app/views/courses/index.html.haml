@@ -13,7 +13,7 @@
   .col-md-2
     .card-header
       %b Filter by:
-    = search_form_for @ransack_courses, as: :courses_search, url: courses_path do |f|
+    = search_form_for @ransack_courses, as: :courses_search, url:  @ransack_path do |f|
       = f.label :title
       = f.search_field :title_cont, placeholder: 'Title', class: 'form-control form-control-sm '
       %br
@@ -35,7 +35,7 @@
       %br
       = f.submit class: 'btn btn-success'
     %br
-    = link_to courses_path, class: 'btn btn-sm btn-info' do
+    = link_to   @ransack_path, class: 'btn btn-sm btn-info' do
       .fa.fa-sync
     %br
     %br

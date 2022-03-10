@@ -4,12 +4,14 @@ class SubscriptionsController < ApplicationController
   # GET /subscriptions or /subscriptions.json
   def index
     #  @subscriptions= Subscription.all
+    @ransack_path = subscriptions_path
     @q = Subscription.ransack(params[:q])
     @pagy,@subscriptions = pagy(@q.result.includes(:user))
     authorize  @subscriptions
   end
 
   def my_students
+    @ransack_path = my_students_subscriptions_path
     #a subscription belongs to a course hence .joins(:course) course is singular
     @q = Subscription.joins(:course).where(courses: {user_id: current_user}).ransack(params[:q])
     @pagy,@subscriptions= pagy(@q.result)

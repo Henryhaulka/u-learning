@@ -11,6 +11,7 @@ class CoursesController < ApplicationController
       #  @ransack_courses = Course.ransack(params[:courses_search], key: :courses_search)
       # if current_user.has_role?(:admin)
         #  @courses = @ransack_courses.result.includes(:user)
+          @ransack_path = courses_path
           @pagy,@courses = pagy(@ransack_courses.result.includes(:user))
       # else
       #   redirect_to root_path, alert: 'You are not authorized'
@@ -25,6 +26,7 @@ class CoursesController < ApplicationController
   end
 
   def purchased_courses
+      @ransack_path = purchased_courses_courses_path
     # @courses =  Course.joins(:subscriptions).where(subscriptions: {user_id: current_user})
     #joins is used to join tables
     ##a course has many subscriptions hence .joins(:subscriptions) subscriptions is plural
@@ -33,6 +35,7 @@ class CoursesController < ApplicationController
   end
 
   def pending_reviews
+    @ransack_path = pending_reviews_courses_path
     #MERGE is used to add a scope here
     @pagy,@courses = 
       pagy(Course.joins(:subscriptions).where(subscriptions: 
@@ -41,6 +44,7 @@ class CoursesController < ApplicationController
   end
 
   def created_courses
+    @ransack_path = created_courses_courses_path
     @pagy,@courses = pagy(Course.where(user_id: current_user))
     render 'index'
     
