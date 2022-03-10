@@ -30,16 +30,18 @@ class CoursesController < ApplicationController
     # @courses =  Course.joins(:subscriptions).where(subscriptions: {user_id: current_user})
     #joins is used to join tables
     ##a course has many subscriptions hence .joins(:subscriptions) subscriptions is plural
-    @pagy,@courses = pagy(Course.joins(:subscriptions).where(subscriptions: {user_id: current_user}))
+    @ransack_courses = Course.joins(:subscriptions).where(subscriptions: {user_id: current_user}).ransack(params[:courses_search])
+    @pagy,@courses = pagy(@ransack_courses.result.includes(:user) )
     render 'index'
   end
 
   def pending_reviews
     @ransack_path = pending_reviews_courses_path
     #MERGE is used to add a scope here
-    @pagy,@courses = 
-      pagy(Course.joins(:subscriptions).where(subscriptions: 
-      {rating: [0,nil, ""], review: [0,nil, "", ], user_id: current_user}))
+    @ransack_courses = 
+      Course.joins(:subscriptions).where(subscriptions: 
+      {rating: [0,nil, ""], review: [0,nil, "", ], user_id: current_user}).ransack(params[:courses_search])
+    @pagy,@courses = pagy(@ransack_courses.result.includes(:user))
     render 'index'
   end
 

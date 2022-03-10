@@ -34,10 +34,14 @@
                   = link_to purchased_courses_courses_path, class: 'dropdown-item' do
                     .fa.fa-graduation-cap
                     Purchased Courses
+                    .badge.bg-danger
+                      = current_user.subscriptions.count
                 %li
                   = link_to pending_reviews_courses_path, class: 'dropdown-item' do
                     .text-warning.fa.fa-star
                     Pending Reviews
+                    .badge.bg-danger
+                      = current_user.subscriptions.pending_review.count
           - if current_user.has_role?(:teacher)
             %li.nav-item.dropdown
               %a#teacherDropdown.nav-link.dropdown-toggle{"aria-expanded" => "false", "data-bs-toggle" => "dropdown", :href => "#", :role => "button"}
