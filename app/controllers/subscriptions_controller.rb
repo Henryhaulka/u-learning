@@ -9,6 +9,13 @@ class SubscriptionsController < ApplicationController
     authorize  @subscriptions
   end
 
+  def my_students
+    #a subscription belongs to a course hence .joins(:course) course is singular
+    @q = Subscription.joins(:course).where(courses: {user_id: current_user}).ransack(params[:q])
+    @pagy,@subscriptions= pagy(@q.result)
+    render 'index'
+  end
+
   # GET /subscriptions/1 or /subscriptions/1.json
   def show
   end

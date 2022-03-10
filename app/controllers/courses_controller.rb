@@ -24,6 +24,31 @@ class CoursesController < ApplicationController
     @course_lessons = @course.lessons.recent_lessons
   end
 
+  def purchased_courses
+    # @courses =  Course.joins(:subscriptions).where(subscriptions: {user_id: current_user})
+    #joins is used to join tables
+    ##a course has many subscriptions hence .joins(:subscriptions) subscriptions is plural
+    @pagy,@courses = pagy(Course.joins(:subscriptions).where(subscriptions: {user_id: current_user}))
+    render 'index'
+  end
+
+  def pending_reviews
+    #MERGE is used to add a scope here
+    @pagy,@courses = 
+      pagy(Course.joins(:subscriptions).where(subscriptions: 
+      {rating: [0,nil, ""], review: [0,nil, "", ], user_id: current_user}))
+    render 'index'
+  end
+
+  def created_courses
+    @pagy,@courses = pagy(Course.where(user_id: current_user))
+    render 'index'
+    
+  end
+  
+  
+  
+
   # GET /courses/new
   def new
     @course = Course.new
