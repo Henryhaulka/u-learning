@@ -19,6 +19,9 @@
       %p
       = review_course(course)
   .card-footer
+    .fa.fa-star.text-warning
+    = course.average_rating
+  .card-footer
     .fa.fa-tasks
     = course.lessons.count
   .card-footer
@@ -34,5 +37,3 @@
     .card-footer
       = link_to 'Edit', edit_course_path(course), class: 'btn btn-warning'
       = link_to 'Destroy', course, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger'
-
-  
