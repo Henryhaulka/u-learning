@@ -10,12 +10,11 @@
   .col-lg-6
     = render 'courses/course', course: @course
   .col-lg-6
-    
-    = link_to new_course_lesson_path(@course, @lesson), class: 'btn btn-primary w-100' do
-      .fa.fa-plus
-      Add a lesson
+    - if policy(@course).owner?
+      = link_to new_course_lesson_path(@course, @lesson), class: 'btn btn-primary w-100' do
+        .fa.fa-plus
+        Add a lesson
     - if  @course_lessons.present?
-      %p
       %h3
         =  "Lessons on #{@course.title}"
       - @course_lessons.each do |lessoner|
