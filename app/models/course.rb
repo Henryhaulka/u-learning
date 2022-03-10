@@ -27,4 +27,13 @@ class Course < ApplicationRecord
     def user_subscribed?(user)
         self.subscriptions.where(course_id: self.id, user_id: user.id).present?
     end
+
+    def update_rating
+        if subscriptions.present? && subscriptions.where.not(rating: nil)
+            update_column :average_rating, (subscriptions.average(:rating).round(2).to_f)
+        else
+            update_column :average_rating, (0.0)
+        end
+    end
+    
 end
