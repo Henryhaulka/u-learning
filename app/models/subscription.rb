@@ -17,6 +17,17 @@ class Subscription < ApplicationRecord
   def to_s
     user.username + "| "  + course.title
   end
+
+  after_save do
+    unless rating.nil? || rating.zero?
+      course.update_rating
+    end
+  end
+
+  after_destroy do
+     course.update_rating
+  end
+
   validate :cant_subscribe_to_own_course
   protected
 
