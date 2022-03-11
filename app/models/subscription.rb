@@ -10,10 +10,14 @@ class Subscription < ApplicationRecord
   # hence can't subcribe to same course twice 
   validates_uniqueness_of :user_id, scope: :course_id
   validates_uniqueness_of :course_id, scope: :user_id
+
+  #Scopes
   scope :pending_review, -> { where(rating: [0,nil, ""], review: [0,nil, ""])}
   scope :reviewed, -> { where.not(rating: [0,nil, ""], review: [0,nil, ""])}
   scope :recent, -> {order(created_at: :desc)}
   scope :limiter, -> {limit(3)}
+  scope :rater, -> {order(rating: :desc)}
+
   validates_presence_of :rating, if: :review?
   validates_presence_of :review, if: :rating?
 
@@ -40,7 +44,7 @@ class Subscription < ApplicationRecord
   def cant_subscribe_to_own_course
     if self.new_record?
           if  self.user_id == self.course.user.id
-              errors.add(:base, "You can't subscribe to your own course")
+            errors.add(:base, "You can't subscribe to your own course")
           end
     end
   end

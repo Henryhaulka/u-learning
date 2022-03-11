@@ -12,6 +12,8 @@ class Course < ApplicationRecord
     friendly_id :title, use: :slugged
     scope :recent, -> {order(created_at: :desc)}
     scope :limiter, -> {limit(3)}
+    scope :popular, -> {order(subscriptions_count: :desc)}
+    scope :top, -> {order(average_rating: :desc).limiter}
     
     LANGUAGES = [ :English, :French, :Spanish, :Russian]
     def self.languages
