@@ -40,20 +40,48 @@
     Life Access
     %p
     Learn at your own pace and time
-
 %hr
-%h3 Popular Courses
+- if Subscription.where(user_id: current_user).present?
+  %h3.pt-2
+    .fa.fa-user-graduate.text-success
+    Continue Learning
+  %div.grid-system
+    - @my_subscriptions.each do |cour|
+      = render 'courses/course', course: cour
+- elsif user_signed_in?
+  %h3.text-warning
+    You have Yet to subscribe to a Course
+  %hr
+%br
+%h3.pt-2
+  .fa.fa-chart-bar
+  Popular Courses
+%br
 %div.grid-system
-  - @courses.each do |cour|
+  - @popular_courses.each do |cour|
     = render 'courses/course', course: cour
 %hr
-%h3 Top Courses
+%h3.pt-2
+  .fa.fa-star.text-warning
+  Top Courses
+%br
 %div.grid-system
-  - @courses.each do |cour|
+  - @top_rated_courses.each do |cour|
     = render 'courses/course', course: cour
 %hr
-%h3 Latest Courses
+%h3.pt-2
+  .fa.fa-clock
+  Latest Courses
+%br
 %div.grid-system
   - @latest_courses.each do |cour|
     = render 'courses/course', course: cour
+%hr
+%h3.pt-2
+  .fa.fa-comments
+  What our students have to say?
+%br
+%div.grid-system
+  - @reviews.each do |subscription|
+    = render 'subscriptions/subscription', enrollment: subscription
 %hr

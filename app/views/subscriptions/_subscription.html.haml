@@ -11,8 +11,9 @@
       .text-warning.fa.fa-star
       %b 
         = enrollment.rating
-      .fa.fa-comment
-      = enrollment.review
+      %p
+        .fa.fa-comment
+        = enrollment.review
   - if policy(enrollment).edit?
     .card-footer
       = link_to 'Edit Review', edit_subscription_path(enrollment)

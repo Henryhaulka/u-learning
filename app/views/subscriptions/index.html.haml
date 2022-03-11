@@ -1,9 +1,11 @@
 - content_for :title do
   ULearning
   \|
-  All Subscriptions
+  = action_name.humanize
+  Subscriptions
 %h2
   .text-center
+    = action_name.humanize
     Subscriptions
     .badge.bg-secondary
       = @subscriptions.size
