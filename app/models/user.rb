@@ -4,6 +4,7 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable,:trackable, :confirmable
   has_many :courses, dependent: :destroy
+  has_many :user_lessons, dependent: :destroy
   has_many :subscriptions, dependent: :destroy
   rolify
   after_create :assign_default_role
@@ -11,6 +12,13 @@ class User < ApplicationRecord
   def username
       self.email.split(/@/).first
   end
+
+  def view(lesson)
+    unless self.user_lessons.where( lesson_id: lesson.id).present?
+      self.user_lessons.create(lesson_id: lesson.id)
+    end
+  end
+  
 
   def buy_a_course(course)
     self.subscriptions.create(course_id: course.id, price: course.price)

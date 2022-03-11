@@ -7,6 +7,8 @@ class Lesson < ApplicationRecord
   has_rich_text :content
   validates :title, :content, presence: true
   validates :content, length: {minimum: 10 }
+  has_many :user_lessons, dependent: :destroy
+
 
   include PublicActivity::Model
   tracked owner: Proc.new{ |controller, model| controller.current_user }
@@ -17,4 +19,8 @@ class Lesson < ApplicationRecord
   end
   scope :recent_lessons, -> {order(created_at: :desc)}
 
+  def lesson_viewed?(user)
+    self.user_lessons.where(user_id: user).present?
+  end
+  
 end
