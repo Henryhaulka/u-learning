@@ -2,9 +2,9 @@
   .card-header
     .fa.fa-user
     - if user_reg.online?
-      .fa.fa-circle.text-success
+      .far.fa-circle.text-success
     -else
-      .fa.fa-circle.text-danger
+      .far.fa-circle.text-danger
     = link_to user_reg.username, user_reg
     - if current_user == user_reg
       .badge.bg-success YOU
@@ -12,8 +12,18 @@
     %b Signed Up:
     = time_ago_in_words(user_reg.created_at) + ' ago'
   .card-footer
-    = 'sign_in_count:'.humanize
+    %b
+      = 'sign_in_count:'.humanize
     = user_reg.sign_in_count
+    %hr
+    %b
+      = 'user_course_subscriptions:'.humanize
+    = user_reg.subscriptions_count
+    %hr
+    - if user_reg.has_role?(:admin)
+      %b
+        = 'user_courses:'.humanize
+      = user_reg.courses_count
     %hr
     %b Current sign time:
     = user_reg.current_sign_in_at.strftime('%D - %r')
