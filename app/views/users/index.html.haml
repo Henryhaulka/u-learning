@@ -29,6 +29,8 @@
         %th id
         %th= sort_link(@q, :email)
         %th Created_at
+        %th= 'courses_count:'.humanize
+        %th= 'subscription_count:'.humanize
         %th= 'sign_in_count:'.humanize
         %th= 'current_sign_in_at'.humanize
         %th= 'last_sign_in_at'.humanize
@@ -48,6 +50,8 @@
               .fa.fa-circle.text-danger
             = link_to user.email, user 
           %td= user.created_at
+          %td= user.courses_count
+          %td= user.subscriptions_count
           %td= user.sign_in_count
           %td= user.current_sign_in_at
           %td= user.last_sign_in_at

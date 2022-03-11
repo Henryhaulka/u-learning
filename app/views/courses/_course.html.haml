@@ -22,12 +22,14 @@
     .fa.fa-star.text-warning
     %b 
       = course.average_rating
-    Subscriptions:
-    %b
-      = course.subscriptions_count
+    (  
+    .fa.fa-user-graduate
+    = course.subscriptions_count  
+    )
+      
   .card-footer
     .fa.fa-tasks
-    = course.lessons.count
+    = course.lessons_count
   .card-footer
     .row
       .col-md-6

@@ -2,7 +2,8 @@ class Subscription < ApplicationRecord
   belongs_to :course, counter_cache: true# to track when a sub is deleted or added to a course
   #to update your count_cache(sub) run this in console
   # Course.find_each {|course| Course.reset_counters(course.id, :subscriptions )}
-  belongs_to :user
+  belongs_to :user, counter_cache: true # to track when a sub is deleted or added relating to a user
+    # User.find_each {|user|User.reset_counters(user.id, :subscriptions )}
   validates :user, :course, presence: true
 
   #this code ensures that a user subcribe to a course only once
