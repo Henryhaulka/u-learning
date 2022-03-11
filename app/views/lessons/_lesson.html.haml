@@ -1,6 +1,9 @@
 .card
   .card-header
-    .far.fa-check-square
+    - if lesson.lesson_viewed?(current_user)
+      .far.fa-check-square.text-success
+    - else
+      .fa.fa-lock.text-warning
     = link_to lesson.title, course_lesson_path(@course, lesson)
   - if policy(lesson).show? 
     .card-body
