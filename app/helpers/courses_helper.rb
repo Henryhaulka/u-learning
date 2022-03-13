@@ -4,7 +4,9 @@ module CoursesHelper
       if current_user == course.user
           link_to 'You created this Course, View analytics', course_path(course),class: 'text-decoration-none'
       elsif course.subscriptions.where(user_id: current_user).present?
-          "<i class = 'text-success'>You already subscribed to this course, Keep learning</i>".html_safe
+          "<i class='fa fa-spinner text-primary'></i>".html_safe + ' ' +
+          number_to_percentage(course.progress_rate(current_user), precision: 0)  + 
+          "<div class = 'text-success'>You already subscribed to this course, Keep learning</div>".html_safe
       elsif course.price.zero?
           link_to 'Free', new_course_subscription_path(course), class: 'btn btn-success'
       elsif !course.price.zero?
@@ -35,8 +37,6 @@ module CoursesHelper
           end
         end
       end
-        
-      
     end
   end
   

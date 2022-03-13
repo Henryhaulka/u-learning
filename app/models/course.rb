@@ -7,9 +7,13 @@ class Course < ApplicationRecord
     # User.find_each {|user|User.reset_counters(user.id, :courses )}
     has_many :lessons, dependent: :destroy
     has_many :subscriptions, dependent: :destroy
-    
+    #a course has lessons, also checked_lessons via lessons
+    #use the lesson.id to find it in the user_lessons table
+    has_many :checked_lessons, through: :lessons, source: :user_lessons
+
     extend FriendlyId
     friendly_id :title, use: :slugged
+    
     scope :recent, -> {order(created_at: :desc)}
     scope :limiter, -> {limit(3)}
     scope :popular, -> {order(subscriptions_count: :desc)}
@@ -39,5 +43,10 @@ class Course < ApplicationRecord
             update_column :average_rating, (0.0)
         end
     end
-    
+
+    def progress_rate(user)
+        unless lessons.count.zero?
+          (checked_lessons.where(user_id: user).count/ self.lessons_count.to_f) * 100  
+        end
+    end
 end
