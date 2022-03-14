@@ -12,6 +12,7 @@
 %p
 .row
   .col-lg-8.order-1.order-lg-1
+    = @lesson.user_lessons.where(user_id: current_user).first.impression
     = render 'lessons/lesson', lesson: @lesson
   .col-lg-4.order-0.order-lg-1
     %ul.list-group

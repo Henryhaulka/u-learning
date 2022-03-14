@@ -16,8 +16,12 @@ class User < ApplicationRecord
   end
 
   def view(lesson)
-    unless self.user_lessons.where( lesson_id: lesson.id).present?
+    user_view = self.user_lessons.where( lesson_id: lesson.id)
+    unless user_view.present?
       self.user_lessons.create(lesson_id: lesson.id)
+    else
+      #we use .first cos where returns an array
+      user_view.first.increment!(:impression)
     end
   end
   
