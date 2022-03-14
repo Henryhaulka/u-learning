@@ -10,7 +10,26 @@
 \/
 = link_to "#{@lesson.title}", course_lesson_path(@lesson)
 %p
-= render 'lessons/lesson', lesson: @lesson
-= link_to 'Edit', edit_course_lesson_path(@course, @lesson)
-\|
-= link_to 'Back to Course', course_path(@lesson.course)
+.row
+  .col-lg-8.order-1.order-lg-1
+    = render 'lessons/lesson', lesson: @lesson
+  .col-lg-4.order-0.order-lg-1
+    %ul.list-group
+      %li.list-group-item.list-group-item-warning
+        .row
+          .col-6
+            .fa.fa-graduation-cap
+            = link_to @course.title, @course
+          .col-6
+            .texter
+              .fa.fa-spinner
+              = number_to_percentage(@course.progress_rate(current_user), precision: 0)
+      - @course_lessons.each do |lessoner|
+        - if @lesson.present? && lessoner == @lesson
+          %li.list-group-item.list-group-item-success
+            = render 'lessons/lessons_previews', lesson: lessoner
+        -else
+          %li.list-group-item
+            = render 'lessons/lessons_previews', lesson: lessoner
+  %p
+

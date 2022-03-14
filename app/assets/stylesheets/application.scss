@@ -16,11 +16,16 @@ body {
   margin-bottom: 10rem;
 }
 
+.sticker {
+  z-index: -1;
+}
+
 .general-footer {
   position: fixed;
   bottom: 0;
   width: 100%;
   margin-top: 25rem;
+  z-index: 3;
 }
 
 .texter {

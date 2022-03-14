@@ -10,6 +10,7 @@ class LessonsController < ApplicationController
   def show
     authorize @lesson
     current_user.view(@lesson)
+    @course_lessons = @course.lessons.recent_lessons
   end
 
   # GET /lessons/new
