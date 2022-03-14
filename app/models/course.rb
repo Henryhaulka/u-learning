@@ -5,8 +5,12 @@ class Course < ApplicationRecord
     has_rich_text :description
     belongs_to :user, counter_cache: true
     # User.find_each {|user|User.reset_counters(user.id, :courses )}
+
     has_many :lessons, dependent: :destroy
-    has_many :subscriptions, dependent: :destroy
+
+    #:restrict_with_error - a course can't be deleted if it has a subscription
+    has_many :subscriptions, dependent: :restrict_with_error
+    
     #a course has lessons, also checked_lessons via lessons
     #use the lesson.id to find it in the user_lessons table
     has_many :checked_lessons, through: :lessons, source: :user_lessons

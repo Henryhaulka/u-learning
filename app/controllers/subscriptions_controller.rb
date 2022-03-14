@@ -64,7 +64,7 @@ class SubscriptionsController < ApplicationController
     @subscription.destroy
 
     respond_to do |format|
-      format.html { redirect_to subscriptions_url, notice: "Subscription was successfully destroyed." }
+      format.html { redirect_to subscriptions_url, alert: "Subscription was successfully destroyed." }
       format.json { head :no_content }
     end
   end

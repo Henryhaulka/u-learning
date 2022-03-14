@@ -3,9 +3,11 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable,:trackable, :confirmable
-  has_many :courses, dependent: :destroy
-  has_many :user_lessons, dependent: :destroy
-  has_many :subscriptions, dependent: :destroy
+  #nullify is used so that when a user deletes their account, their associations
+  #still exists
+  has_many :courses, dependent: :nullify
+  has_many :user_lessons, dependent: :nullify
+  has_many :subscriptions, dependent: :nullify
   rolify
   after_create :assign_default_role
 
