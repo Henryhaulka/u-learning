@@ -18,6 +18,8 @@ gem 'rolify', '~> 6.0'
 gem "pundit"
 gem 'exception_notification', '~> 4.5'
 gem 'pagy', '~> 5.10', '>= 5.10.1'
+gem 'chartkick', '~> 4.1', '>= 4.1.3'
+gem 'groupdate', '~> 2.5', '>= 2.5.2'
 # Use Puma as the app server
 gem 'puma', '~> 5.0'
 # Use SCSS for stylesheets
