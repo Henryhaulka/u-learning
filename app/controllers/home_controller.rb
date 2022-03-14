@@ -18,9 +18,9 @@ class HomeController < ApplicationController
 
   def analytics
     if current_user.has_role?(:admin)
-       @user = User.all
-       @subscriptions = Subscription.all
-       @courses = Course.all
+      #  @user = User.all
+      #  @subscriptions = Subscription.all
+      #  @courses = Course.all
     else
        redirect_to root_path, alert: 'Access Denied!! You are not Authorized'
     end
