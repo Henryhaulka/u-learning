@@ -4,15 +4,7 @@
     = link_to course.title, course, class: 'text-decoration-none'
   .card-body
     = simple_format(course.short_description)
-  .card-footer
-    .row
-      .col-md-6
-        .fa.fa-language
-        = course.language
-      .col-md-6
-        .aligner
-          .fa.fa-signal
-          = course.level
+
   .card-footer
     .text-center
       = subscribe_button(course)
@@ -42,3 +34,7 @@
     .card-footer
       = link_to 'Edit', edit_course_path(course), class: 'btn btn-warning'
       = link_to 'Destroy', course, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger'
+      - if policy(@course).owner?
+        = link_to new_course_lesson_path(course, @lesson), class: 'btn btn-primary' do
+          .fa.fa-plus
+          Add a lesson

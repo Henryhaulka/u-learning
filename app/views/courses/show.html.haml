@@ -7,18 +7,47 @@
 = link_to "#{@course.title}", edit_course_path(@course)
 %p
 .row
-  .col-lg-6
-    = render 'courses/course', course: @course
-  .col-lg-6
-    - if policy(@course).owner?
-      = link_to new_course_lesson_path(@course, @lesson), class: 'btn btn-primary w-100' do
-        .fa.fa-plus
-        Add a lesson
+  .col-lg-8.order-1.order-lg-1
     - if  @course_lessons.present?
-      %h3
-        =  "Lessons on #{@course.title}"
-      - @course_lessons.each do |lessoner|
-        = render 'lessons/lesson', lesson: lessoner
+      %div.p-5.bg-secondary.text-white.rounded
+        %h3.pb-2
+          .fa.fa-graduation-cap
+          =  @course.title
+        %p
+          .fa.fa-clock
+          = @course.updated_at.strftime('%D')
+        %p
+          .fa.fa-globe-africa
+          = @course.language
+        %p
+          .fa.fa-signal
+          = @course.level
+        %p
+          = @course.description
+      %p
+        %h3
+          .row
+            .col-6
+              .fa.fa-tasks
+              = pluralize(@course_lessons.count, 'Lesson')
+            .col-6
+              .texter
+                .fa.fa-spinner
+                = number_to_percentage(@course.progress_rate(current_user), precision: 0)
+      %ul.list-group
+        - @course_lessons.each do |lessoner|
+          = render 'lessons/lessons_previews', lesson: lessoner
+      %p
+      %h3.pt-2
+        .fa.fa-comment.text-warning
+        = pluralize(@course.subscriptions.reviewed.count, 'Review')
+      - @subscriptions_reviews.each do |subscription|
+        = render 'subscriptions/subscription', enrollment: subscription
     - else
       %h3
         The course has no Lessons yet
+  .col-lg-4.order-0.order-lg-1
+    .sticky-top
+      = render 'courses/course', course: @course
+  %p
+

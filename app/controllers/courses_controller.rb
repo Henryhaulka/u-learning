@@ -23,6 +23,7 @@ class CoursesController < ApplicationController
   # GET /courses/1 or /courses/1.json
   def show
     @course_lessons = @course.lessons.recent_lessons
+    @subscriptions_reviews = @course.subscriptions.reviewed
   end
 
   def purchased_courses
