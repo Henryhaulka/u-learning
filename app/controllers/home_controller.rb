@@ -9,7 +9,22 @@ class HomeController < ApplicationController
   end
 
   def activity
-    @activities = PublicActivity::Activity.all
+    if current_user.has_role?(:admin)
+       @activities = PublicActivity::Activity.all
+    else
+       redirect_to root_path, alert: 'Access Denied!! You are not Authorized'
+    end
   end
+
+  def analytics
+    if current_user.has_role?(:admin)
+       @user = User.all
+       @subscriptions = Subscription.all
+       @courses = Course.all
+    else
+       redirect_to root_path, alert: 'Access Denied!! You are not Authorized'
+    end
+  end
+  
   
 end

@@ -1,0 +1,10 @@
+%h3.text-center
+  User Creation
+= line_chart @user.group_by_day(:created_at).count 
+%h3.text-center 
+  Subscriptions Created
+= column_chart @subscriptions.group_by_day(:created_at).count 
+%h3.text-center
+  Course Popularity
+/= pie_chart @subscriptions.joins(:course).group("title").count
+= bar_chart @subscriptions.joins(:course).group("title").count
