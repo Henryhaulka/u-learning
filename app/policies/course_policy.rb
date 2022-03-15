@@ -29,4 +29,8 @@ class CoursePolicy < ApplicationPolicy
   def owner?
     user == record.user
   end
+
+  def approve?
+    @user.has_role?(:admin)
+  end
 end
