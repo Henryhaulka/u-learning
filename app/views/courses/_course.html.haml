@@ -32,9 +32,16 @@
     = course.created_at.strftime('%D')
   - if user_signed_in? &&  policy(course).edit?   
     .card-footer
-      = link_to 'Edit', edit_course_path(course), class: 'btn btn-warning'
-      = link_to 'Destroy', course, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger'
+      = link_to 'Edit', edit_course_path(course), class: 'btn btn-sm btn-warning'
+      = link_to 'Destroy', course, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-sm btn-danger'
       - if policy(course).owner?
-        = link_to new_course_lesson_path(course, @lesson), class: 'btn btn-primary' do
+        = link_to new_course_lesson_path(course, @lesson), class: 'btn btn-sm btn-primary' do
           .fa.fa-plus
           Add a lesson
+    .card-footer
+      - if course.published?
+        .badge.bg-success
+          published
+      - else
+        .badge.badge-sm.bg-danger unpublished
+

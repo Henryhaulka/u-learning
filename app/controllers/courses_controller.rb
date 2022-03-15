@@ -12,6 +12,7 @@ class CoursesController < ApplicationController
       # if current_user.has_role?(:admin)
         #  @courses = @ransack_courses.result.includes(:user)
           @ransack_path = courses_path
+          @ransack_courses = Course.publish.ransack(params[:courses_search], search_key: :courses_search)  
           @pagy,@courses = pagy(@ransack_courses.result.includes(:user))
       # else
       #   redirect_to root_path, alert: 'You are not authorized'
@@ -50,8 +51,14 @@ class CoursesController < ApplicationController
     @ransack_path = created_courses_courses_path
     @ransack_courses = Course.where(user_id: current_user).ransack(params[:courses_search])
     @pagy,@courses = pagy(@ransack_courses.result)
-    render 'index'
-    
+    render 'index' 
+  end
+
+  def approved_courses
+    @ransack_path = approved_courses_courses_path
+    @ransack_courses = Course.where(user_id: current_user).ransack(params[:courses_search])
+    @pagy,@courses = pagy(@ransack_courses.result)
+    render 'index' 
   end
   
   
@@ -120,6 +127,6 @@ class CoursesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def course_params
-      params.require(:course).permit(:title, :description, :short_description, :level, :price, :language)
+      params.require(:course).permit(:title, :description, :short_description, :level, :published, :price, :language)
     end
 end

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_03_14_151212) do
+ActiveRecord::Schema.define(version: 2022_03_15_082217) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -87,6 +87,8 @@ ActiveRecord::Schema.define(version: 2022_03_14_151212) do
     t.integer "subscriptions_count", default: 0, null: false
     t.integer "lessons_count", default: 0, null: false
     t.integer "lesson_count", default: 0, null: false
+    t.boolean "approved", default: false
+    t.boolean "published", default: false
     t.index ["slug"], name: "index_courses_on_slug", unique: true
     t.index ["user_id"], name: "index_courses_on_user_id"
   end
