@@ -5,7 +5,7 @@ Rails.application.routes.draw do
   get 'users/index'
   devise_for :users
   resources :courses do
-    get :purchased_courses, :pending_reviews,:created_courses, on: :collection
+    get :purchased_courses, :pending_reviews,:created_courses, :unapproved_courses, on: :collection
     member do#member means take a course
       patch :approve
       patch :unapprove

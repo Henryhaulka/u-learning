@@ -30,7 +30,7 @@ class CoursePolicy < ApplicationPolicy
     user == record.user
   end
 
-  def approve?
+  def approve_policy?
     @user.has_role?(:admin)
   end
 end

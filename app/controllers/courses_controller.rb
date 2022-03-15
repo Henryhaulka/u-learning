@@ -54,19 +54,21 @@ class CoursesController < ApplicationController
     render 'index' 
   end
 
-  # def unapproved_courses
-  #   @ransack_path = approved_courses_courses_path
-  #   @ransack_courses = Course.where(user_id: current_user).ransack(params[:courses_search])
-  #   @pagy,@courses = pagy(@ransack_courses.result)
-  #   render 'index' 
-  # end
+  def unapproved_courses
+    @ransack_path = unapproved_courses_courses_path
+    @ransack_courses = Course.unapprove.ransack(params[:courses_search])
+    @pagy,@courses = pagy(@ransack_courses.result)
+    render 'index' 
+  end
 
   def approve
+    authorize @course, :approve_policy?
     @course.update_attribute(:approved, true)
     redirect_to course_path(@course), notice: 'Course successfully approved and visible'
   end
 
   def unapprove
+     authorize @course, :approve_policy?
     @course.update_attribute(:approved, false)
     redirect_to course_path(@course), alert: 'Course successfully unapproved and hidden'
   end
