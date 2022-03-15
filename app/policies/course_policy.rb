@@ -10,6 +10,12 @@ class CoursePolicy < ApplicationPolicy
     @user.has_role?(:admin) || @record.user == @user
   end
 
+  def show?
+    @user.has_role?(:admin) || @record.user == @user || 
+    @record.approved && @record.published || 
+    @record.user_subscribed?(user)
+  end
+
   def new?
    @user.has_role?(:teacher) 
   end

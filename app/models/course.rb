@@ -46,7 +46,7 @@ class Course < ApplicationRecord
 
     def update_rating
         if subscriptions.present? && subscriptions.where.not(rating: nil)
-            update_column :average_rating, (subscriptions.average(:rating).round(2).to_f)
+            update_column :average_rating, (subscriptions.average(:rating).to_f)
         else
             update_column :average_rating, (0.0)
         end
