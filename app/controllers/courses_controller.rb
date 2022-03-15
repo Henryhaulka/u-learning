@@ -1,5 +1,5 @@
 class CoursesController < ApplicationController
-  before_action :set_course, only: %i[ show edit update destroy ]
+  before_action :set_course, only: %i[ show edit update destroy approve unapprove ]
 
   # GET /courses or /courses.json
   def index
@@ -12,7 +12,7 @@ class CoursesController < ApplicationController
       # if current_user.has_role?(:admin)
         #  @courses = @ransack_courses.result.includes(:user)
           @ransack_path = courses_path
-          @ransack_courses = Course.publish.ransack(params[:courses_search], search_key: :courses_search)  
+          @ransack_courses = Course.publish.approve.ransack(params[:courses_search], search_key: :courses_search)  
           @pagy,@courses = pagy(@ransack_courses.result.includes(:user))
       # else
       #   redirect_to root_path, alert: 'You are not authorized'
@@ -54,12 +54,23 @@ class CoursesController < ApplicationController
     render 'index' 
   end
 
-  def approved_courses
-    @ransack_path = approved_courses_courses_path
-    @ransack_courses = Course.where(user_id: current_user).ransack(params[:courses_search])
-    @pagy,@courses = pagy(@ransack_courses.result)
-    render 'index' 
+  # def unapproved_courses
+  #   @ransack_path = approved_courses_courses_path
+  #   @ransack_courses = Course.where(user_id: current_user).ransack(params[:courses_search])
+  #   @pagy,@courses = pagy(@ransack_courses.result)
+  #   render 'index' 
+  # end
+
+  def approve
+    @course.update_attribute(:approved, true)
+    redirect_to course_path(@course), notice: 'Course successfully approved and visible'
   end
+
+  def unapprove
+    @course.update_attribute(:approved, false)
+    redirect_to course_path(@course), alert: 'Course successfully unapproved and hidden'
+  end
+  
   
   
   
