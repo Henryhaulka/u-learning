@@ -22,6 +22,10 @@ class Course < ApplicationRecord
     scope :limiter, -> {limit(3)}
     scope :popular, -> {order(subscriptions_count: :desc)}
     scope :top, -> {order(average_rating: :desc).limiter}
+    scope :approve, -> {where(approved: true)}
+    scope :unapprov, -> {where(approved: false)}
+    scope :publish, -> {where(published: true)}
+    scope :unpublish, -> {where(published: false)}
     
     LANGUAGES = [ :English, :French, :Spanish, :Russian]
     def self.languages
