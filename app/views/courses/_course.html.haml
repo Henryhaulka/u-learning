@@ -44,4 +44,16 @@
           published
       - else
         .badge.badge-sm.bg-danger unpublished
+      - if course.approved?
+        .badge.bg-success  approved
+      - else
+        .badge.badge-sm.bg-danger  unapproved
+    - if policy(course).approve?
+      .card-footer
+        - if course.approved?
+          = link_to 'unapprove', unapprove_course_path(course),method: :patch, class: 'btn btn-danger'
+        - else
+          = link_to 'approve', approve_course_path(course), method: :patch, class: 'btn btn-success'
+            
+         
 

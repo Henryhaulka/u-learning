@@ -6,6 +6,11 @@ Rails.application.routes.draw do
   devise_for :users
   resources :courses do
     get :purchased_courses, :pending_reviews,:created_courses, on: :collection
+    member do#member means take a course
+      patch :approve
+      patch :unapprove
+    end
+   
     resources :lessons, except: :index
     resources :subscriptions, only: [:new, :create]
   end
