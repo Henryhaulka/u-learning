@@ -3,5 +3,5 @@
 - else
   .fa.fa-lock.text-warning
 - if lesson.row_order.present?
-  = lesson.row_order_rank
+  = lesson.row_order_rank + 1
 = link_to lesson.title, course_lesson_path(@course,lesson)

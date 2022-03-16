@@ -25,5 +25,14 @@ class Lesson < ApplicationRecord
   def lesson_viewed?(user)
     self.user_lessons.where(user_id: user).present?
   end
-  
+
+  def prev
+    # if we are on page 2, find d last lesson less than 2 = 1
+    course.lessons.where('row_order < ?', row_order).order(:row_order).last
+  end
+
+  def next
+    # if we are on page 2, find d first lesson grater than 2 = 3
+    course.lessons.where('row_order > ?', row_order).order(:row_order).first
+  end
 end

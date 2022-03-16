@@ -12,4 +12,16 @@
     .card-footer
       = link_to 'Edit', edit_course_lesson_path(@course,lesson), class: 'btn btn-sm btn-warning'
       = link_to 'Destroy', [@course,lesson], method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-sm btn-danger'
-%p
+  .card-footer
+    .row
+      .col-6
+        - if @lesson.prev.present?
+          = link_to course_lesson_path(@course, @lesson.prev), class: 'btn btn-primary' do
+            .fa.fa-arrow-left
+            Previous
+      .col-6
+        - if @lesson.next.present?
+          .texter
+            = link_to course_lesson_path(@course, @lesson.next), class: 'btn btn-primary' do
+              Next
+              .fa.fa-arrow-right
