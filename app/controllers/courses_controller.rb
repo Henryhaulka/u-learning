@@ -50,7 +50,7 @@ class CoursesController < ApplicationController
 
   def created_courses
     @ransack_path = created_courses_courses_path
-    @ransack_courses = Course.where(user_id: current_user).ransack(params[:courses_search])
+    @ransack_courses = Course.recent.where(user_id: current_user).ransack(params[:courses_search])
     @pagy,@courses = pagy(@ransack_courses.result)
     render 'index' 
   end

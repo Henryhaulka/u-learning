@@ -48,6 +48,9 @@
   %div.grid-system
     - @my_subscriptions.each do |cour|
       = render 'courses/course', course: cour
+  %p
+  .texter
+    = link_to 'My purchased Courses', purchased_courses_courses_path, class: 'btn btn-primary '
 - elsif user_signed_in?
   %h3.text-warning
     You have Yet to subscribe to a Course
@@ -60,6 +63,9 @@
 %div.grid-system
   - @popular_courses.each do |cour|
     = render 'courses/course', course: cour
+%p
+.texter
+  = link_to 'More Popular Courses', courses_path(courses_search: {s: 'subscriptions_count desc'}), class: 'btn btn-primary '
 %hr
 %h3.pt-2
   .fa.fa-star.text-warning
@@ -68,6 +74,9 @@
 %div.grid-system
   - @top_rated_courses.each do |cour|
     = render 'courses/course', course: cour
+%p
+.texter
+  = link_to 'Top rated Courses', courses_path(courses_search: {s: 'average_rating desc'}), class: 'btn btn-primary '
 %hr
 %h3.pt-2
   .fa.fa-clock
@@ -76,6 +85,9 @@
 %div.grid-system
   - @latest_courses.each do |cour|
     = render 'courses/course', course: cour
+%p
+.texter
+  = link_to 'More Recent Courses', courses_path(courses_search: {s: 'created_at desc'}), class: 'btn btn-primary '
 %hr
 %h3.pt-2
   .fa.fa-comments
