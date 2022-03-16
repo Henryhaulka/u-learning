@@ -6,7 +6,7 @@ class CoursePolicy < ApplicationPolicy
     end
   end
   def edit?
-    #only admin and holder of record(course.user_id) i.e teacher that owns, not any teacher
+    #holder of record(course.user_id) i.e teacher that owns, not any teacher
      @record.user == @user
   end
 

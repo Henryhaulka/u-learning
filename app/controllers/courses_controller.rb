@@ -1,5 +1,5 @@
 class CoursesController < ApplicationController
-  before_action :set_course, only: %i[ show edit update destroy approve unapprove ]
+  before_action :set_course, only: %i[ show edit update destroy approve unapprove analytics]
   skip_before_action :authenticate_user!, only: :show
   # GET /courses or /courses.json
   def index
@@ -12,7 +12,7 @@ class CoursesController < ApplicationController
       # if current_user.has_role?(:admin)
         #  @courses = @ransack_courses.result.includes(:user)
           @ransack_path = courses_path
-          @ransack_courses = Course.publish.approve.ransack(params[:courses_search], search_key: :courses_search)  
+          @ransack_courses = Course.recent.publish.approve.ransack(params[:courses_search], search_key: :courses_search)  
           @pagy,@courses = pagy(@ransack_courses.result.includes(:user))
       # else
       #   redirect_to root_path, alert: 'You are not authorized'
@@ -37,6 +37,11 @@ class CoursesController < ApplicationController
     @pagy,@courses = pagy(@ransack_courses.result )
     render 'index'
   end
+
+  def analytics
+     authorize @course, :owner?
+  end
+  
 
   def pending_reviews
     @ransack_path = pending_reviews_courses_path
