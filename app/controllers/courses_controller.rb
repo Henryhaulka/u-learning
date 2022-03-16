@@ -1,6 +1,6 @@
 class CoursesController < ApplicationController
   before_action :set_course, only: %i[ show edit update destroy approve unapprove ]
-
+  skip_before_action :authenticate_user!, only: :show
   # GET /courses or /courses.json
   def index
     # if params[:title]
@@ -57,7 +57,7 @@ class CoursesController < ApplicationController
 
   def unapproved_courses
     @ransack_path = unapproved_courses_courses_path
-    @ransack_courses = Course.unapprove.ransack(params[:courses_search])
+    @ransack_courses = Course.unapprove.order(created_at: :desc).ransack(params[:courses_search])
     @pagy,@courses = pagy(@ransack_courses.result)
     render 'index' 
   end

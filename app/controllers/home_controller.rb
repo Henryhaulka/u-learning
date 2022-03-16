@@ -1,10 +1,10 @@
 class HomeController < ApplicationController
   skip_before_action :authenticate_user!, only: :index
   def index
-     @latest_courses = Course.recent.limiter
+     @latest_courses = Course.publish.approve.recent.limiter
      @my_subscriptions = Course.joins(:subscriptions).where(subscriptions: {user_id: current_user})
-     @popular_courses = Course.popular.recent.limiter
-     @top_rated_courses = Course.top.recent.limiter
+     @popular_courses = Course.publish.approve.popular.recent.limiter
+     @top_rated_courses = Course.publish.approve.top.recent.limiter
      @reviews = Subscription.reviewed.rater.recent.limiter.order(rating: :desc)
   end
 
