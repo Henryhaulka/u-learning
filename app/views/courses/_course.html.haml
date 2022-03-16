@@ -38,6 +38,7 @@
         = link_to new_course_lesson_path(course, @lesson), class: 'btn btn-sm btn-primary' do
           .fa.fa-plus
           Add a lesson
+  - if user_signed_in? &&  policy(course).edit? || user_signed_in? && policy(course).approve_policy?      
     .card-footer
       - if course.published?
         .badge.bg-success
@@ -45,15 +46,16 @@
       - else
         .badge.badge-sm.bg-danger unpublished
       - if course.approved?
-        .badge.bg-success  approved
+        .badge.bg-success  
+          approved
       - else
         .badge.badge-sm.bg-danger  unapproved
-    - if policy(course).approve_policy?
-      .card-footer
-        - if course.approved?
-          = link_to 'unapprove', unapprove_course_path(course),method: :patch, class: 'btn btn-danger'
-        - else
-          = link_to 'approve', approve_course_path(course), method: :patch, class: 'btn btn-success'
-            
-         
+  - if user_signed_in? && policy(course).approve_policy?
+    .card-footer
+      - if course.approved?
+        = link_to 'unapprove', unapprove_course_path(course),method: :patch, class: 'btn btn-danger'
+      - else
+        = link_to 'approve', approve_course_path(course), method: :patch, class: 'btn btn-success'
+          
+        
 

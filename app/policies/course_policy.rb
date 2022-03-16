@@ -7,13 +7,13 @@ class CoursePolicy < ApplicationPolicy
   end
   def edit?
     #only admin and holder of record(course.user_id) i.e teacher that owns, not any teacher
-    @user.has_role?(:admin) || @record.user == @user
+     @record.user == @user
   end
 
   def show?
-    @user.has_role?(:admin) || @record.user == @user || 
+    @user.present? || @user.present? && @user.has_role?(:admin) || @user.present? && @record.user == @user || 
     @record.approved && @record.published || 
-    @record.user_subscribed?(user)
+    @user.present? && @record.user_subscribed?(user)
   end
 
   def new?
@@ -25,7 +25,7 @@ class CoursePolicy < ApplicationPolicy
   end
 
   def update?
-    @user.has_role?(:admin) or @user == record.user 
+    @user == record.user 
   end
 
   def destroy?

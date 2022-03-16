@@ -13,7 +13,7 @@ module CoursesHelper
           link_to number_to_currency(course.price), new_course_subscription_path(course), class: 'btn btn-success'
       end
     else
-        link_to "Check Price", courses_path, class: 'btn btn-success'
+        link_to "Check Price", new_course_subscription_path(course), class: 'btn btn-success'
     end
       
   end
