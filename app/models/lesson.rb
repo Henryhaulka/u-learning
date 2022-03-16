@@ -9,6 +9,9 @@ class Lesson < ApplicationRecord
   validates :content, length: {minimum: 10 }
   has_many :user_lessons, dependent: :destroy
 
+  include RankedModel
+  ranks :row_order, with_same: :course_id  
+
 
   include PublicActivity::Model
   tracked owner: Proc.new{ |controller, model| controller.current_user }

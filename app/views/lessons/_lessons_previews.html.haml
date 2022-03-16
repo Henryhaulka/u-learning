@@ -2,4 +2,6 @@
   .far.fa-check-square.text-success
 - else
   .fa.fa-lock.text-warning
+- if lesson.row_order.present?
+  = lesson.row_order_rank
 = link_to lesson.title, course_lesson_path(@course,lesson)

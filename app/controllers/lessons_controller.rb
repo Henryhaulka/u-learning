@@ -10,7 +10,7 @@ class LessonsController < ApplicationController
   def show
     authorize @lesson
     current_user.view(@lesson)
-    @course_lessons = @course.lessons.recent_lessons
+    @course_lessons = @course.lessons.recent_lessons.rank(:row_order)
   end
 
   # GET /lessons/new
