@@ -10,7 +10,6 @@ Rails.application.routes.draw do
       patch :approve
       patch :unapprove
     end
-   
     resources :lessons, except: :index
     resources :subscriptions, only: [:new, :create]
   end
