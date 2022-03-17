@@ -17,3 +17,29 @@ import "bootstrap";
 require("trix")
 require("@rails/actiontext")
 import "chartkick/chart.js";
+
+
+require("jquery")
+require("jquery-ui-dist/jquery-ui");
+$(document).on("turbolinks:load", function(){
+  $('.lesson-sortable').sortable({
+    cursor: "grabbing",
+    cursorAt: { left: 4},
+    placeholder: "ui-state-highlight",
+    update: function (e, ui) {
+      let item = ui.item;
+      let itemData = item.data();
+      let params = { _method: "put" };
+      params[itemData.modelName] = { row_order_position: item.index() };
+      $.ajax({
+        type: "POST",
+        url: itemData.updateUrl,
+        dataType: "json",
+        data: params,
+      });
+    },
+    stop: function (e, ui) {
+      console.log("stop called when finish sorting of cards");
+    },
+  });
+});
