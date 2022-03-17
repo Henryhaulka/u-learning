@@ -11,7 +11,10 @@ Rails.application.routes.draw do
       patch :approve
       patch :unapprove
     end
-    resources :lessons, except: :index
+    resources :lessons, except: :index do
+      put :sort
+    end
+      
     resources :subscriptions, only: [:new, :create]
   end
   resources :users, only: [:index, :edit, :show, :update]

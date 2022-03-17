@@ -1,6 +1,15 @@
 class LessonsController < ApplicationController
   before_action :set_lesson, only: %i[ show edit update destroy ]
-
+  
+  def sort
+    @course = Course.friendly.find(params[:course_id])
+    lesson = Lesson.friendly.find(params[:lesson_id])#only cos sort method is not dependent on this controller
+    # Lesson.friendly.find(params[:id]) on a norms
+    authorize lesson, :edit?
+    lesson.update(lesson_params)
+    render body: nil
+  end
+  
   # GET /lessons or /lessons.json
   def index
     @lessons = Lesson.all
@@ -77,6 +86,6 @@ class LessonsController < ApplicationController
     def lesson_params
       #we didn't include "course_id" here since it was in the actions above
       #if included here, it might easy to hack
-      params.require(:lesson).permit(:title, :content)
+      params.require(:lesson).permit(:title, :content, :row_order_position)
     end
 end
