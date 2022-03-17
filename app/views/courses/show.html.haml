@@ -34,10 +34,11 @@
               .texter
                 .fa.fa-spinner
                 = number_to_percentage(@course.progress_rate(current_user), precision: 0)
-      %ul.list-group
-        - @course_lessons.each do |lessoner|
-          %li.list-group-item
-            = render 'lessons/lessons_previews', lesson: lessoner
+      %ul.list-group.lesson-sortable
+        - @course_lessons.each do |lesson|
+          = content_tag "div", id: "lesson-#{lesson.id}", data: { model_name: lesson.class.name.underscore, update_url: course_lesson_sort_path(@course, lesson)} do
+            %li.list-group-item
+              = render 'lessons/lessons_previews', lesson: lesson
       %p
       %h3.pt-2
         .fa.fa-comment.text-warning
@@ -51,4 +52,3 @@
     .sticky-top
       = render 'courses/course', course: @course
   %p
-
