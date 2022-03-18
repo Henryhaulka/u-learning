@@ -7,6 +7,8 @@ class Course < ApplicationRecord
     # User.find_each {|user|User.reset_counters(user.id, :courses )}
 
     has_many :lessons, dependent: :destroy
+    # from_activestorage
+    has_one_attached :avatar
 
     #:restrict_with_error - a course can't be deleted if it has a subscription
     has_many :subscriptions, dependent: :restrict_with_error

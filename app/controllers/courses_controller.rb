@@ -79,10 +79,6 @@ class CoursesController < ApplicationController
     redirect_to course_path(@course), alert: 'Course successfully unapproved and hidden'
   end
   
-  
-  
-  
-
   # GET /courses/new
   def new
     @course = Course.new
@@ -146,6 +142,6 @@ class CoursesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def course_params
-      params.require(:course).permit(:title, :description, :short_description, :level, :published, :price, :language)
+      params.require(:course).permit(:title, :description, :short_description, :level, :published, :price, :language, :avatar)
     end
 end
