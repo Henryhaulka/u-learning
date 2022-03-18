@@ -16,6 +16,7 @@
       %p
     %br
     = f.file_field :avatar
+    %small= f.error :avatar, class:'text-danger'
     %br
     %p
     = f.input :short_description

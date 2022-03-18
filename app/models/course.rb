@@ -9,6 +9,7 @@ class Course < ApplicationRecord
     has_many :lessons, dependent: :destroy
     # from_activestorage
     has_one_attached :avatar
+    validates :avatar, presence: true, blob: { content_type: ['image/png', 'image/jpg', 'image/jpeg'], size_range: 1..(2.megabytes) }
 
     #:restrict_with_error - a course can't be deleted if it has a subscription
     has_many :subscriptions, dependent: :restrict_with_error

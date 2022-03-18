@@ -22,7 +22,7 @@ gem 'chartkick', '~> 4.1', '>= 4.1.3'
 gem 'groupdate', '~> 2.5', '>= 2.5.2'
 gem 'ranked-model', '~> 0.4.8'
 gem "aws-sdk-s3", require: false
-
+gem 'activestorage-validator'
 # Use Puma as the app server
 gem 'puma', '~> 5.0'
 # Use SCSS for stylesheets
