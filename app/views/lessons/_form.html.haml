@@ -14,6 +14,9 @@
     = f.rich_text_area :content
     %small= f.error:content, class:'text-danger'
     %br
+    = f.input :video
+    %br
+    = f.input :video_thumbnail
     /= f.input :content
     /= f.association :course
     /= f.input :course_id, input_html: {value: @lesson.course_id || params[:course_id]}, as: :hidden

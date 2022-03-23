@@ -86,6 +86,6 @@ class LessonsController < ApplicationController
     def lesson_params
       #we didn't include "course_id" here since it was in the actions above
       #if included here, it might easy to hack
-      params.require(:lesson).permit(:title, :content, :row_order_position)
+      params.require(:lesson).permit(:title, :content, :row_order_position, :video, :video_thumbnail)
     end
 end

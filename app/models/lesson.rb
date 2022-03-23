@@ -8,7 +8,20 @@ class Lesson < ApplicationRecord
   validates :title, :content, :course, presence: true
   validates :content, length: {minimum: 10, maximum: 1000 }
   validates :title, length: {minimum: 5, maximum: 50 }
+  # validates :title, uniqueness: true
+  validates_uniqueness_of :title, scope: :course_id
   has_many :user_lessons, dependent: :destroy
+
+  has_one_attached :video
+  validates :video, presence: true,  blob: { content_type: ['video/mp4'], size: { 
+    less_than: 500.kilobytes, message: 'size should be less than 50MB'} 
+  }
+
+  has_one_attached :video_thumbnail
+  validates :video_thumbnail, presence: true,  blob: { content_type: ['image/png', 'image/jpg', 'image/jpeg'], size: { 
+    less_than: 500.kilobytes, message: 'size should be less than 50MB'}
+  }
+
   include RankedModel
   ranks :row_order, with_same: :course_id  
 
