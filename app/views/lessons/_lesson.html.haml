@@ -14,6 +14,8 @@
       - elsif lesson.video.present?
         %video(controls = "true" width= "100%" preload= "metadata")
           %source{src: rails_blob_url(lesson.video) } 
+      /= content_tag :video, id: 'my-video' do
+      /  = tag :source, src: rails_blob_url(lesson.video)
 
       = lesson.content
   - if policy(lesson).edit? 

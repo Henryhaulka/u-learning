@@ -21,6 +21,11 @@ import "chartkick/chart.js";
 //tric editor
 import "../trix-editor-override";
 
+//video.js
+//run  'yarn add video.js'after adding the line below
+import videojs from 'video.js'
+import "video.js/dist/video-js.css";
+
 require("jquery")
 require("jquery-ui-dist/jquery-ui");
 $(document).on("turbolinks:load", function(){
@@ -44,4 +49,14 @@ $(document).on("turbolinks:load", function(){
       console.log("stop called when finish sorting of cards");
     },
   });
+  let videoPlayer = videojs(document.getElementById('my-video'), {
+    controls: true,
+    playbackRates: [0.5, 1.0, 1.5],
+    fluid: true,
+    responsive: true,
+    loop: false,
+    liveui: true
+  })
+  videoPlayer.addClass('video-js')
+  videoPlayer.addClass("vjs-big-play-centered");
 });
