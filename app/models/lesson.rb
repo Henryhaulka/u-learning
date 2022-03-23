@@ -6,7 +6,7 @@ class Lesson < ApplicationRecord
   friendly_id :title, use: :slugged
   has_rich_text :content
   validates :title, :content, :course, presence: true
-  validates :content, length: {minimum: 10, maximum: 1000 }
+  validates :content, length: {minimum: 10}
   validates :title, length: {minimum: 5, maximum: 50 }
   # validates :title, uniqueness: true
   validates_uniqueness_of :title, scope: :course_id
