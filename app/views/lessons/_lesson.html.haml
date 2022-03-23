@@ -7,11 +7,15 @@
     = link_to lesson.title, course_lesson_path(@course, lesson)
   - if policy(lesson).show? 
     .card-body
-      = lesson.content
-      - if lesson.video_thumbnail.present?
+      - if lesson.video_thumbnail.present? && lesson.video.present?
         /= image_tag(lesson.video_thumbnail, width: '500px', height: '200px')
         %video(controls = "true" poster = "#{url_for lesson.video_thumbnail}" width= "100%" preload= "metadata")
           %source{src: rails_blob_url(lesson.video) } 
+      - elsif lesson.video.present?
+        %video(controls = "true" width= "100%" preload= "metadata")
+          %source{src: rails_blob_url(lesson.video) } 
+
+      = lesson.content
   - if policy(lesson).edit? 
     .card-footer
       = link_to 'Edit', edit_course_lesson_path(@course,lesson), class: 'btn btn-sm btn-warning'
