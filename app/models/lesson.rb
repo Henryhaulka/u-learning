@@ -18,7 +18,7 @@ class Lesson < ApplicationRecord
   }
 
   has_one_attached :video_thumbnail
-  validates :video_thumbnail, presence: true,  blob: { content_type: ['image/png', 'image/jpg', 'image/jpeg'], size: { 
+  validates :video_thumbnail,  blob: { content_type: ['image/png', 'image/jpg', 'image/jpeg'], size: { 
     less_than: 500.kilobytes, message: 'size should be less than 50MB'}
   }
 
