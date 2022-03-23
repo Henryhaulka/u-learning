@@ -10,9 +10,10 @@
   .form-inputs
     = f.input :title
     %br
-    = f.label :content
-    = f.rich_text_area :content
-    %small= f.error:content, class:'text-danger'
+    /= f.label :content
+    /= f.rich_text_area :content
+    /%small= f.error:content, class:'text-danger'
+    = f.input :content, as: :rich_text_area
     %br
     - if @lesson.video.attached?
       = @lesson.video.filename
