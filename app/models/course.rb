@@ -1,7 +1,8 @@
 class Course < ApplicationRecord
     validates :title,:short_description,:price,:level,:language, presence: true
     validates :description,presence: true, length: {minimum: 5}
-    validates :title, uniqueness: true
+    validates :title, uniqueness: true,  length: {maximum: 50}
+    validates :price, numericality: { greater_than_or_equal_to: 0 }
     has_rich_text :description
     belongs_to :user, counter_cache: true
     # User.find_each {|user|User.reset_counters(user.id, :courses )}

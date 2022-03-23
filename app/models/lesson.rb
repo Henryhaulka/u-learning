@@ -5,8 +5,9 @@ class Lesson < ApplicationRecord
   extend FriendlyId
   friendly_id :title, use: :slugged
   has_rich_text :content
-  validates :title, :content, presence: true
-  validates :content, length: {minimum: 10 }
+  validates :title, :content, :course, presence: true
+  validates :content, length: {minimum: 10, maximum: 1000 }
+  validates :title, length: {minimum: 5, maximum: 50 }
   has_many :user_lessons, dependent: :destroy
   include RankedModel
   ranks :row_order, with_same: :course_id  
