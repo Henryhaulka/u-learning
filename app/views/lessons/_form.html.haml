@@ -16,6 +16,9 @@
     %br
     - if @lesson.video.attached?
       = @lesson.video.filename
+      - if policy(@lesson).edit?
+        = link_to delete_video_course_lesson_path, method: :delete, data: {confirm: 'Are you sure?'} do
+          .fa.fa-trash.text-danger
     = f.input :video
     %br
     - if @lesson.video_thumbnail.attached?
