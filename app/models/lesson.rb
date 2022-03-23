@@ -8,7 +8,6 @@ class Lesson < ApplicationRecord
   validates :title, :content, presence: true
   validates :content, length: {minimum: 10 }
   has_many :user_lessons, dependent: :destroy
-
   include RankedModel
   ranks :row_order, with_same: :course_id  
 
