@@ -20,6 +20,9 @@ Rails.application.routes.draw do
       
     resources :subscriptions, only: [:new, :create]
   end
+
+  resources :youtube, only: :show
+
   resources :users, only: [:index, :edit, :show, :update]
   get 'home/index'
   get 'activity', to: "home#activity"

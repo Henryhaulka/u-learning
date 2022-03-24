@@ -17,8 +17,8 @@ module ULearning
       end
     end
 
-    config.after_initialize do
-      # ActionText::ContentHelper.allowed_tags << "iframe" # youtube embed
+    config.to_prepare do
+      ActionText::ContentHelper.allowed_tags << "iframe" # youtube embed
 
       # video previews for action_text
       ActionText::ContentHelper.allowed_attributes.add "style"

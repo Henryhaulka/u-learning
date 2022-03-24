@@ -14,6 +14,10 @@ ActiveStorage.start()
 
 import "bootstrap";
 
+
+//youtube player
+import "youtube";
+
 require("trix")
 require("@rails/actiontext")
 import "chartkick/chart.js";
