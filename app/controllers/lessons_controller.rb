@@ -30,7 +30,7 @@ class LessonsController < ApplicationController
     current_user.view(@lesson)
     @course_lessons = @course.lessons.recent_lessons.rank(:row_order)
     @comment = Comment.new
-    @comments = @lesson.comments
+    @comments = @lesson.comments.order(created_at: :desc)
   end
 
   # GET /lessons/new

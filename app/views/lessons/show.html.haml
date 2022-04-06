@@ -14,6 +14,21 @@
   .col-lg-8.order-1.order-lg-1
     /= @lesson.user_lessons.where(user_id: current_user).first.impression
     = render 'lessons/lesson', lesson: @lesson
+    %br
+    .card
+      .card-header
+        New Comment
+      .card-body
+        = render 'lessons/comments/form'
+    %br
+    - if @comments.present?
+      .row
+        %h3
+          .fa.fa-comment.text-warning
+          Comments:  
+          = @comments.count
+        - @comments.each do |comment|
+          = render 'lessons/comments/show', comment: comment
   .col-lg-4.order-0.order-lg-1
     %ul.list-group
       %li.list-group-item.list-group-item-warning
@@ -32,15 +47,3 @@
         -else
           %li.list-group-item
             = render 'lessons/lessons_previews', lesson: lessoner
-%br
-.row
-  %h3
-    New Comment
-  = render 'lessons/comments/form'
-%br
-- if @comments.present?
-  .row
-    %h3
-      Comments
-    - @comments.each do |comment|
-      = render 'lessons/comments/show', comment: comment
