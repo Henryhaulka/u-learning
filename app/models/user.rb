@@ -8,6 +8,7 @@ class User < ApplicationRecord
   has_many :courses, dependent: :nullify
   has_many :user_lessons, dependent: :nullify
   has_many :subscriptions, dependent: :nullify
+  has_many :comments, dependent: :nullify
   rolify
   after_create :assign_default_role
 

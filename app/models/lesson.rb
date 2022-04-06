@@ -1,5 +1,6 @@
 class Lesson < ApplicationRecord
   belongs_to :course, counter_cache: true
+  has_many :comments, dependent: :nullify
   #to update your count_cache(sub) run this in console
   # Course.find_each {|course| Course.reset_counters(course.id, :lessons )}
   extend FriendlyId
