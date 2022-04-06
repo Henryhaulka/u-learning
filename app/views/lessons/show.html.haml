@@ -37,3 +37,10 @@
   %h3
     New Comment
   = render 'lessons/comments/form'
+%br
+- if @comments.present?
+  .row
+    %h3
+      Comments
+    - @comments.each do |comment|
+      = render 'lessons/comments/show', comment: comment
