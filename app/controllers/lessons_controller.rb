@@ -29,6 +29,8 @@ class LessonsController < ApplicationController
     authorize @lesson
     current_user.view(@lesson)
     @course_lessons = @course.lessons.recent_lessons.rank(:row_order)
+    @comment = Comment.new
+    @comments = @lesson.comments
   end
 
   # GET /lessons/new
