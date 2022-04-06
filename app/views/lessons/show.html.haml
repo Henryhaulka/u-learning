@@ -26,7 +26,8 @@
         %h3
           .fa.fa-comment.text-warning
           Comments:  
-          = @comments.count
+          /= @comments.count
+          = @lesson.comments_count
         - @comments.each do |comment|
           = render 'lessons/comments/show', comment: comment
   .col-lg-4.order-0.order-lg-1
