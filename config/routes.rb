@@ -3,7 +3,8 @@ Rails.application.routes.draw do
     get :my_students, on: :collection
   end
   get 'users/index'
-  devise_for :users
+  # devise_for :users
+  devise_for :users, controllers: { registrations: "users/registrations"}
   resources :courses do
     get :purchased_courses, :pending_reviews,:created_courses, :unapproved_courses, on: :collection
     member do#member means take a course i.e. self
