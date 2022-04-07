@@ -6,15 +6,17 @@
                 required: false,
                 autofocus: true,
                 input_html: { autocomplete: "email" } %>
+    <br>
     <%= f.input :password,
                 required: false,
                 input_html: { autocomplete: "current-password" } %>
+    <br>
     <%= f.input :remember_me, as: :boolean if devise_mapping.rememberable? %>
   </div>
-
+  <br>
   <div class="form-actions">
-    <%= f.button :submit, "Log in" %>
+    <%= f.button :submit, "Log in", class: 'btn-success' %>
   </div>
 <% end %>
-
+<br>
 <%= render "devise/shared/links" %>

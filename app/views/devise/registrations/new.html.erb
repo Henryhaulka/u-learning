@@ -8,10 +8,12 @@
                 required: true,
                 autofocus: true,
                 input_html: { autocomplete: "email" }%>
+    <br/>
     <%= f.input :password,
                 required: true,
                 hint: ("#{@minimum_password_length} characters minimum" if @minimum_password_length),
                 input_html: { autocomplete: "new-password" } %>
+    <br/>
     <%= f.input :password_confirmation,
                 required: true,
                 input_html: { autocomplete: "new-password" } %>
@@ -19,9 +21,9 @@
   <br/>
   <div class= 'bg-danger text-white'><%= flash[:recaptcha_error]%></div>
   <%= recaptcha_tags %>
-
+  <br/>
   <div class="form-actions">
-    <%= f.button :submit, "Sign up" %>
+    <%= f.button :submit, "Sign up", class: 'btn-success' %>
   </div>
 <% end %>
 

@@ -1,4 +1,4 @@
-%nav.navbar.navbar-expand-lg.navbar-dark.bg-dark
+%nav.navbar.navbar-expand-lg.navbar-dark.bg-dark.w-100
   .container-fluid
     %a.navbar-brand{:href => "/"} 
       .fa.fa-graduation-cap
@@ -125,9 +125,9 @@
                   .fa.fa-sign-out-alt
                   %b= 'Sign out'
     - else
-      %ul.navbar-nav
-        %li.nav-item
-          = link_to 'Sign in', new_user_session_path, class: 'nav-link'
-        %li.nav-item
-          = link_to 'Sign up', new_user_registration_path , class: 'nav-link'
+      %ul.d-flex
+        %li.nav-item.pt-3
+          = link_to 'Log in', new_user_session_path, class: 'nav-link text-white'
+        %li.nav-item.pt-3
+          = link_to 'Sign up', new_user_registration_path , class: 'nav-link text-white'
       
