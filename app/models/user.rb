@@ -19,6 +19,7 @@ class User < ApplicationRecord
   def view(lesson)
     user_view = self.user_lessons.where( lesson_id: lesson.id)
     unless user_view.present?
+      # unique user
       self.user_lessons.create(lesson_id: lesson.id)
     else
       #we use .first cos where returns an array
