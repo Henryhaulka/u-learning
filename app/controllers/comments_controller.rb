@@ -1,11 +1,10 @@
 class CommentsController < ApplicationController
-    def new
+  before_action :set_required
+    # def new
         
-    end
+    # end
         
     def create
-       @course = Course.friendly.find(params[:course_id])
-       @lesson = Lesson.friendly.find(params[:lesson_id])
        @comment = Comment.new(set_comment)
        @comment.lesson =  @lesson
        @comment.user = current_user
@@ -17,17 +16,39 @@ class CommentsController < ApplicationController
     end
 
     def destroy
-      @course = Course.friendly.find(params[:course_id])
-      @lesson = Lesson.friendly.find(params[:lesson_id])
       @comment = Comment.find(params[:id])
+      authorize @comment
       @comment.destroy
       redirect_to course_lesson_path(@course, @lesson), alert: "Course was successfully destroyed." 
     end
+
+    def edit
+      @comment = Comment.find(params[:id])
+      authorize @comment
+    end
+
+    def update
+      
+      @comment = Comment.find(params[:id])
+      if @comment.update(set_comment)
+        redirect_to course_lesson_path(@course, @lesson), notice: "Course was successfully Updated."
+      else
+          redirect_to course_lesson_path(@course, @lesson), alert: "Not AUTHORIZED."
+      end
+    end
+    
+    
     
 
     private 
     def set_comment
         params.require(:comment).permit(:content)
     end
+
+    def set_required
+      @course = Course.friendly.find(params[:course_id])
+      @lesson = Lesson.friendly.find(params[:lesson_id])
+    end
+    
     
 end
