@@ -2,9 +2,9 @@
   .card-header
     .fa.fa-user
     - if user_reg.online?
-      .far.fa-circle.text-success
+      .fa.fa-signal.text-success
     -else
-      .far.fa-circle.text-danger
+      .fa.fa-signal.text-danger
     = link_to user_reg.username, user_reg
     - if current_user == user_reg
       .badge.bg-success YOU
