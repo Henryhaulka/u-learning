@@ -34,12 +34,19 @@ class Subscription < ApplicationRecord
     end
   end
 
+  # def to_s
+  #   course.title + user.username
+  # end
+
   after_destroy do
      course.update_rating
   end
 
   validate :cant_subscribe_to_own_course
   protected
+
+  include PublicActivity::Model
+  tracked owner: Proc.new{ |controller, model| controller.current_user }
 
   def cant_subscribe_to_own_course
     if self.new_record?

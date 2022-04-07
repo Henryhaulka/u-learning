@@ -15,13 +15,23 @@
       = activity.id
       = activity.created_at.strftime('%D - %r')
       (#{ time_ago_in_words(activity.created_at)})
-      /= activity.trackable_id
+      = activity.trackable_type
       = model_type(activity.trackable_type) 
       - if activity.trackable_type == 'Lesson'
         - if Lesson.where(id: activity.trackable_id).present?
           = link_to activity.trackable.title, course_lesson_path(activity.trackable.course, activity.trackable)
         - else
-          Lesson was deleted
+          was deleted
+      - elsif activity.trackable_type == 'Comment'
+        - if Comment.where(id: activity.trackable_id).present?
+          = link_to activity.trackable.content.truncate(10, separator: ' '), course_lesson_path(activity.trackable.lesson.course, activity.trackable.lesson)
+        - else
+          was deleted
+      - elsif activity.trackable_type == 'Subscription'
+        - if Subscription.where(id: activity.trackable_id).present?
+          =  activity.trackable
+        - else
+          was deleted
       - else
         = link_to activity.trackable.title, activity.trackable if activity.trackable.present?
       /= activity.key.match(/\.(.*)/)[1]

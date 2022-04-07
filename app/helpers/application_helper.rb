@@ -16,7 +16,12 @@ module ApplicationHelper
         when 'Course'
            "<i class='fa fa-graduation-cap '></i>".html_safe
         when 'Lesson'
-         "<i class='fa fa-tasks '></i>".html_safe    
+         "<i class='fa fa-tasks '></i>".html_safe  
+        when 'Comment'
+         "<i class='fa fa-comment '></i>".html_safe 
+        when 'Subscription'
+         "<i class='fa fa-unlock '></i>".html_safe      
     end
   end 
+
 end
