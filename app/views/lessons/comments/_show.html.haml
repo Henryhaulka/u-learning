@@ -3,6 +3,14 @@
     = link_to comment.user.username, comment.user
     %small
       = time_ago_in_words(comment.created_at) + ' ago'
+      &nbsp;&nbsp;
+    - if policy(comment).destroy?
+      = link_to  [@course,@lesson, comment], method: :delete, data: { confirm: 'Are you sure?' }, class: 'text-decoration-none' do
+        .fa.fa-trash.text-danger
+      &nbsp;&nbsp;
+    - if policy(comment).edit?
+      = link_to edit_course_lesson_comment_path(@course,@lesson, comment), class: 'text-decoration-none' do
+        .fa.fa-pen.text-primary
+
   .card-body
     = comment.content
-    = link_to 'Delete', [@course,@lesson, comment], method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-sm btn-danger'
