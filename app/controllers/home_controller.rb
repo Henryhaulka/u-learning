@@ -1,5 +1,5 @@
 class HomeController < ApplicationController
-  skip_before_action :authenticate_user!, only: :index
+  skip_before_action :authenticate_user!, only: %i[index, privacy_policy]
   def index
      @latest_courses = Course.publish.approve.recent.limiter
      @my_subscriptions = Course.joins(:subscriptions).where(subscriptions: {user_id: current_user})
@@ -25,6 +25,10 @@ class HomeController < ApplicationController
     else
        redirect_to root_path, alert: 'Access Denied!! You are not Authorized'
     end
+  end
+  
+
+  def privacy_policy
   end
   
   
