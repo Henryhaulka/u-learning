@@ -3,6 +3,41 @@
 @import "font-awesome";
 @import "./actiontext.scss";
 
+body {
+  background-color: #374151;
+  color: gainsboro;
+}
+
+.jumbotron,
+.card{
+  color: #374151;
+  text-decoration: none;
+}
+
+.card a, .list-group-item a {
+  text-decoration: none;
+  color: #374151;
+}
+
+.card-footer a {
+  color: white;
+  font-weight: bolder;
+}
+
+.toban {
+  list-style: none;
+}
+
+.jumbotron {
+  background-image: linear-gradient(to right, rgba(27, 27, 26, 0.5),rgba(27, 27, 26, 0.5)), url(https://s35691.pcdn.co/wp-content/uploads/2019/11/Implementing-active-learning-and-student-centered-pedagogy.jpg);
+  background-size: cover;
+  background-repeat: no-repeat;
+  height: 20rem;
+  background-position: center;
+  position: relative;
+  color: white;
+}
+
 .form-control.is-invalid { background-image: none;}
 .form-control.is-valid { background-image: none;}
 
@@ -56,10 +91,23 @@ body {
   grid-gap: 5px;
 }
 
+.search-container {
+  float: left;
+  width: 250px;
+}
+
 @media screen and (max-width: 765px){
   .grid-system,
   .grid2
    { 
      grid-template-columns:  1fr;
     }
+
+  .jumbotron h1 {
+    font-size: 1.5rem;
+  }
+
+  .search-container {
+    width: 200px;
+  }
 }

@@ -4,10 +4,10 @@
   Home
 .jumbotron.bg-light.p-5.rounded
   %h1.display-4 What do you want to learn today?
-  - if user_signed_in?  
+  - if user_signed_in?
     = search_form_for @ransack_courses, as: :courses_search , url: courses_path do |f|
       .input-group
-      = f.search_field :title_or_user_email_cont, placeholder: 'Find Course by Title or Author', class: 'form-control', style: 'float: left; width: 250px;'
+      = f.search_field :title_or_user_email_cont, placeholder: 'Find Course by Title or Author', class: 'form-control search-container'
       %span.input-group-append
         %button.btn.btn-primary.btn-sm.mt-1{:type => 'Submit'}
           %span.fa.fa-search{'aria-hidden' => 'true'}
