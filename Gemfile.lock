@@ -201,6 +201,9 @@ GEM
     omniauth-oauth2 (1.7.2)
       oauth2 (~> 1.4)
       omniauth (>= 1.9, < 3)
+    omniauth-rails_csrf_protection (1.0.1)
+      actionpack (>= 4.2)
+      omniauth (~> 2.0)
     orm_adapter (0.5.0)
     pagy (5.10.1)
       activesupport
@@ -364,6 +367,7 @@ DEPENDENCIES
   jquery-rails (~> 4.4)
   listen (~> 3.3)
   omniauth-google-oauth2 (~> 1.0, >= 1.0.1)
+  omniauth-rails_csrf_protection
   pagy (~> 5.10, >= 5.10.1)
   pg (~> 1.1)
   public_activity (~> 1.6, >= 1.6.4)
