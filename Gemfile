@@ -23,6 +23,7 @@ gem 'groupdate', '~> 2.5', '>= 2.5.2'
 gem 'ranked-model', '~> 0.4.8'
 gem "aws-sdk-s3", require: false
 gem 'activestorage-validator'
+gem 'omniauth-google-oauth2', '~> 1.0', '>= 1.0.1'
 # Use Puma as the app server
 gem 'puma', '~> 5.0'
 gem "recaptcha"

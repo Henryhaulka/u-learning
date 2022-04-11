@@ -1,5 +1,5 @@
 class HomeController < ApplicationController
-  skip_before_action :authenticate_user!, except: %i[ index, privacy_policy]
+  skip_before_action :authenticate_user!, only: %i[ index privacy_policy]
   def index
      @latest_courses = Course.publish.approve.recent.limiter
      @my_subscriptions = Course.joins(:subscriptions).where(subscriptions: {user_id: current_user})

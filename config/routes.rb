@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   end
   get 'users/index'
   # devise_for :users
-  devise_for :users, controllers: { registrations: "users/registrations"}
+  devise_for :users, controllers: { registrations: "users/registrations", omniauth_callbacks: 'users/omniauth_callbacks'}
   resources :courses do
     get :purchased_courses, :pending_reviews,:created_courses, :unapproved_courses, on: :collection
     member do#member means take a course i.e. self

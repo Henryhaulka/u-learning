@@ -130,4 +130,6 @@
           = link_to 'Log in', new_user_session_path, class: 'nav-link text-white'
         %li.nav-item.pt-3
           = link_to 'Sign up', new_user_registration_path , class: 'nav-link text-white'
+        %li.nav-item.pt-3
+          = link_to "Sign in with Google", user_google_oauth2_omniauth_authorize_path 
       
