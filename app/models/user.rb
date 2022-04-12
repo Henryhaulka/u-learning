@@ -5,6 +5,15 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable,:trackable, :confirmable,
          :omniauthable, omniauth_providers: [:google_oauth2]
 
+  #nullify is used so that when a user deletes their account, their associations
+  #still exists
+  has_many :courses, dependent: :nullify
+  has_many :user_lessons, dependent: :nullify
+  has_many :subscriptions, dependent: :nullify
+  has_many :comments, dependent: :nullify
+  rolify
+  after_create :assign_default_role
+
   def self.from_omniauth(access_token)
     data = access_token.info
     user = User.where(email: data['email']).first
@@ -18,17 +27,6 @@ class User < ApplicationRecord
     end
     user
   end
-
-
-  #nullify is used so that when a user deletes their account, their associations
-  #still exists
-  has_many :courses, dependent: :nullify
-  has_many :user_lessons, dependent: :nullify
-  has_many :subscriptions, dependent: :nullify
-  has_many :comments, dependent: :nullify
-  rolify
-  after_create :assign_default_role
-
   def username
       self.email.split(/@/).first
   end
