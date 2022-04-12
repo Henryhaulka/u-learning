@@ -3,10 +3,10 @@
     %a.navbar-brand{:href => "/"} 
       .fa.fa-graduation-cap
       U-Learning
-    - if user_signed_in?
-      %button.navbar-toggler{"aria-controls" => "navbarSupportedContent", "aria-expanded" => "false", "aria-label" => "Toggle navigation", "data-bs-target" => "#navbarSupportedContent", "data-bs-toggle" => "collapse", :type => "button"}
-        %span.navbar-toggler-icon
-      #navbarSupportedContent.collapse.navbar-collapse
+    %button.navbar-toggler{"aria-controls" => "navbarSupportedContent", "aria-expanded" => "false", "aria-label" => "Toggle navigation", "data-bs-target" => "#navbarSupportedContent", "data-bs-toggle" => "collapse", :type => "button"}
+      %span.navbar-toggler-icon
+    #navbarSupportedContent.collapse.navbar-collapse
+      - if user_signed_in?
         %ul.navbar-nav.me-auto.mb-2.mb-lg-0
           %li.nav-item{class: "#{'active font-weight-bold' if current_page?(root_path)}"}
             = link_to root_path, class: 'nav-link' do
@@ -124,12 +124,9 @@
                 = link_to  destroy_user_session_path, method: :delete, class: 'dropdown-item' do
                   .fa.fa-sign-out-alt
                   %b= 'Sign out'
-    - else
-      %ul.d-flex.toban
-        %li.nav-item.pt-3
+      - else
+        %ul.navbar-nav.toban
           = link_to 'Log in', new_user_session_path, class: 'nav-link text-white'
-        %li.nav-item.pt-3
           = link_to 'Sign up', new_user_registration_path , class: 'nav-link text-white'
-        %li.nav-item.pt-3
           = link_to "Sign in with Google", user_google_oauth2_omniauth_authorize_path, method: :post
       

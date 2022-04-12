@@ -8,6 +8,11 @@ body {
   color: gainsboro;
 }
 
+.shared_link a {
+  color: white;
+  text-decoration: none;
+}
+
 .jumbotron,
 .card{
   color: #374151;
@@ -25,7 +30,7 @@ body {
 }
 
 .toban {
-  list-style: none;
+  margin-left: auto;
 }
 
 .jumbotron {
