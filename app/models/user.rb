@@ -3,7 +3,7 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable,:trackable, :confirmable,
-         :omniauthable, omniauth_providers: [:google_oauth2]
+         :omniauthable, omniauth_providers: [:google_oauth2, :github]
 
   #nullify is used so that when a user deletes their account, their associations
   #still exists
@@ -25,6 +25,11 @@ class User < ApplicationRecord
            password: Devise.friendly_token[0,20],
            confirmed_at: Time.now #verifies a user that signs up with google
         )
+    else
+      user.name = access_token.info.name
+      user.image = access_token.info.image
+      user.provider = access_token.provider
+      user.save!
     end
     user
   end

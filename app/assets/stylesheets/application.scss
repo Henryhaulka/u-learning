@@ -29,6 +29,14 @@ body {
   font-weight: bolder;
 }
 
+.google {
+  background: linear-gradient(to right, rgb(255, 251, 251), rgb(8, 165, 8));
+  font-size: 1rem;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;  
+  cursor: pointer;
+}
+
 .toban {
   margin-left: auto;
 }
