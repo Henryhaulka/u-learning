@@ -9,10 +9,10 @@
   = link_to user_google_oauth2_omniauth_authorize_path, method: :post do
     .fab.fa-google.text-white
       Sign in with Google
-/- if @user.provider.present?
-/  %h4
-/   = @user.provider
-/  %div
-/   = @user.name
-/  %div
-/    = image_tag @user.image, class: 'rounded-circle',size: '30x30', alt: "#{@user.email}"
+- if @user.provider.present?
+  %h4
+    = @user.provider
+  %div
+    = @user.email
+  %div
+    = image_tag @user.image, class: 'rounded-circle',size: '30x30', alt: "#{@user.email}"

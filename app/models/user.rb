@@ -25,11 +25,12 @@ class User < ApplicationRecord
            password: Devise.friendly_token[0,20],
            confirmed_at: Time.now #verifies a user that signs up with google
         )
-    # else
-    #   user.name = access_token.info.name
-    #   user.image = access_token.info.image
-    #   user.provider = access_token.provider
-    #   user.save!
+    else
+      # user.name = access_token.info[:name]
+      user.email = access_token.info[:email]
+      user.image = access_token.info[:image]
+      user.provider = access_token.provider
+      user.save!
     end
     user
   end
