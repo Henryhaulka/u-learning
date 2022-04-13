@@ -3,7 +3,7 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable,:trackable, :confirmable,
-         :omniauthable, omniauth_providers: [:google_oauth2, :github]
+         :omniauthable, omniauth_providers: [:google_oauth2, :github, :facebook]
 
   #nullify is used so that when a user deletes their account, their associations
   #still exists
