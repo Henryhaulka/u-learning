@@ -13,7 +13,6 @@
   %h4
     = @user.provider
   %div
-    = @user.email
+    = @user.name
   %div
-    -if @user.image.present?
-      = image_tag @user.image, class: 'rounded-circle',size: '30x30', alt: "#{@user.email}"
+    = image_tag @user.image, class: 'rounded-circle',size: '30x30', alt: "#{@user.email}"
