@@ -15,4 +15,5 @@
   %div
     = @user.email
   %div
-    = image_tag @user.image, class: 'rounded-circle',size: '30x30', alt: "#{@user.email}"
+    -if @user.image.present?
+      = image_tag @user.image, class: 'rounded-circle',size: '30x30', alt: "#{@user.email}"

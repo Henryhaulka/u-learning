@@ -28,7 +28,9 @@ class User < ApplicationRecord
     else
       # user.name = access_token.info[:name]
       user.email = access_token.info[:email]
-      user.image = access_token.info[:image]
+      if user.image.present?
+        user.image = access_token.info[:image]
+      end
       user.provider = access_token.provider
       user.save!
     end
