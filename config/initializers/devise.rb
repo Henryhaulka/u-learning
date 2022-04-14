@@ -271,8 +271,8 @@ Devise.setup do |config|
   # ==> OmniAuth
   # Add a new OmniAuth provider. Check the wiki for more information on setting
   # up on your models and hooks.
-  # 354059293354649
-  config.omniauth :facebook, '354059293354649', '03a1065441baa2dc2a15b6950254ef92'
+
+  config.omniauth :facebook, Rails.application.credentials.facebook[:client_id], Rails.application.credentials.facebook[:client_secret]
   config.omniauth :google_oauth2,  Rails.application.credentials.google_oauth2[:site_key], Rails.application.credentials.google_oauth2[:secret_key]
   config.omniauth :github,  Rails.application.credentials.github[:client_id],  Rails.application.credentials.github[:client_secret]
   # , scope: 'user,public_repo'
