@@ -114,7 +114,11 @@
           
           %li.nav-item.dropdown
             %a#navbarDropdown.nav-link.dropdown-toggle{"aria-expanded" => "false", "data-bs-toggle" => "dropdown", :href => "#", :role => "button"}
-              %b= current_user.email
+              - if current_user.provider.present?
+                = current_user.name
+                = image_tag current_user.image, class: 'rounded-circle',size: '30x30', alt: "#{current_user.email}"
+              -else
+                %b= current_user.username
             %ul.dropdown-menu{"aria-labelledby" => "navbarDropdown"}
               %li
                 = link_to  edit_user_registration_path, class: 'dropdown-item' do
