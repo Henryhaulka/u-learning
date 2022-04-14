@@ -30,6 +30,12 @@ import "../trix-editor-override";
 import videojs from 'video.js'
 import "video.js/dist/video-js.css";
 
+// 'yarn add selectize'
+
+
+
+require("selectize");
+
 require("jquery")
 require("jquery-ui-dist/jquery-ui");
 $(document).on("turbolinks:load", function(){
@@ -53,6 +59,12 @@ $(document).on("turbolinks:load", function(){
       console.log("stop called when finish sorting of cards");
     },
   });
+  
+  if ($(".selectize")) {
+    $(".selectize").selectize({
+      sortField: "text",
+    });
+  }
   let videoPlayer = videojs(document.getElementById('my-video'), {
     controls: true,
     playbackRates: [0.5, 1.0, 1.5],
