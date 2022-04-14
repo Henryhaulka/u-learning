@@ -5,12 +5,30 @@
 .jumbotron.bg-light.p-5.rounded
   %h1.display-4 What do you want to learn today?
   - if user_signed_in?
-    = search_form_for @ransack_courses, as: :courses_search , url: courses_path do |f|
-      .input-group
-      = f.search_field :title_or_user_email_cont, placeholder: 'Find Course by Title or Author', class: 'form-control search-container'
-      %span.input-group-append
-        %button.btn.btn-primary.btn-sm.mt-1{:type => 'Submit'}
-          %span.fa.fa-search{'aria-hidden' => 'true'}
+    %div.pt-5
+      = search_form_for @ransack_courses, as: :courses_search , url: courses_path do |f|
+        .input-group
+        = f.search_field :title_or_user_email_cont, placeholder: 'Find Course by Title or Author', class: 'form-control search-container'
+        %span.input-group-append
+          %button.btn.btn-primary.btn-sm.mt-1{:type => 'Submit'}
+            %span.fa.fa-search{'aria-hidden' => 'true'}
+  - else 
+    %h3.text-shadow Join to access all the courses
+    .p-2
+    = link_to 'Register', new_user_registration_path, class: 'btn btn-lg text-white'
+    = link_to 'Login', new_user_session_path, class: 'btn btn-lg text-white'
+    .row.mt-1
+    = link_to user_google_oauth2_omniauth_authorize_path, method: :post, class: 'btn btn-info btn-lg mr-1' do
+      Continue with
+      .fab.fa-google
+    .row.mt-1
+    = link_to user_github_omniauth_authorize_path, method: :post, class: 'btn btn-dark btn-lg mr-1' do
+      Continue with
+      .fab.fa-github
+    .row.mt-1
+    = link_to user_facebook_omniauth_authorize_path, method: :post, class: 'btn btn-primary btn-lg mr-1' do
+      Continue with
+      .fab.fa-facebook
 %p
 %div.grid2
   .card.p-4

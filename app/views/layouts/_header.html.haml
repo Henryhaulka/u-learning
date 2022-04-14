@@ -131,5 +131,10 @@
           %div.mt-2
             = link_to user_google_oauth2_omniauth_authorize_path, method: :post  do
               .fab.fa-google.google
-                Sign in with Google
+            &nbsp;&nbsp;
+            = link_to user_github_omniauth_authorize_path, method: :post  do
+              .fab.fa-github.google
+            &nbsp;&nbsp;
+            = link_to user_facebook_omniauth_authorize_path, method: :post  do
+              .fab.fa-facebook.google
         

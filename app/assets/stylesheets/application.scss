@@ -30,11 +30,16 @@ body {
 }
 
 .google {
-  background: linear-gradient(to right, rgb(255, 251, 251), rgb(8, 165, 8));
+  background: linear-gradient(to right, rgb(255, 251, 251), blue);
   font-size: 1rem;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;  
   cursor: pointer;
+  font-size: 1.3rem;
+}
+
+ a {
+  text-decoration: none;
 }
 
 .toban {
@@ -45,7 +50,7 @@ body {
   background-image: linear-gradient(to right, rgba(27, 27, 26, 0.5),rgba(27, 27, 26, 0.5)), url(https://s35691.pcdn.co/wp-content/uploads/2019/11/Implementing-active-learning-and-student-centered-pedagogy.jpg);
   background-size: cover;
   background-repeat: no-repeat;
-  height: 20rem;
+  height: 25rem;
   background-position: center;
   position: relative;
   color: white;
