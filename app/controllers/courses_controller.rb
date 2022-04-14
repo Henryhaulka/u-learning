@@ -83,17 +83,20 @@ class CoursesController < ApplicationController
   def new
     @course = Course.new
     authorize @course
+    @tags = Tag.all
   end
 
   # GET /courses/1/edit
   def edit
     authorize @course
+    @tags = Tag.all
   end
 
   # POST /courses or /courses.json
   def create
     @course = Course.new(course_params)
     @course.user = current_user
+ 
      authorize @course
 
     respond_to do |format|
@@ -101,6 +104,7 @@ class CoursesController < ApplicationController
         format.html { redirect_to course_url(@course), notice: "Course was successfully created." }
         format.json { render :show, status: :created, location: @course }
       else
+        @tags = Tag.all
         format.html { render :new, status: :unprocessable_entity }
         format.json { render json: @course.errors, status: :unprocessable_entity }
       end
@@ -115,6 +119,7 @@ class CoursesController < ApplicationController
         format.html { redirect_to course_url(@course), notice: "Course was successfully updated." }
         format.json { render :show, status: :ok, location: @course }
       else
+         @tags = Tag.all
         format.html { render :edit, status: :unprocessable_entity }
         format.json { render json: @course.errors, status: :unprocessable_entity }
       end
@@ -142,6 +147,6 @@ class CoursesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def course_params
-      params.require(:course).permit(:title, :description, :short_description, :level, :published, :price, :language, :avatar)
+      params.require(:course).permit(:title, :description, :short_description, :level, :published, :price, :language, :avatar, tag_ids: [])
     end
 end

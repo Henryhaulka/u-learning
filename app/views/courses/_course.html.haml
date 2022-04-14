@@ -63,6 +63,10 @@
         = link_to 'unapprove', unapprove_course_path(course),method: :patch, class: 'btn btn-danger'
       - else
         = link_to 'approve', approve_course_path(course), method: :patch, class: 'btn btn-success'
+  .card-footer
+    -course.tags.each do |tag|
+      .badge.bg-info.text-dark
+        = tag.name
           
         
 
