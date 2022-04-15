@@ -55,9 +55,10 @@
     %br
     %br
     - @tags.order(course_tags_count: :desc).each do |tag|
-      .badge.bg-info.text-dark
-        = tag.name
-        = tag.course_tags_count
+      = link_to courses_path(courses_search: {course_tags_tag_id_eq: tag.id}) do
+        .badge.bg-info.text-dark
+          = tag.name
+          = tag.course_tags_count
   .col-md-10
     %div.grid-system
       - @courses.each do |cour|
