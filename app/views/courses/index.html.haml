@@ -55,7 +55,7 @@
     %br
     %br
     - @tags.order(course_tags_count: :desc).each do |tag|
-      = link_to courses_path(courses_search: {course_tags_tag_id_eq: tag.id}) do
+      = link_to controller: controller_name, action: action_name, courses_search: {course_tags_tag_id_eq: tag.id} do
         .badge.bg-info.text-dark
           = tag.name
           = tag.course_tags_count
