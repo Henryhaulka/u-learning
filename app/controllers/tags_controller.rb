@@ -1,4 +1,8 @@
 class TagsController < ApplicationController
+  def index
+    @tags = Tag.all.order(course_tags_count: :desc)
+  end
+  
   def create
     @tag = Tag.new(tag_params)
     if @tag.save
