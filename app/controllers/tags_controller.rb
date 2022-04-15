@@ -1,6 +1,7 @@
 class TagsController < ApplicationController
   def index
     @tags = Tag.all.order(course_tags_count: :desc)
+    authorize @tags
   end
   
   def create
@@ -14,6 +15,7 @@ class TagsController < ApplicationController
 
   def destroy
     @tag = Tag.find(params[:id])
+      authorize @tag
      if @tag.destroy
        redirect_to @tag, notice: "Tag was successfully destroyed."
     # else
