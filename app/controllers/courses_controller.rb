@@ -11,7 +11,7 @@ class CoursesController < ApplicationController
       #  @ransack_courses = Course.ransack(params[:courses_search], key: :courses_search)
       # if current_user.has_role?(:admin)
         #  @courses = @ransack_courses.result.includes(:user)
-          @tags = Tag.all
+          @tags = Tag.all.where.not(course_tags_count: 0).order(course_tags_count: :desc).limit(10)
           @ransack_path = courses_path
           @ransack_courses = Course.recent.publish.approve.ransack(params[:courses_search], search_key: :courses_search)  
           # :course_tags, :course_tags => :tag using the through table to get a tag
@@ -33,7 +33,7 @@ class CoursesController < ApplicationController
 
   def purchased_courses
       @ransack_path = purchased_courses_courses_path
-       @tags = Tag.all
+      @tags = Tag.all.where.not(course_tags_count: 0).order(course_tags_count: :desc)
     # @courses =  Course.joins(:subscriptions).where(subscriptions: {user_id: current_user})
     #joins is used to join tables
     ##a course has many subscriptions hence .joins(:subscriptions) subscriptions is plural
@@ -49,7 +49,7 @@ class CoursesController < ApplicationController
 
   def pending_reviews
     @ransack_path = pending_reviews_courses_path
-     @tags = Tag.all
+     @tags = Tag.all.where.not(course_tags_count: 0).order(course_tags_count: :desc)
     #MERGE is used to add a scope here
     @ransack_courses = 
       Course.joins(:subscriptions).where(subscriptions: 
@@ -60,7 +60,7 @@ class CoursesController < ApplicationController
 
   def created_courses
     @ransack_path = created_courses_courses_path
-    @tags = Tag.all
+    @tags = Tag.all.where.not(course_tags_count: 0).order(course_tags_count: :desc)
     @ransack_courses = Course.recent.where(user_id: current_user).ransack(params[:courses_search])
      @pagy,@courses = pagy(@ransack_courses.result.includes(:user, :course_tags, :course_tags => :tag))
     render 'index' 
@@ -68,7 +68,7 @@ class CoursesController < ApplicationController
 
   def unapproved_courses
     @ransack_path = unapproved_courses_courses_path
-     @tags = Tag.all
+     @tags = Tag.all.where.not(course_tags_count: 0).order(course_tags_count: :desc)
     @ransack_courses = Course.unapprove.order(created_at: :desc).ransack(params[:courses_search])
      @pagy,@courses = pagy(@ransack_courses.result.includes(:user, :course_tags, :course_tags => :tag))
     render 'index' 

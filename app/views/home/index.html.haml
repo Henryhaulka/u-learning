@@ -106,6 +106,18 @@
 %p
 .texter
   = link_to 'More Recent Courses', courses_path(courses_search: {s: 'created_at desc'}), class: 'btn btn-primary '
+
+%h3.pt-2
+Popular Tags
+.fa.fa-tags
+%div.pt-2
+  - @popular_tags.each do |tag|
+    = link_to courses_path(courses_search: {course_tags_tag_id_eq: tag.id}) do
+      .badge.bg-info.text-dark
+        .fa.fa-tag
+        = tag.name
+        = tag.course_tags_count
+%br
 %hr
 %h3.pt-2
   .fa.fa-comments

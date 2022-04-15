@@ -6,6 +6,7 @@
     = f.input :title
     %br
     /any time you create a course with a tag, a course_tag is created with course_id and tag_id
+    = f.label :tag
     = f.select :tag_ids,  @tags.pluck(:name, :id), {}, { multiple: true, class: "selectize-tags"}
     %br
     /= f.label :description

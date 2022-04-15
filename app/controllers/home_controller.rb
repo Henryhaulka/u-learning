@@ -6,6 +6,7 @@ class HomeController < ApplicationController
      @popular_courses = Course.publish.approve.popular.recent.limiter
      @top_rated_courses = Course.publish.approve.top.recent.limiter
      @reviews = Subscription.reviewed.rater.recent.limiter.order(rating: :desc)
+     @popular_tags = Tag.all.where.not(course_tags_count: 0).order(course_tags_count: :desc).limit(10)
   end
 
   def activity
