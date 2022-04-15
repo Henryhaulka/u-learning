@@ -12,6 +12,16 @@ class TagsController < ApplicationController
     end
   end
 
+  def destroy
+    @tag = Tag.find(params[:id])
+     if @tag.destroy
+       redirect_to @tag, notice: "Tag was successfully destroyed."
+    # else
+    #    redirect_to course_url, alert: "Course can't be deleted because it has a subscription" 
+     end
+  end
+  
+
   def tag_params
     params.require(:tag).permit(:name)
   end
