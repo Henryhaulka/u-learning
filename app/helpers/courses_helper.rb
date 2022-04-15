@@ -2,7 +2,7 @@ module CoursesHelper
   def subscribe_button(course)
     if user_signed_in?
       if current_user == course.user
-          link_to 'You created this Course, View analytics', course_path(course),class: 'text-decoration-none'
+          link_to 'You created this Course, View analytics', course_path(course),class: 'text-decoration-none text-primary'
       elsif course.subscriptions.where(user_id: current_user).present?
           "<i class='fa fa-spinner text-primary'></i>".html_safe + ' ' +
           number_to_percentage(course.progress_rate(current_user), precision: 0)  + 

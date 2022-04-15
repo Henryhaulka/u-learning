@@ -26,6 +26,10 @@
       = f.label :language
       = f.select :language_cont, Course.languages, include_blank: true
       %br
+      = f.label :tag
+      /course_tags_tag_name_cont to the course_tags table to get the tag's name
+      = f.search_field :course_tags_tag_name_cont,placeholder: 'Tag name', class: 'form-control form-control-sm '
+      %br
       = f.label :level
       = f.select :level_cont, Course.levels, include_blank: true
       %br
@@ -50,6 +54,10 @@
       .fa.fa-sync
     %br
     %br
+    - @tags.order(course_tags_count: :desc).each do |tag|
+      .badge.bg-info.text-dark
+        = tag.name
+        = tag.course_tags_count
   .col-md-10
     %div.grid-system
       - @courses.each do |cour|
