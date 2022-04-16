@@ -27,6 +27,8 @@ gem 'omniauth-google-oauth2'
 gem 'omniauth-github', github: 'omniauth/omniauth-github', branch: 'master'
 gem 'omniauth-rails_csrf_protection'
 gem 'omniauth-facebook'
+gem 'wicked_pdf'
+gem 'wkhtmltopdf-binary'
 # Use Puma as the app server
 gem 'puma', '~> 5.0'
 gem "recaptcha"

@@ -29,6 +29,19 @@ class CoursesController < ApplicationController
     authorize @course
     @course_lessons = @course.lessons.recent_lessons.rank(:row_order)
     @subscriptions_reviews = @course.subscriptions.reviewed
+    respond_to do |format|
+      format.html
+      format.pdf do
+        render pdf: "file_name",   # Excluding ".pdf" extension.
+        page_size: 'A4',
+        template: 'courses/show.pdf.haml',
+        layout: 'pdf.html.haml',
+        orientation: 'Portrait',
+        lowquality: true,
+        dpi: 75,
+        zoom: 1
+      end
+    end
   end
 
   def purchased_courses
