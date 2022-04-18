@@ -52,6 +52,7 @@
         %th= sort_link(@q, :rating)
         /.text-warning.fa.fa-star
         / Rating
+        %th Certificate
         %th
         %th
         %th
@@ -70,6 +71,7 @@
           %td= subscription.review
           %td= number_to_percentage(subscription.course.progress_rate(current_user), precision: 0)
           %td= subscription.rating
+          %td= link_to 'Certificate', certificate_subscription_path(subscription, format: :pdf)
           %td= link_to 'See Review', subscription
           %td
             - if policy(subscription).edit?

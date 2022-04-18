@@ -31,12 +31,7 @@ class SubscriptionsController < ApplicationController
       format.pdf do
         render pdf: "#{@subscription.course.title}, #{@subscription.user.email}", # Excluding ".pdf" extension.
         page_size: 'A4',
-        template: 'subscriptions/show.pdf.haml',
-        layout: 'pdf.html.haml',
-        orientation: 'Portrait',
-        lowquality: true,
-        dpi: 75,
-        zoom: 1
+        template: 'subscriptions/show.pdf.haml'
       end
     end
   end
