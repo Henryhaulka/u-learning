@@ -1,6 +1,9 @@
 Rails.application.routes.draw do
   resources :subscriptions do
     get :my_students, on: :collection
+    member do
+      get :certificate
+    end
   end
   get 'users/index'
   # devise_for :users

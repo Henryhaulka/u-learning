@@ -1,6 +1,9 @@
 class SubscriptionsController < ApplicationController
-  before_action :set_subscription, only: %i[ show edit update destroy ]
+
+  before_action :set_subscription, only: %i[ show edit update destroy certificate]
   before_action :set_course, only: [:new, :create ]
+  # allows a non-registered user to view certificate
+  skip_before_action :authenticate_user!, only: :certificate
   # GET /subscriptions or /subscriptions.json
   def index
     #  @subscriptions= Subscription.all
@@ -21,6 +24,23 @@ class SubscriptionsController < ApplicationController
   # GET /subscriptions/1 or /subscriptions/1.json
   def show
   end
+
+  def certificate
+    respond_to do |format|
+      format.html
+      format.pdf do
+        render pdf: "#{@subscription.course.title}, #{@subscription.user.email}", # Excluding ".pdf" extension.
+        page_size: 'A4',
+        template: 'subscriptions/show.pdf.haml',
+        layout: 'pdf.html.haml',
+        orientation: 'Portrait',
+        lowquality: true,
+        dpi: 75,
+        zoom: 1
+      end
+    end
+  end
+  
 
   # GET /subscriptions/new
   def new
