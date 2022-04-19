@@ -26,7 +26,7 @@ Rails.application.routes.draw do
       
     resources :subscriptions, only: [:new, :create]
   end
-
+  resources :course_creator
   resources :youtube, only: :show
 
   resources :users, only: [:index, :edit, :show, :update]
