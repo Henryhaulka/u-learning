@@ -1,1 +1,28 @@
-= render 'template'
+.card
+  .progress
+    .progress-bar{:style => "width: #{@progress}%"}
+  .card-header
+    %h2
+      =  wizard_steps.index(step) + 1
+      \/
+      = wizard_steps.count
+      = step.to_s.humanize
+  .card-body
+    = simple_form_for @course, url: course_course_wizard_path, method: :put do |f|
+      = f.input :title
+      %br
+      = f.input :short_description
+      %br
+      = f.input :language , collection: Course.languages
+      %br
+      = f.input :level, collection: Course.levels
+      %br
+      = f.button :submit, class: 'btn-success'
+  .card-footer
+    = link_to next_wizard_path, class: 'btn btn-sm btn-info' do
+      .fa.fa-arrow-right
+      Skip
+    &nbsp; &nbsp;
+    = link_to previous_wizard_path, class: 'btn btn-sm btn-info' do
+      .fa.fa-arrow-left
+      Previous
