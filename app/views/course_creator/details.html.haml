@@ -1,0 +1,16 @@
+.card
+  .card-header
+    %h2
+      =  wizard_steps.index(step) + 1
+      \/
+      = wizard_steps.count
+      = step.to_s.humanize
+  .card-body
+  .card-footer
+    = link_to next_wizard_path, class: 'btn btn-sm btn-info' do
+      .fa.fa-arrow-right
+      Skip
+    &nbsp; &nbsp;
+    = link_to previous_wizard_path, class: 'btn btn-sm btn-info' do
+      .fa.fa-arrow-left
+      Previous
