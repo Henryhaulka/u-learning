@@ -39,5 +39,19 @@ module CoursesHelper
       end
     end
   end
-  
+
+  def certificate_button(course)
+    user_sub = current_user.subscriptions.where(course_id: course.id)
+    if  user_sub.any?
+      if course.progress_rate(current_user) == 100
+        link_to certificate_subscription_path(user_sub.first, format: :pdf), class: 'btn btn-success' do
+           "<i class='fa fa-file-pdf'></i>".html_safe + ' ' +
+           "Certificate of Completion"
+        end
+      else
+        "<span class = 'nocomplete'>Complete the Course to view your Certificate</span>".html_safe
+        
+      end
+    end
+  end
 end
