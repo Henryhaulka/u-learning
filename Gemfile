@@ -28,6 +28,7 @@ gem 'omniauth-github', github: 'omniauth/omniauth-github', branch: 'master'
 gem 'omniauth-rails_csrf_protection'
 gem 'omniauth-facebook'
 gem 'wicked_pdf'
+gem 'wicked' #for multistep forms
 gem 'wkhtmltopdf-binary', group: :development
 # reduces the size of app in production
 gem 'wkhtmltopdf-heroku', group: :production
