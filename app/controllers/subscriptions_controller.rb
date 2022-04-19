@@ -26,6 +26,7 @@ class SubscriptionsController < ApplicationController
   end
 
   def certificate
+    authorize @subscription, :certificate?
     respond_to do |format|
       format.html
       format.pdf do
