@@ -23,10 +23,10 @@ Rails.application.routes.draw do
         delete :delete_video
       end
     end
-      
+    resources :course_wizard, controller: 'courses/course_wizard'
     resources :subscriptions, only: [:new, :create]
   end
-  resources :course_creator
+  
   resources :youtube, only: :show
 
   resources :users, only: [:index, :edit, :show, :update]

@@ -12,10 +12,6 @@
             = link_to root_path, class: 'nav-link' do
               .fa.fa-home
               Home
-             
-          %li.nav-item{class: "#{'active font-weight-bold' if current_page?( course_creator_index_path)}"}
-            = link_to  course_creator_index_path, class: 'nav-link' do
-              Course Creator
           %li.nav-item{class: "#{'active font-weight-bold' if current_page?(courses_path)}"}
             = link_to courses_path, class: 'nav-link' do
               .fa.fa-book

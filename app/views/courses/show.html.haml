@@ -29,6 +29,7 @@
         = @course.description
     %p
       %br
+      = link_to 'Created coursers', course_course_wizard_index_path(@course)
       - if  @course_lessons.present?
         %h3
           .row
