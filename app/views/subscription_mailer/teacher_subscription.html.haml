@@ -1,0 +1,30 @@
+%b
+  You have a new subscriber to your course
+= link_to @subscription.course.title, @subscription.course
+.row
+%b
+  Subscription date:
+= @subscription.created_at.strftime('%D - %r')
+.row
+%b
+  Subscription ID:
+= @subscription.slug
+.row
+%b
+  Course price:
+= number_to_currency(@subscription.course.price)
+.row
+%b
+  Price paid:
+= number_to_currency(@subscription.price)
+.row
+%b
+  Course instructor:
+= @subscription.course.user.username
+= mail_to @subscription.course.user.email, @subscription.course.user.email
+%p
+After completing the course, you will be entitled to a Certificate of Completion.
+%p
+Regards,
+.row
+= link_to 'The U-learning team', root_url

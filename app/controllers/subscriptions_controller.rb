@@ -56,7 +56,8 @@ class SubscriptionsController < ApplicationController
     else
       @subscription = current_user.buy_a_course(@course)
       flash[:notice] = "You have successfully subscribe to #{@course.title}"
-      SubscriptionMailer.new_subscription(@subscription).deliver_now
+      SubscriptionMailer.student_subscription(@subscription).deliver_now
+      SubscriptionMailer.teacher_subscription(@subscription).deliver_now
        redirect_to course_path(@course)
     end
   end

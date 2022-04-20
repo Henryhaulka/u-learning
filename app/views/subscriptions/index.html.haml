@@ -25,7 +25,7 @@
 %p
 %p
 .table-responsive
-  %table.table.table-bordered.table-sm.table-striped.white
+  %table.table.table-bordered.table-sm.table-striped.text-white.white
     %thead
       %tr
         %th ID
@@ -57,20 +57,26 @@
         %th
         %th
 
-    %tbody
+    %tbody.white
       - @subscriptions.each do |subscription|
-        %tr
-          %td= subscription.id
+        %tr.white
+          %td.text-white
+            = subscription.id
           %td= link_to subscription.user.username, subscription.user
           %td= link_to subscription.course.title, subscription.course
-          %td= subscription.created_at.strftime('%D - %r')
-          %td=  number_to_currency(subscription.price)
-          %td
+          %td.text-white
+            = subscription.created_at.strftime('%D - %r') 
+          %td.text-white
+            =  number_to_currency(subscription.price)
+          %td.text-white
             - if subscription.rating.present?
               = subscription.updated_at.strftime('%D - %r')
-          %td= subscription.review
-          %td= number_to_percentage(subscription.course.progress_rate(current_user), precision: 0)
-          %td= subscription.rating
+          %td.text-white
+            = subscription.review
+          %td.text-white
+            = number_to_percentage(subscription.course.progress_rate(current_user), precision: 0)
+          %td.text-white
+            = subscription.rating
           %td= link_to 'Certificate', certificate_subscription_path(subscription, format: :pdf)
           %td= link_to 'See Review', subscription
           %td
