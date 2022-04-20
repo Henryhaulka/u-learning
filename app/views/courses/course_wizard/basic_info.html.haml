@@ -1,3 +1,13 @@
+= link_to 'Courses', courses_path
+\/
+= link_to course_path(@course) do
+  .fa.fa-graduation-cap.text-white
+  = @course.title
+\/
+= link_to course_course_wizard_path(@course, :basic_info) do
+  Edit
+  = step.to_s.humanize 
+%div.p-2
 .card
   .progress
     .progress-bar{:style => "width: #{@progress}%"}
@@ -23,6 +33,5 @@
       .fa.fa-arrow-right
       Skip
     &nbsp; &nbsp;
-    = link_to previous_wizard_path, class: 'btn btn-sm btn-info' do
-      .fa.fa-arrow-left
-      Previous
+    = link_to course_path(@course), class: 'btn btn-sm btn-danger' do
+      Cancel
