@@ -54,9 +54,10 @@ class SubscriptionsController < ApplicationController
       flash[:alert] = "You can't access paid courses yet"
       redirect_to new_course_subscription_path(@course)
     else
-      current_user.buy_a_course(@course)
+      @subscription = current_user.buy_a_course(@course)
       flash[:notice] = "You have successfully subscribe to #{@course.title}"
-      redirect_to course_path(@course)
+      SubscriptionMailer.new_subscription(@subscription).deliver_now
+       redirect_to course_path(@course)
     end
   end
 
