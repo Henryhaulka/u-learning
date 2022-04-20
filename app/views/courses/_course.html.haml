@@ -35,10 +35,16 @@
   - if user_signed_in? && policy(course).owner? || user_signed_in? && policy(course).destroy? 
     .card-footer
       - if policy(course).destroy?  
-        = link_to 'Delete', course, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-sm btn-danger'
+        = link_to 'Delete', course, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn  btn-danger'
       - if policy(course).owner?
-        = link_to 'Edit', edit_course_path(course), class: 'btn btn-sm btn-warning'
-        = link_to new_course_lesson_path(course, @lesson), class: 'btn btn-sm btn-primary' do
+        = link_to edit_course_path(course), class: 'btn  btn-warning' do
+          .fas.fa-edit
+          Edit
+        &nbsp;&nbsp;
+        = link_to  course_course_wizard_index_path(course), class: 'btn  btn-warning' do
+          .fa.fa-dragon
+          Wizard
+        = link_to new_course_lesson_path(course, @lesson), class: 'btn  btn-primary mt-2' do
           .fa.fa-plus
           Add a lesson
         %p
