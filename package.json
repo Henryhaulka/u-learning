@@ -2,6 +2,7 @@
   "name": "u-learning",
   "private": true,
   "dependencies": {
+    "@nathanvda/cocoon": "^1.2.14",
     "@popperjs/core": "^2.11.2",
     "@rails/actioncable": "^6.0.0",
     "@rails/actiontext": "^6.1.4-4",
