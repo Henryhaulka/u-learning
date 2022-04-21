@@ -1,33 +1,18 @@
-= link_to 'Courses', courses_path
-\/
-= link_to course_path(@course) do
-  .fa.fa-graduation-cap.text-white
-  = @course.title
-\/
-= link_to course_course_wizard_path(@course, :basic_info) do
-  Edit
-  = step.to_s.humanize 
-%div.p-2
-.card
-  .progress
-    .progress-bar{:style => "width: #{@progress}%"}
-  .card-header
-    %h2
-      =  wizard_steps.index(step) + 1
-      \/
-      = wizard_steps.count
-      = step.to_s.humanize
-  .card-body
-    = simple_form_for @course, url: course_course_wizard_path, method: :put do |f|
-      = f.input :title
-      %br
-      = f.input :short_description
-      %br
-      = f.input :language , collection: Course.languages
-      %br
-      = f.input :level, collection: Course.levels
-      %br
+= render layout: 'courses/course_wizard/step' do
+  = simple_form_for @course, url: course_course_wizard_path, method: :put do |f|
+    = f.input :title, input_html: { autocomplete: 'off'}
+    %br
+      = f.input :avatar
+    %br
+    - if @course.avatar.attached?
+      = image_tag(@course.avatar, width: '200px') 
+      %p
+    = f.input :short_description
+    %br
+      = f.input :description, as: :rich_text_area
+    %br
       = f.button :submit, class: 'btn-success'
+  %br
   .card-footer
     = link_to next_wizard_path, class: 'btn btn-sm btn-info' do
       .fa.fa-arrow-right
