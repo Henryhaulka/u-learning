@@ -13,7 +13,11 @@ class User < ApplicationRecord
   has_many :comments, dependent: :nullify
   rolify
   after_create :assign_default_role
-
+  # we didnt user controller cos authenciaction is done by devise
+  after_create do
+    UserMailer.new_user(self).deliver_now
+  end
+  
   def self.from_omniauth(access_token)
     data = access_token.info
     user = User.where(email: data['email']).first
