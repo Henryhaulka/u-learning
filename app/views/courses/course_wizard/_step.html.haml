@@ -11,6 +11,16 @@
 .card
   .progress
     .progress-bar{:style => "width: #{@progress}%"}
+  / .progress-bar.bg-success{style: "width: #{@course.progress_rate(current_user)}%"}= number_to_percentage(@course.progress_rate(current_user), precision: 0)
+  .progress
+    - wizard_steps.each do |s|
+      - if current_page?(course_course_wizard_path(@course,s))
+        - @color = 'bg-success'
+      - else
+        - @color = 'bg-secondary'
+      = link_to course_course_wizard_path(@course, s), class: "progress-bar #{@color}", style: "width: #{@progress}%" do
+        =  wizard_steps.index(s) + 1
+        = s.to_s.humanize
   .card-header
     %h2
       =  wizard_steps.index(step) + 1
