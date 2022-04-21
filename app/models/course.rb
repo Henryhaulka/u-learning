@@ -9,8 +9,8 @@ class Course < ApplicationRecord
     has_many :course_tags, dependent: :destroy
     has_many :tags, through: :course_tags
     # User.find_each {|user|User.reset_counters(user.id, :courses )}
-
-    has_many :lessons, dependent: :destroy
+    has_many :lessons, dependent: :destroy, inverse_of: :course
+    accepts_nested_attributes_for :lessons, reject_if: :all_blank, allow_destroy: true
     # from_activestorage
     has_one_attached :avatar
     validates :avatar, presence: true, blob: { content_type: ['image/png', 'image/jpg', 'image/jpeg'], size_range: 1..(2.megabytes) }
