@@ -22,6 +22,10 @@ require("trix")
 require("@rails/actiontext")
 import "chartkick/chart.js";
 
+
+// cocoon
+require("jquery");
+require("@nathanvda/cocoon");
 //tric editor
 import "../trix-editor-override";
 

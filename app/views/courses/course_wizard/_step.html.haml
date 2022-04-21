@@ -11,6 +11,7 @@
 .card
   .progress
     .progress-bar{:style => "width: #{@progress}%"}
+      = number_to_percentage(@progress, precision: 0)
   / .progress-bar.bg-success{style: "width: #{@course.progress_rate(current_user)}%"}= number_to_percentage(@course.progress_rate(current_user), precision: 0)
   .progress
     - wizard_steps.each do |s|
