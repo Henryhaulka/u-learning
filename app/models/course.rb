@@ -51,6 +51,11 @@ class Course < ApplicationRecord
         self.subscriptions.where(course_id: self.id, user_id: user.id).present?
     end
 
+    def calculate_income
+        update_column :income, (subscriptions.map(&:price).sum)
+        user.calculate_balance
+    end
+    
     def update_rating
         if subscriptions.present? && subscriptions.where.not(rating: nil)
             update_column :average_rating, (subscriptions.average(:rating).to_f)

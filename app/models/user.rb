@@ -37,6 +37,18 @@ class User < ApplicationRecord
     end
     user
   end
+
+  def calculate_balance
+    update_column :course_income, (courses.map(&:income).sum)
+    update_column :balance, (course_income - subscription_expenses)
+  end
+
+  def calculate_expenses
+    update_column :subscription_expenses, (subscriptions.map(&:price).sum)
+    update_column :balance, (course_income - subscription_expenses)
+  end
+  
+  
   def username
       self.email.split(/@/).first
   end

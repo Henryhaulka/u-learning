@@ -39,8 +39,18 @@ class Subscription < ApplicationRecord
   # end
 
   after_destroy do
-     course.update_rating
+    course.update_rating
   end
+
+  after_create :calculate_balance
+  after_destroy :calculate_balance
+
+  def calculate_balance
+    course.calculate_income
+    user.calculate_expenses
+  end
+  
+
 
   validate :cant_subscribe_to_own_course
   protected

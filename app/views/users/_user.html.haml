@@ -12,6 +12,15 @@
     %b Signed Up:
     = time_ago_in_words(user_reg.created_at) + ' ago'
   .card-footer
+    Balance
+    = user_reg.balance
+    .row
+      Subscription Expenses
+      = user_reg.subscription_expenses
+    .row
+      Course Income
+      = user_reg.course_income
+  .card-footer
     %b
       = 'sign_in_count:'.humanize
     = user_reg.sign_in_count
@@ -20,9 +29,10 @@
       = 'user_course_subscriptions:'.humanize
     = user_reg.subscriptions_count
     - if user_reg.has_role?(:admin)
+      %hr
       %b
         = 'user_courses:'.humanize
-      = user_reg.courses_count
+        = user_reg.courses_count
     %hr
     %b User comments:
     = user_reg.comments_count

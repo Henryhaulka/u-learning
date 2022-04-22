@@ -35,6 +35,8 @@
         %th 
           .fa.fa-graduation-cap
           Course
+        %th 
+          Teacher
         %th
           .fa.fa-clock
           .fa.fa-lock-open
@@ -64,6 +66,7 @@
             = subscription.id
           %td= link_to subscription.user.username, subscription.user
           %td= link_to subscription.course.title, subscription.course
+          %td= link_to subscription.course.user.username, subscription.course.user
           %td.text-white
             = subscription.created_at.strftime('%D - %r') 
           %td.text-white
