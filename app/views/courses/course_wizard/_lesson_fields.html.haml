@@ -1,0 +1,7 @@
+
+.nested-fields.mt-3
+= f.input :title
+= f.input :content, as: :rich_text_area
+
+%br
+= link_to_remove_association "remove lesson", f, class: 'btn btn-danger text-white mb-2'

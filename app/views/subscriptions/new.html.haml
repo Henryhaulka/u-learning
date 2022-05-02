@@ -1,0 +1,22 @@
+- content_for :title do
+  U-learning
+  \\|
+  New subscription
+.card
+  .card-header
+    %h3
+      .fa.fa-book
+      = link_to @course.title, @course
+      %hr/
+      .fa.fa-lock-open
+      Buy Course: 
+      = number_to_currency(@course.price)
+  .card-body
+    - if @course.price > 0
+      = form_tag course_subscriptions_path(@course) do
+        %script.stripe-button{"data-key" => "pk_test_51KutbhE6d3rELsxa8Xa5vGwl4pekTocKkuYF70wDrcrytpekUCshVUp3KVVHtcTej4QA2qztwBcuM19oiHRK3RpZ00CskFTJup", "data-locale" => "auto", src: "https://checkout.stripe.com/checkout.js"}
+    - else
+      = form_tag course_subscriptions_path(@course) do
+        =submit_tag "Subscribe for Free!!!", class: 'btn btn-success'
+  .card-footer
+    = link_to "Back to All Courses", courses_path, class: 'btn btn-primary'

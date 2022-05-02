@@ -1,0 +1,38 @@
+.card
+  .card-header
+    - if lesson.lesson_viewed?(current_user)
+      .far.fa-check-square.text-success
+    - else
+      .fa.fa-lock.text-warning
+    = link_to lesson.title, course_lesson_path(@course, lesson)
+  - if policy(lesson).show? 
+    .card-body
+      - if lesson.video_thumbnail.present? && lesson.video.present?
+        /= image_tag(lesson.video_thumbnail, width: '500px', height: '200px')
+        %video(controls = "true" poster = "#{url_for lesson.video_thumbnail}" height= '400px' width= "100%" preload= "metadata")
+          %source{src: rails_blob_url(lesson.video) } 
+      - elsif lesson.video.present?
+        %video(controls = "true" width= "100%" preload= "metadata")
+          %source{src: rails_blob_url(lesson.video) } 
+      /= content_tag :video, id: 'my-video' do
+      /  = tag :source, src: rails_blob_url(lesson.video)
+
+      = lesson.content
+  - if policy(lesson).edit? 
+    .card-footer
+      = link_to 'Edit', edit_course_lesson_path(@course,lesson), class: 'btn btn-sm btn-warning'
+      = link_to 'Destroy', [@course,lesson], method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-sm btn-danger'
+  - if @lesson.prev.present? || @lesson.next.present?
+    .card-footer
+      .row
+        .col-6
+          - if @lesson.prev.present?
+            = link_to course_lesson_path(@course, @lesson.prev), class: 'btn btn-primary' do
+              .fa.fa-arrow-left
+              Previous
+        .col-6
+          - if @lesson.next.present?
+            .texter
+              = link_to course_lesson_path(@course, @lesson.next), class: 'btn btn-primary' do
+                Next
+                .fa.fa-arrow-right

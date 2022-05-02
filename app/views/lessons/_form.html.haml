@@ -1,0 +1,35 @@
+-# frozen_string_literal: true
+= simple_form_for([@course, @lesson]) do |f|
+  = f.error_notification
+  = f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present?
+  %h4
+    - if @lesson.new_record?
+      = "For #{(Course.friendly.find(params[:course_id])).title.capitalize } Course" 
+    - else
+      = "For #{ (Lesson.friendly.find(params[:id]) ).course.title.capitalize } Course" 
+  .form-inputs
+    = f.input :title
+    %br
+    /= f.label :content
+    /= f.rich_text_area :content
+    /%small= f.error:content, class:'text-danger'
+    = f.input :content, as: :rich_text_area
+    %br
+    - if @lesson.video.attached?
+      = @lesson.video.filename
+      - if policy(@lesson).edit?
+        = link_to delete_video_course_lesson_path, method: :delete, data: {confirm: 'Are you sure?'} do
+          .fa.fa-trash.text-danger
+    = f.input :video
+    %br
+    - if @lesson.video_thumbnail.attached?
+      = @lesson.video_thumbnail.filename
+    = f.input :video_thumbnail
+    %br
+    /= f.input :content
+    /= f.association :course
+    /= f.input :course_id, input_html: {value: @lesson.course_id || params[:course_id]}, as: :hidden
+
+  .form-actions
+    = f.button :submit, class: 'btn btn-success'
+  %p

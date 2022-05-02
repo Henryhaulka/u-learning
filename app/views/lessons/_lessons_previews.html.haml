@@ -1,0 +1,18 @@
+%div.d-flex.justify-content-between
+  %div
+    - if lesson.lesson_viewed?(current_user)
+      .far.fa-check-square.text-success
+    - else
+      .fa.fa-lock.text-warning
+    - if lesson.row_order.present?
+      = lesson.row_order_rank + 1
+    = link_to lesson.title, course_lesson_path(@course,lesson)
+  %div
+    /unique viewers:
+    - if policy(lesson).destroy?
+      .fa.fa-eye
+      = lesson.user_lessons.count
+    .far.fa-eye
+    = lesson.user_lessons.map(&:impression).sum
+    .fa.fa-comment
+    = lesson.comments_count

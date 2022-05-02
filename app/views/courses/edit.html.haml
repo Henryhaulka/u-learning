@@ -1,0 +1,16 @@
+- content_for :title do
+  ULearning
+  \|
+  = "Editing #{@course.title}"
+.card
+  .card-header
+    %h1 
+      .fa.fa-pen
+      Editing course
+  .card-body
+    = render 'form'
+%br
+
+= link_to 'Show', @course
+\|
+= link_to 'Back', courses_path

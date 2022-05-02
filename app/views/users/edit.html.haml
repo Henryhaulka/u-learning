@@ -1,0 +1,17 @@
+.card
+  .card-header
+    %h2
+      Edit roles for user:
+      .badge.bg-primary
+        = @user.username
+  .card-body
+    = simple_form_for @user do |f| 
+      = f.collection_check_boxes :role_ids, Role.all, :id, :name
+      = f.error :roles, class: 'text-danger'
+      %p
+      = f.submit class: 'btn btn-success'
+    %p
+  .card-footer
+    = link_to 'Cancel', users_path, class: 'btn btn-danger'
+
+

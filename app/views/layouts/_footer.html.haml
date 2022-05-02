@@ -1,0 +1,22 @@
+
+%footer.bg-dark.text-white.p-3.general-footer.text-center
+  .container
+    .row
+      .col-md-4
+        Copyright
+        .fa.fa-copyright
+        = Time.now.year
+        .badge.bg-success
+          HenryHaulka
+        .row.pt-2
+          .fa.fa-envelope
+            onuhenry24@gmail.com
+      .col-md-4
+        = link_to 'Privacy Policy', privacy_policy_path, class: 'text-white text-decoration-none'
+        .row
+        Terms and Conditions
+      .col-md-4
+        %a{:href => "https://github.com/Henryhaulka", class: 'text-white text-decoration-none'} About us
+            
+
+    

@@ -1,0 +1,130 @@
+- content_for :title do
+  = ULearning
+  \|
+  Home
+.jumbotron.bg-light.rounded
+  %h1.display-4 What do you want to learn today?
+  - if user_signed_in?
+    %div.pt-5
+      = search_form_for @ransack_courses, as: :courses_search , url: courses_path do |f|
+        .input-group
+        = f.search_field :title_or_user_email_cont, placeholder: 'Find Course by Title or Author', class: 'form-control search-container'
+        %span.input-group-append
+          %button.btn.btn-primary.btn{:type => 'Submit'}
+            %span.fa.fa-search{'aria-hidden' => 'true'}
+  - else 
+    %h6.text-shadow Join to access all the courses
+    .p-2
+    = link_to 'Register', new_user_registration_path, class: 'btn btn-success text-white'
+    &nbsp;&nbsp;&nbsp;&nbsp;
+    = link_to 'Login', new_user_session_path, class: 'btn btn-success text-white'
+    .row.mt-1
+    = link_to user_google_oauth2_omniauth_authorize_path, method: :post, class: 'btn btn-info btn-lg mr-1' do
+      Continue with
+      .fab.fa-google
+    .row.mt-1
+    = link_to user_github_omniauth_authorize_path, method: :post, class: 'btn btn-dark btn-lg mr-1' do
+      Continue with
+      .fab.fa-github
+    .row.mt-1
+    = link_to user_facebook_omniauth_authorize_path, method: :post, class: 'btn btn-primary btn-lg mr-1' do
+      Continue with
+      .fab.fa-facebook
+%p
+%div.grid2
+  .card.p-4
+    .card-body.p-0
+    .fa.fa-graduation-cap.fa-4x
+    = Course.count 
+    online courses
+    %p
+    Explore variety of fresh courses
+  .card.p-4
+    .card-body.p-0
+    .fa.fa-chalkboard-teacher.fa-4x
+    = Course.distinct.count(:user)
+    Expert Instructor
+    %p
+    Find the best Instructor for you
+  .card.p-4
+    .card-body.p-0
+    .fa.fa-user-graduate.fa-4x
+    = User.count 
+    Active learners
+    %p
+    Join the online community of learners
+  .card.p-4
+    .card-body.p-0
+    .fa.fa-infinity.fa-4x
+    Life Access
+    %p
+    Learn at your own pace and time
+%hr
+- if Subscription.where(user_id: current_user).present?
+  %h3.pt-2
+    .fa.fa-user-graduate.text-success
+    Continue Learning
+  %div.grid-system
+    - @my_subscriptions.each do |cour|
+      = render 'courses/course', course: cour
+  %p
+  .texter
+    = link_to 'My purchased Courses', purchased_courses_courses_path, class: 'btn btn-primary '
+- elsif user_signed_in?
+  %h3.text-warning
+    You have Yet to subscribe to a Course
+  %hr
+%br
+%h3.pt-2
+  .fa.fa-chart-bar
+  Popular Courses
+%br
+%div.grid-system
+  - @popular_courses.each do |cour|
+    = render 'courses/course', course: cour
+%p
+.texter
+  = link_to 'More Popular Courses', courses_path(courses_search: {s: 'subscriptions_count desc'}), class: 'btn btn-primary '
+%hr
+%h3.pt-2
+  .fa.fa-star.text-warning
+  Top Courses
+%br
+%div.grid-system
+  - @top_rated_courses.each do |cour|
+    = render 'courses/course', course: cour
+%p
+.texter
+  = link_to 'Top rated Courses', courses_path(courses_search: {s: 'average_rating desc'}), class: 'btn btn-primary '
+%hr
+%h3.pt-2
+  .fa.fa-clock
+  Latest Courses
+%br
+%div.grid-system
+  - @latest_courses.each do |cour|
+    = render 'courses/course', course: cour
+%p
+.texter
+  = link_to 'More Recent Courses', courses_path(courses_search: {s: 'created_at desc'}), class: 'btn btn-primary '
+
+%h3.pt-2
+Popular Tags
+.fa.fa-tags
+%div.pt-2
+  - @popular_tags.each do |tag|
+    = link_to courses_path(courses_search: {course_tags_tag_id_eq: tag.id}) do
+      .badge.bg-info.text-dark
+        .fa.fa-tag
+        = tag.name
+        = tag.course_tags_count
+%br
+%hr
+%h3.pt-2
+  .fa.fa-comments
+  What our students have to say?
+%br
+%div.grid-system
+  - @reviews.each do |subscription|
+    = render 'subscriptions/subscription', enrollment: subscription
+%hr

@@ -1,0 +1,69 @@
+.card
+  .card-header
+    .fa.fa-user
+    - if user_reg.online?
+      .fa.fa-signal.text-success
+    -else
+      .fa.fa-signal.text-danger
+    = link_to user_reg.username, user_reg
+    - if current_user == user_reg
+      .badge.bg-success YOU
+  .card-footer
+    %b Signed Up:
+    = time_ago_in_words(user_reg.created_at) + ' ago'
+  .card-footer
+    %b 
+      Balance:
+      = number_to_currency user_reg.balance
+    %hr
+    .row
+      %b 
+        Subscription Expenses:
+        = number_to_currency (user_reg.subscription_expenses)
+        %hr
+    .row
+      %b
+        Course Income :
+        = number_to_currency user_reg.course_income
+    %hr
+    %b
+      = 'sign_in_count:'.humanize
+    = user_reg.sign_in_count
+    %hr
+    %b
+      = 'user_course_subscriptions:'.humanize
+    = user_reg.subscriptions_count
+    - if user_reg.has_role?(:admin)
+      %hr
+      %b
+        = 'user_courses:'.humanize
+        = user_reg.courses_count
+    %hr
+    %b User comments:
+    = user_reg.comments_count
+    %hr
+    %b Current sign time:
+    = user_reg.current_sign_in_at.strftime('%D - %r')
+    %hr
+    %b Last sign in at:
+    = user_reg.last_sign_in_at.strftime('%D - %r')
+    %hr
+    %b current sign in ip:
+    = user_reg.current_sign_in_ip
+    %hr
+    %b last sign in ip:
+    = user_reg.last_sign_in_ip
+    %hr
+    Confirmed Email
+    - if user_reg.confirmed_at.present?
+      .badge.bg-success  Yes
+    - else
+      .badge.bg-danger No
+  .card-footer
+    - user_reg.roles.each do |role|
+      .badge.bg-info
+        = role.name
+    - if policy(user_reg).edit?    
+      %p.pt-3
+        = link_to "User Role", edit_user_path(user_reg), class: 'btn btn-sm btn-warning'
+

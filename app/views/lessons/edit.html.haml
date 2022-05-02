@@ -1,0 +1,16 @@
+- content_for :title do
+  = ULearning
+  \|
+  Edit 
+  =  @lesson.title
+.card
+  .card-header
+    %h1
+      .fa.fa-pen
+      Editing lesson
+  .card-body
+    = render 'form'
+  .card-footer
+    = link_to 'Back to lesson', course_lesson_path(@course,@lesson)
+    \|
+    = link_to 'Back to Course', course_path(@lesson.course)

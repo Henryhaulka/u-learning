@@ -1,0 +1,77 @@
+- content_for :title do
+  = ULearning
+  \|
+  All Users
+%h2
+  .text-center
+    User
+    .badge.bg-secondary
+      = @users.count
+%p
+/%div.grid-system
+/  - @users.each do |user|
+/    = render 'user', user_reg:  user
+%br
+= search_form_for @q do |f|
+  .row
+    = f.search_field :email_cont, placeholder: 'Email', class:'form-control m-2', style:"width: 300px;"
+    /= f.search_field :sign_in_count_eq, placeholder: 'Sign in count'
+    /= f.search_field :email_or_sign_in_count_eq, placeholder: 'Sign in count or email'
+    = f.submit style:"width: 70px;", class:"btn btn-sm btn-success m-2"
+= link_to users_path, class: 'btn btn-sm btn-secondary' do
+  .fa.fa-sync
+%br
+%br
+.table-responsive
+  %table.table.table-bordered.text-white
+    %thead
+      %tr 
+        %th id
+        %th= sort_link(@q, :email)
+        %th Created_at
+        %th= 'courses_count:'.humanize
+        %th= 'subscription_count:'.humanize
+        %th= 'comments_count:'.humanize
+        %th= 'sign_in_count:'.humanize
+        %th= 'current_sign_in_at'.humanize
+        %th= 'last_sign_in_at'.humanize
+        %th= 'current_sign_in_ip'.humanize
+        %th= 'last_sign_in_ip'.humanize
+        %th Confirmed?
+        %th Role
+
+    %body
+      - @users.each do |user|
+        %tr 
+          %td= user.id
+          %td
+            - if user.online?
+              .fa.fa-signal.text-success
+            - else
+              .fa.fa-signal.text-danger
+            = link_to user.email, user 
+          %td= user.created_at
+          %td= user.courses_count
+          %td= user.subscriptions_count
+          %td= user.comments_count
+          %td= user.sign_in_count
+          %td= user.current_sign_in_at
+          %td= user.last_sign_in_at
+          %td= user.current_sign_in_ip
+          %td= user.last_sign_in_ip
+          %td
+            - if user.confirmed_at.present?
+              .badge.bg-success  Yes
+            - else
+              .badge.bg-danger No
+          %td
+            - user.roles.each do |role|
+              .badge.bg-info
+                = role.name
+            .row
+              - if policy(user).edit?    
+                %p.pt-3
+                  = link_to "User Role", edit_user_path(user), class: 'btn btn-sm btn-warning'
+%p
+%div.text-center
+  != pagy_bootstrap_nav(@pagy)

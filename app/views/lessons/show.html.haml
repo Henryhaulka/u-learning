@@ -1,0 +1,50 @@
+- content_for :title do
+  = ULearning
+  \|
+  = @lesson.course.title
+  \|
+  = @lesson.title
+= link_to 'Courses', courses_path
+\/
+= link_to "#{@lesson.course.title}", course_path(@lesson.course)
+\/
+= link_to "#{@lesson.title}", course_lesson_path(@lesson)
+%p
+.row
+  .col-lg-8.order-1.order-lg-1
+    /= @lesson.user_lessons.where(user_id: current_user).first.impression
+    = render 'lessons/lesson', lesson: @lesson
+    %br
+    .card
+      .card-header
+        New Comment
+      .card-body
+        = render 'lessons/comments/form'
+    %br
+    - if @comments.present?
+      .row
+        %h3
+          .fa.fa-comment.text-warning
+          Comments:  
+          /= @comments.count
+          = @lesson.comments_count
+        - @comments.each do |comment|
+          = render 'lessons/comments/show', comment: comment
+  .col-lg-4.order-0.order-lg-1
+    %ul.list-group
+      %li.list-group-item.list-group-item-warning
+        .row
+          .col-6
+            .fa.fa-graduation-cap
+            = link_to @course.title, @course
+          .col-6
+            .texter
+              .fa.fa-spinner
+              = number_to_percentage(@course.progress_rate(current_user), precision: 0)
+      - @course_lessons.each do |lessoner|
+        - if @lesson.present? && lessoner == @lesson
+          %li.list-group-item.list-group-item-success
+            = render 'lessons/lessons_previews', lesson: lessoner
+        -else
+          %li.list-group-item
+            = render 'lessons/lessons_previews', lesson: lessoner

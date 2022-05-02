@@ -1,0 +1,148 @@
+%nav.navbar.navbar-expand-lg.navbar-dark.bg-dark.w-100
+  .container-fluid
+    %a.navbar-brand{:href => "/"} 
+      .fa.fa-graduation-cap
+      U-Learning
+    %button.navbar-toggler{"aria-controls" => "navbarSupportedContent", "aria-expanded" => "false", "aria-label" => "Toggle navigation", "data-bs-target" => "#navbarSupportedContent", "data-bs-toggle" => "collapse", :type => "button"}
+      %span.navbar-toggler-icon
+    #navbarSupportedContent.collapse.navbar-collapse
+      - if user_signed_in?
+        %ul.navbar-nav.me-auto.mb-2.mb-lg-0
+          %li.nav-item{class: "#{'active font-weight-bold' if current_page?(root_path)}"}
+            = link_to root_path, class: 'nav-link' do
+              .fa.fa-home
+              Home
+          %li.nav-item{class: "#{'active font-weight-bold' if current_page?(courses_path)}"}
+            = link_to courses_path, class: 'nav-link' do
+              .fa.fa-book
+              Courses
+          .form-inline
+            = search_form_for @ransack_courses, as: :courses_search , url: courses_path do |f|
+              .input-group
+                = f.search_field :title_or_user_email_cont, placeholder: 'Find Course by Title or Author', class: 'form-control', style: 'float: left; width: 200px;'
+                %span.input-group-append
+                  %button.btn.btn-primary.btn{:type => 'Submit'}
+                    %span.fa.fa-search{'aria-hidden' => 'true'}
+        %ul.navbar-nav.mr-auto
+          - if current_user.has_role?(:student)
+            %li.nav-item.dropdown
+              %a#teacherDropdown.nav-link.dropdown-toggle{"aria-expanded" => "false", "data-bs-toggle" => "dropdown", :href => "#", :role => "button"}
+                .fa.fa-graduation-cap
+                Learn
+              %ul.dropdown-menu{"aria-labelledby" => "teacherDropdown"}
+                %li
+                  = link_to purchased_courses_courses_path, class: 'dropdown-item' do
+                    .fa.fa-graduation-cap
+                    Subscribed Courses
+                    .badge.bg-danger
+                      = current_user.subscriptions.count
+                %li
+                  = link_to pending_reviews_courses_path, class: 'dropdown-item' do
+                    .text-warning.fa.fa-star
+                    Pending Reviews
+                    .badge.bg-danger
+                      = current_user.subscriptions.pending_review.count
+          - if current_user.has_role?(:teacher)
+            %li.nav-item.dropdown
+              %a#teacherDropdown.nav-link.dropdown-toggle{"aria-expanded" => "false", "data-bs-toggle" => "dropdown", :href => "#", :role => "button"}
+                .fa.fa-chalkboard-teacher
+                Teach
+              %ul.dropdown-menu{"aria-labelledby" => "teacherDropdown"}
+                %li
+                  = link_to new_course_path, class: 'dropdown-item' do
+                    .fa.fa-plus
+                    .fa.fa-graduation-cap
+                    New Course
+                %li
+                  = link_to created_courses_courses_path, class: 'dropdown-item' do
+                    .fa.fa-graduation-cap
+                    My Created Course
+                    .badge.bg-danger
+                      = current_user.courses.count
+                %li
+                  = link_to my_students_subscriptions_path, class: 'dropdown-item' do
+                    .fa.fa-users
+                    My Students
+                    .badge.bg-danger
+                      = Subscription.joins(:course).where(courses: {user: current_user}).count
+          - if current_user.has_role?(:admin)
+            %li.nav-item.dropdown
+              %a#adminDropdown.nav-link.dropdown-toggle{"aria-expanded" => "false", "data-bs-toggle" => "dropdown", :href => "#", :role => "button"}
+                .fa.fa-cog
+                Admin
+              %ul.dropdown-menu{"aria-labelledby" => "adminDropdown"}
+                %li
+                  = link_to unapproved_courses_courses_path, class: 'dropdown-item' do
+                    .fa.fa-graduation-cap
+                    unapproved courses
+                    .badge.bg-danger
+                      = Course.unapprove.count
+                %li
+                  = link_to users_path, class: 'dropdown-item' do
+                    .fa.fa-users
+                    Users
+                    .badge.bg-danger
+                      = User.count
+                %li
+                  = link_to  subscriptions_path, class: 'dropdown-item' do
+                    .fa.fa-unlock
+                    Subscriptions
+                    .badge.bg-danger
+                      = Subscription.count
+                %li
+                  = link_to activity_path, class: 'dropdown-item' do
+                    .fa.fa-bell
+                    Activity
+                %li
+                  = link_to analytics_path, class: 'dropdown-item' do
+                    .fa.fa-chart-line
+                    Analytics
+                %li
+                  = link_to tags_path, class: 'dropdown-item' do
+                    .fa.fa-tags
+                    Tags
+          /  %li.nav-item{class: "#{'active font-weight-bold' if current_page?(users_path)}"}   
+          
+          /.form-inline.my-2.my-lg-0
+          /= form_tag(courses_path, method: :get) do
+          /  .input-group
+          /    = text_field_tag :title, params[:title], autocomplete: 'off', placeholder: 'Search by course title', class: 'form-control'
+          /    %span.input-group-append
+          /    %button.btn.btn-primary.btn-sm{:type => 'Submit'}
+          /      %span.fa.fa-search{'aria-hidden' => 'true'}
+        %ul.navbar-nav.mr-right
+          /%li.nav-item{class: "#{'active font-weight-bold' if current_page?(courses_path)}"}
+          /  = link_to home_index_path, class: 'nav-link' do
+          /    .fa.fa-book
+          /    Another Link
+          
+          %li.nav-item.dropdown.sider
+            %a#navbarDropdown.nav-link.dropdown-toggle{"aria-expanded" => "false", "data-bs-toggle" => "dropdown", :href => "#", :role => "button"}
+              - if current_user.provider.present?
+                = current_user.name
+                = image_tag current_user.image, class: 'rounded-circle',size: '30x30', alt: "#{current_user.email}"
+              -else
+                %b= current_user.username
+            %ul.dropdown-menu{"aria-labelledby" => "navbarDropdown"}
+              %li
+                = link_to  edit_user_registration_path, class: 'dropdown-item' do
+                  .fa.fa-cog
+                  %b= 'Account Setting'
+              %li
+                = link_to  destroy_user_session_path, method: :delete, class: 'dropdown-item' do
+                  .fa.fa-sign-out-alt
+                  %b= 'Sign out'
+      - else
+        %ul.navbar-nav.toban
+          = link_to 'Log in', new_user_session_path, class: 'nav-link text-white'
+          = link_to 'Sign up', new_user_registration_path , class: 'nav-link text-white'
+          %div.mt-2
+            = link_to user_google_oauth2_omniauth_authorize_path, method: :post  do
+              .fab.fa-google.google
+            &nbsp;&nbsp;
+            = link_to user_github_omniauth_authorize_path, method: :post  do
+              .fab.fa-github.google
+            &nbsp;&nbsp;
+            = link_to user_facebook_omniauth_authorize_path, method: :post  do
+              .fab.fa-facebook.google
+        

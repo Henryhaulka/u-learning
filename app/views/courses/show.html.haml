@@ -1,0 +1,58 @@
+- content_for :title do
+  = ULearning
+  \|
+  = @course.title
+
+%p
+.row
+  .col-lg-8.order-1.order-lg-1
+    %div.p-5.bg-secondary.text-white.rounded
+      %h3.pb-2
+        .fa.fa-graduation-cap
+        =  @course.title
+      %p
+        .fa.fa-clock
+        = @course.updated_at.strftime('%D')
+      %p
+        .fa.fa-globe-africa
+        = @course.language
+      %p
+      .fa.fa-signal
+      = @course.level
+      %p
+        /= @course.avatar.attached?
+        /- if @course.avatar.attached?
+        /  = image_tag(@course.avatar, width: '200px') 
+      %p
+        = @course.description
+    %p
+      %br
+      - if  @course_lessons.present?
+        %h3
+          .row
+            .col-6
+              .fa.fa-tasks
+              = pluralize(@course_lessons.count, 'Lesson')
+            .col-6
+              .texter
+                .fa.fa-spinner
+                = number_to_percentage(@course.progress_rate(current_user), precision: 0)
+                = certificate_button(@course)
+        %ul.list-group.lesson-sortable
+          - @course_lessons.each do |lesson|
+            = content_tag "div", id: "lesson-#{lesson.id}", data: { model_name: lesson.class.name.underscore, update_url: course_lesson_sort_path(@course, lesson)} do
+              %li.list-group-item
+                = render 'lessons/lessons_previews', lesson: lesson
+          %p
+          %h3.pt-2
+            .fa.fa-comment.text-warning
+            = pluralize(@course.subscriptions.reviewed.count, 'Review')
+          - @subscriptions_reviews.each do |subscription|
+            = render 'subscriptions/subscription', enrollment: subscription
+      - else
+        %h3
+          The course has no Lessons yet
+  .col-lg-4.order-0.order-lg-1.sticker
+    .sticky-top
+      = render 'courses/course', course: @course
+%p

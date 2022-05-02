@@ -1,0 +1,97 @@
+- content_for :title do
+  ULearning
+  \|
+  = action_name.humanize
+  Subscriptions
+%h2
+  .text-center
+    = action_name.humanize
+    Subscriptions
+    .badge.bg-secondary
+      = @subscriptions.size
+%p
+%p
+
+= search_form_for @q, url: @ransack_path do |f|
+  .row
+    = f.search_field :user_email_cont, placeholder: 'Email',class:'form-control m-2', style:"width: 200px;"
+    = f.search_field :rating_eq, placeholder: 'rating', class:'form-control m-2', style:"width: 200px;"
+    = f.search_field :price_eq, placeholder: 'Price', class:'form-control m-2', style:"width: 200px;"
+    = f.search_field :review_cont, placeholder: 'Review', class:'form-control m-2', style:"width: 200px;"
+    = f.submit style:"width: 70px;", class:"btn btn-sm btn-success m-2"
+%p
+= link_to @ransack_path, class: 'btn btn-sm btn-info' do
+  .fa.fa-sync
+%p
+%p
+.table-responsive
+  %table.table.table-bordered.table-sm.table-striped.text-white.white
+    %thead
+      %tr
+        %th ID
+        %th= sort_link(@q, :user_email, 'User')
+        /.fa.fa-user
+        /  /User
+        %th 
+          .fa.fa-graduation-cap
+          Course
+        %th 
+          Teacher
+        %th
+          .fa.fa-clock
+          .fa.fa-lock-open
+          Bought
+        %th= sort_link(@q, :price)
+        /  .fa.fa-dollar-sign
+        /  Price
+        %th 
+          .text-warning.fa.fa-clock
+          Reviewed on
+        %th
+          .text-warning.fa.fa-comment
+          Review
+        %th Course Progress
+        %th= sort_link(@q, :rating)
+        /.text-warning.fa.fa-star
+        / Rating
+        %th Certificate
+        %th
+        %th
+        %th
+
+    %tbody.white
+      - @subscriptions.each do |subscription|
+        %tr.white
+          %td.text-white
+            = subscription.id
+          %td= link_to subscription.user.username, subscription.user
+          %td= link_to subscription.course.title, subscription.course
+          %td= link_to subscription.course.user.username, subscription.course.user
+          %td.text-white
+            = subscription.created_at.strftime('%D - %r') 
+          %td.text-white
+            =  number_to_currency(subscription.price)
+          %td.text-white
+            - if subscription.rating.present?
+              = subscription.updated_at.strftime('%D - %r')
+          %td.text-white
+            = subscription.review
+          %td.text-white
+            = number_to_percentage(subscription.course.progress_rate(current_user), precision: 0)
+          %td.text-white
+            = subscription.rating
+          %td= link_to 'Certificate', certificate_subscription_path(subscription, format: :pdf), class: 'btn btn-success'
+          %td= link_to 'See Review', subscription
+          %td
+            - if policy(subscription).edit?
+              = link_to 'Add Review', edit_subscription_path(subscription), class: 'btn btn-primary'
+          %td
+            - if policy(subscription).destroy?
+              = link_to 'Delete ', subscription, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger'
+
+  %br
+
+  = link_to "Back to Courses", courses_path
+%p
+  %div.text-center
+    != pagy_bootstrap_nav(@pagy)

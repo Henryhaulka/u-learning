@@ -1,0 +1,40 @@
+= simple_form_for(@course) do |f|
+  = f.error_notification
+  = f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present?
+
+  .form-inputs
+    = f.input :title
+    %br
+    /any time you create a course with a tag, a course_tag is created with course_id and tag_id
+    = f.label :tag
+    = f.select :tag_ids,  @tags.pluck(:name, :id), {}, { multiple: true, class: "selectize-tags"}
+    %br
+    /= f.label :description
+    /= f.rich_text_area :description
+    /%small= f.error :description, class:'text-danger'
+    = f.input :description, as: :rich_text_area
+    %br
+    /= f.label :avatar
+    = f.input :avatar
+    %br
+    - if @course.avatar.attached?
+      = image_tag(@course.avatar, width: '200px') 
+      %p
+    %br
+    /= f.file_field :avatar
+    /%small= f.error :avatar, class:'text-danger'
+    %br
+    %p
+    = f.input :short_description
+    %br
+    = f.input :language , collection: Course.languages
+    %br
+    = f.input :level, collection: Course.levels
+    %br
+    = f.input :price
+    %br
+    = f.input :published
+    %br
+    %div
+      .form-actions
+      = f.button :submit, class: 'btn-success'

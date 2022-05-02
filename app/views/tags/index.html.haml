@@ -1,0 +1,6 @@
+%h3
+  Tags
+- @tags.each do |tag|
+  = tag.name
+  = tag.course_tags_count 
+  = link_to 'Delete', tag_path(tag), data: {confirm: 'Are you sure?'}, method: :delete

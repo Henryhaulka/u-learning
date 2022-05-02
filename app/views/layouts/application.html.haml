@@ -1,0 +1,28 @@
+!!!
+%html
+  %head
+    %meta{:content => "AEa_b2yYhBZ-zbMF0fc89iEZ4pI7aNABrPY9S11pHps", :name => "google-site-verification"}/
+    %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
+    %meta{:content => "online education, course platform, video tutorials, udemy clone", :name => "keywords"}/
+    %meta{:content => "Online Learning and Skill sharing platform", :name => "description"}/
+    %meta{:content => "HenryHaulka", :name => "author"}/
+    = favicon_link_tag 'life.png'
+    /%title ULearning
+    %title
+      = content_for?(:title) ? yield(:title) : 'ULearning'
+    %meta{:content => "width=device-width,initial-scale=1", :name => "viewport"}/
+    = csrf_meta_tags
+    = csp_meta_tag
+    = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload'
+    = javascript_pack_tag 'application', 'data-turbolinks-track': 'reload'
+    - if Rails.env.production?
+      = render 'layouts/google-analytics'
+  %body
+    = render 'layouts/header'
+    = render 'layouts/error'
+    %p
+    %div.container
+      = yield
+    %br
+    = render 'layouts/footer'
+

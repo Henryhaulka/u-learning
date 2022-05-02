@@ -1,0 +1,14 @@
+= render layout: 'courses/course_wizard/step' do
+  = simple_form_for @course, url: course_course_wizard_path, method: :put do |f|
+    = f.input :published
+    %br
+    = f.button :submit, class: 'btn-success'
+    
+  %br
+  .card-footer.d-flex.justify-content-between
+    = link_to next_wizard_path, class: 'btn btn-sm btn-info' do
+      .fa.fa-arrow-right
+      Skip
+    = link_to previous_wizard_path, class: 'btn btn-sm btn-info' do
+      .fa.fa-arrow-left
+      Previous

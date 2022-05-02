@@ -1,0 +1,22 @@
+= render layout: 'courses/course_wizard/step' do
+  = simple_form_for @course, url: course_course_wizard_path, method: :put do |f|
+    = f.input :title, input_html: { autocomplete: 'off'}
+    %br
+      = f.input :avatar
+    %br
+    - if @course.avatar.attached?
+      = image_tag(@course.avatar, width: '200px') 
+      %p
+    = f.input :short_description
+    %br
+      = f.input :description, as: :rich_text_area
+    %br
+      = f.button :submit, class: 'btn-success'
+  %br
+  .card-footer.d-flex.justify-content-between
+    = link_to next_wizard_path, class: 'btn btn-sm btn-info' do
+      .fa.fa-arrow-right
+      Skip
+    &nbsp; &nbsp;
+    = link_to course_path(@course), class: 'btn btn-sm btn-danger' do
+      Cancel

@@ -1,0 +1,154 @@
+
+@import "selectize/dist/css/selectize";
+@import "selectize/dist/css/selectize.default";
+@import "bootstrap";
+@import "font-awesome-sprockets";
+@import "font-awesome";
+@import "./actiontext.scss";
+
+
+body {
+  background-color: #374151;
+  color: gainsboro;
+}
+
+.white, .white a {
+  color: white;
+}
+
+.nocomplete {
+  font-size: 0.7rem;
+}
+
+.sider {
+  padding-right: 3rem;
+}
+.shared_link a {
+  color: white;
+  text-decoration: none;
+}
+
+.jumbotron,
+.card{
+  color: #374151;
+  text-decoration: none;
+}
+
+.card a, .list-group-item a {
+  text-decoration: none;
+  color: #374151;
+}
+
+.card-footer a {
+  color: white;
+  font-weight: bolder;
+}
+
+.google {
+  background: linear-gradient(to right, rgb(255, 251, 251), blue);
+  font-size: 1rem;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;  
+  cursor: pointer;
+  font-size: 1.3rem;
+}
+
+ a {
+  text-decoration: none;
+}
+
+.toban {
+  margin-left: auto;
+}
+
+.jumbotron {
+  background-image: linear-gradient(to right, rgba(27, 27, 26, 0.5),rgba(27, 27, 26, 0.5)), url(https://s35691.pcdn.co/wp-content/uploads/2019/11/Implementing-active-learning-and-student-centered-pedagogy.jpg);
+  background-size: cover;
+  background-repeat: no-repeat;
+  height: 30rem;
+  background-position: center;
+  position: relative;
+  color: white;
+  padding: 5rem;
+}
+
+.form-control.is-invalid { background-image: none;}
+.form-control.is-valid { background-image: none;}
+
+.grid-system {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 1rem;
+}
+
+.instruction {
+  text-decoration: none;
+  font-size: 1.5rem;
+}
+
+body {
+  margin-bottom: 10rem;
+}
+
+.sticker {
+  z-index: 1;
+}
+
+.general-footer {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  margin-top: 25rem;
+  z-index: 3;
+}
+
+.ui-state-highlight {
+  background-color: #008E9B;
+  height: 3em;
+}
+
+.texter {
+  text-align: right;
+}
+
+.former {
+  outline: none;
+}
+
+.aligner {
+  text-align: right;
+}
+
+.grid2 {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-gap: 5px;
+}
+
+.search-container {
+  float: left;
+  width: 250px;
+}
+
+@media screen and (max-width: 765px){
+  .grid-system,
+  .grid2
+   { 
+     grid-template-columns:  1fr;
+    }
+
+  .jumbotron h1 {
+    font-size: 1.5rem;
+  }
+  
+  .jumbotron{
+    padding: 2rem;
+    font-size: 1rem;
+    height: 25rem;
+  }
+   
+
+  .search-container {
+    width: 185px;
+  }
+}

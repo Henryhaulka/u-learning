@@ -1,0 +1,19 @@
+%div.bg-white.p-3 
+  %h3.text-center.text-dark
+    New users per day
+  /= line_chart @user.group_by_day(:created_at).count 
+  = line_chart charts_user_per_day_path
+  %br
+  %h3.text-center.text-dark
+    Subscriptions per day
+  /= column_chart @subscriptions.group_by_day(:created_at).count 
+  = column_chart charts_subscriptions_per_day_path
+  %br
+  %h3.text-center.text-dark
+    Most subscribed Courses
+  /= bar_chart @subscriptions.joins(:course).group("title").count
+  = bar_chart charts_course_popularity_path
+  %br
+  %h3.text-center.text-dark
+    Money Makers
+  = bar_chart charts_money_makers_path

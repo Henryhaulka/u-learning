@@ -1,0 +1,15 @@
+- content_for :title do
+  = ULearning
+  \|
+  = @course.title
+  \|
+  New Lesson
+.card
+  .card-header
+    %h1
+      .fa.fa-plus-circle.text-primary
+      New lesson
+  .card-body
+    = render 'form'
+  .card-footer
+    = link_to 'Back', course_path(@course)
