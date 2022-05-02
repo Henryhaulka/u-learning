@@ -32,6 +32,8 @@ gem 'wicked' #for multistep forms
 gem 'wkhtmltopdf-binary', group: :development
 # nested form
 gem "cocoon"
+# payment
+gem 'stripe'
 # reduces the size of app in production
 gem 'wkhtmltopdf-heroku', group: :production
 # Use Puma as the app server
