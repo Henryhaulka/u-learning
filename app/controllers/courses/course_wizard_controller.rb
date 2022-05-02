@@ -26,11 +26,15 @@ class Courses::CourseWizardController < ApplicationController
       authorize @course, :edit?
         case step
             when :basic_info
+              @course.update(course_params)
             when :details
               @tag = Tag.all
+              @course.update(course_params)
             when :publish
+              @course.update(course_params)
             when :lesson
-            @course.update(course_params)
+              @course.update(course_params)
+            
         end
          render_wizard @course #render wizard 4 course
     end
