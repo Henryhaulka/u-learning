@@ -32,6 +32,8 @@
           =  activity.trackable
         - else
           was deleted
+      - elsif activity.trackable_type == 'User'
+        = link_to activity.trackable.email, activity.trackable if activity.trackable.present?
       - else
         = link_to activity.trackable.title, activity.trackable if activity.trackable.present?
       /= activity.key.match(/\.(.*)/)[1]

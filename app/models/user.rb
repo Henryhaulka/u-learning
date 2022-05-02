@@ -12,6 +12,10 @@ class User < ApplicationRecord
   has_many :subscriptions, dependent: :nullify
   has_many :comments, dependent: :nullify
   rolify
+
+  include PublicActivity::Model
+  tracked only: [:create, :destroy], owner: :itself
+
   after_create :assign_default_role
   # we didnt user controller cos authenciaction is done by devise
   after_create do
