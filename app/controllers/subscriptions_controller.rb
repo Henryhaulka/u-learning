@@ -50,19 +50,30 @@ class SubscriptionsController < ApplicationController
 
   # POST /subscriptions or /subscriptions.json
   def create
+    if @course.price > 0
+      # since stripe uses cent 13.00 == 13 and .00 cents
+      @amount = (@course.price * 100).to_i
+      customer = Stripe::Customer.create(
+        email: params[:stripeEmail],
+        source: params[:stripeToken]
+      )
+
+      charge = Stripe::Charge.create(
+        customer: customer.id,
+        amount: @amount, 
+        description: @course.title,
+        currency: 'usd'
+      )
+    end
     @subscription = current_user.buy_a_course(@course)
     flash[:notice] = "You have successfully subscribe to #{@course.title}"
     redirect_to course_path(@course)
-    # if @course.price > 0
-    #   flash[:alert] = "You can't access paid courses yet"
-    #   redirect_to new_course_subscription_path(@course)
-    # else
-    #   @subscription = current_user.buy_a_course(@course)
-    #   flash[:notice] = "You have successfully subscribe to #{@course.title}"
-    #   SubscriptionMailer.student_subscription(@subscription).deliver_now
-    #   SubscriptionMailer.teacher_subscription(@subscription).deliver_now
-    #    redirect_to course_path(@course)
-    # end
+
+    SubscriptionMailer.student_subscription(@subscription).deliver_now
+    SubscriptionMailer.teacher_subscription(@subscription).deliver_now
+    rescue Stripe::CardError => e
+      flash[:error] = e.message
+      redirect_to new_course_subscription_path(@course), alert: 'Card was DECLINED'
   end
 
   # PATCH/PUT /subscriptions/1 or /subscriptions/1.json
