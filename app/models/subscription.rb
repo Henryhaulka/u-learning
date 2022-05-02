@@ -49,7 +49,6 @@ class Subscription < ApplicationRecord
     course.calculate_income
     user.calculate_expenses
   end
-  
 
 
   validate :cant_subscribe_to_own_course

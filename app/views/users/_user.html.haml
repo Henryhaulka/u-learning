@@ -12,15 +12,20 @@
     %b Signed Up:
     = time_ago_in_words(user_reg.created_at) + ' ago'
   .card-footer
-    Balance
-    = user_reg.balance
+    %b 
+      Balance:
+      = number_to_currency user_reg.balance
+    %hr
     .row
-      Subscription Expenses
-      = user_reg.subscription_expenses
+      %b 
+        Subscription Expenses:
+        = number_to_currency (user_reg.subscription_expenses)
+        %hr
     .row
-      Course Income
-      = user_reg.course_income
-  .card-footer
+      %b
+        Course Income :
+        = number_to_currency user_reg.course_income
+    %hr
     %b
       = 'sign_in_count:'.humanize
     = user_reg.sign_in_count

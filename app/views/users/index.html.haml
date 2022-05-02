@@ -46,9 +46,9 @@
           %td= user.id
           %td
             - if user.online?
-              .far.fa-circle.text-success
+              .fa.fa-signal.text-success
             - else
-              .far.fa-circle.text-danger
+              .fa.fa-signal.text-danger
             = link_to user.email, user 
           %td= user.created_at
           %td= user.courses_count

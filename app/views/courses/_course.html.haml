@@ -7,6 +7,7 @@
       = image_tag(course.avatar, width: '100%', height: '200px') 
   .card-footer.bg-white
     = simple_format(course.short_description)
+    /= course.income
   .card-footer
     .text-center
       = subscribe_button(course)

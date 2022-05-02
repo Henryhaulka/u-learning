@@ -80,14 +80,14 @@
             = number_to_percentage(subscription.course.progress_rate(current_user), precision: 0)
           %td.text-white
             = subscription.rating
-          %td= link_to 'Certificate', certificate_subscription_path(subscription, format: :pdf)
+          %td= link_to 'Certificate', certificate_subscription_path(subscription, format: :pdf), class: 'btn btn-success'
           %td= link_to 'See Review', subscription
           %td
             - if policy(subscription).edit?
-              = link_to 'Add review', edit_subscription_path(subscription)
+              = link_to 'Add Review', edit_subscription_path(subscription), class: 'btn btn-primary'
           %td
             - if policy(subscription).destroy?
-              = link_to 'Delete Subscription', subscription, method: :delete, data: { confirm: 'Are you sure?' }
+              = link_to 'Delete ', subscription, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger'
 
   %br
 
