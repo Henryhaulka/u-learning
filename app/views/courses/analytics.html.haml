@@ -1,35 +1,36 @@
-- content_for :title do
-  ULearning
-  \|
-  = "#{@course.title} Analytics"
+%div.bg-white.p-3.text-dark
+  - content_for :title do
+    ULearning
+    \|
+    = "#{@course.title} Analytics"
 
-= link_to 'Courses', courses_path
-|
-= link_to course_path(@course) do
-  .fa.fa-graduation-cap
-  = @course.title
-|
-= link_to  analytics_course_path(@course) do
-  .fa.fa-chart-bar
-  Analytics
-%h3
-  .text-center
-    Analytics for
+  = link_to 'Courses', courses_path
+  |
+  = link_to course_path(@course) do
+    .fa.fa-graduation-cap
     = @course.title
-- if @course.subscriptions.present?
-  %p
-  %h3 Course subscriptions per day in quantity
-  = line_chart @course.subscriptions.group_by_day(:created_at).count 
-  %h3 Course subscriptions per day in price
-  = line_chart @course.subscriptions.group_by_day(:created_at).sum(:price)
-- else
+  |
+  = link_to  analytics_course_path(@course) do
+    .fa.fa-chart-bar
+    Analytics
   %h3
-    Sorry, users are yet to subscribe to your course
-- if @course.lessons.present?
-  %h3 Unique count (How many times a lesson was openedby a user once)
-  = bar_chart @course.checked_lessons.joins(:lesson).group(:'lessons.title').count
-  %h3 Impression (How many times a lesson was opened)
-  = bar_chart @course.checked_lessons.joins(:lesson).group(:'lessons.title').sum(:impression)
-- else
-  %h3
-    You are yet to create a Lesson
+    .text-center
+      Analytics for
+      = @course.title
+  - if @course.subscriptions.present?
+    %p
+    %h3 Course subscriptions per day in quantity
+    = line_chart @course.subscriptions.group_by_day(:created_at).count 
+    %h3 Course subscriptions per day in price
+    = line_chart @course.subscriptions.group_by_day(:created_at).sum(:price)
+  - else
+    %h3
+      Sorry, users are yet to subscribe to your course
+  - if @course.lessons.present?
+    %h3 Unique count (How many times a lesson was openedby a user once)
+    = bar_chart @course.checked_lessons.joins(:lesson).group(:'lessons.title').count
+    %h3 Impression (How many times a lesson was opened)
+    = bar_chart @course.checked_lessons.joins(:lesson).group(:'lessons.title').sum(:impression)
+  - else
+    %h3
+      You are yet to create a Lesson
