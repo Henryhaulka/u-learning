@@ -1,4 +1,4 @@
-%div.bg-white.p-3 
+%div.bg-white
   %h3.text-center.text-dark
     New users per day
   /= line_chart @user.group_by_day(:created_at).count 
