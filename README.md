@@ -15,7 +15,7 @@ U-learning is an online school-like platform where students can learn new skills
 - Ruby on Rails v6.1.4
 
 ## Live Demo
-[Live Demo Link](https://https://u-learning.herokuapp.com/)
+[Live Demo Link](https://u-learning.herokuapp.com/)
 
 
 
