@@ -13,6 +13,10 @@ U-learning is an online school-like platform where students can learn new skills
 
 - ruby 2.7.2p137
 - Ruby on Rails v6.1.4
+- Bootstrap
+- Javascript
+- AWS
+- HAML
 
 ## Live Demo
 [Live Demo Link](https://u-learning.herokuapp.com/)
