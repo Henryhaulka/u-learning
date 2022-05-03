@@ -3,9 +3,9 @@ U-learning is an online school-like platform where students can learn new skills
 
 
 
-![screenshot](img/cinema1.png)
-![screenshot](img/cinema2.png)
-
+![screenshot](img/u1.png)
+![screenshot](img/u2.png)
+![screenshot](img/u3.png)
 
 
 
