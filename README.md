@@ -1,4 +1,4 @@
-U-learning is an online school-like platform where students can learn new skills and concepts ranging from programming, engineering, Football, Music, Culture and more. The app was built with myraid features established to help students and teachers have the best experience of online learning. Students can subscribe to free and paid courses and get certified after course completion. This app has a lot features which this README can't contain, to have a feel, best visit the live demo 
+U-learning is an online school-like platform where students can learn new skills and concepts ranging from Programming, Engineering, Football, Music, Culture and more. U-learning is built with plethora of features established to help students and teachers have the best user experience of online learning. Students can subscribe to free and paid courses and get certified after Course completion. This app has a lot features that this README can't contain,  to have a feel, best visit the live demo.
 
 
 
